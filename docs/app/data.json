@@ -1,0 +1,1168 @@
+{
+    "project": {
+        "name": "spaseed",
+        "description": "a lightweight framework for single-page application",
+        "version": "1.0.0"
+    },
+    "files": {
+        "lib\\event.js": {
+            "name": "lib\\event.js",
+            "modules": {},
+            "classes": {
+                "event": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "lib\\jquery-1.10.2.js": {
+            "name": "lib\\jquery-1.10.2.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "lib\\net.js": {
+            "name": "lib\\net.js",
+            "modules": {},
+            "classes": {
+                "net": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "lib\\util.js": {
+            "name": "lib\\util.js",
+            "modules": {},
+            "classes": {
+                "util": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "main\\layout\\default.js": {
+            "name": "main\\layout\\default.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "main\\pagemanager.js": {
+            "name": "main\\pagemanager.js",
+            "modules": {},
+            "classes": {
+                "pagemanager": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "main\\router.js": {
+            "name": "main\\router.js",
+            "modules": {},
+            "classes": {
+                "router": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "config\\manager.js": {
+            "name": "config\\manager.js",
+            "modules": {},
+            "classes": {
+                "manager": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {},
+    "classes": {
+        "event": {
+            "name": "event",
+            "shortname": "event",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "lib\\event.js",
+            "line": 2,
+            "description": "事件管理",
+            "static": 1
+        },
+        "net": {
+            "name": "net",
+            "shortname": "net",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "lib\\net.js",
+            "line": 7,
+            "description": "网络请求",
+            "static": 1
+        },
+        "util": {
+            "name": "util",
+            "shortname": "util",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "lib\\util.js",
+            "line": 6,
+            "description": "工具类",
+            "static": 1
+        },
+        "pagemanager": {
+            "name": "pagemanager",
+            "shortname": "pagemanager",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "main\\pagemanager.js",
+            "line": 36,
+            "description": "页面管理",
+            "static": 1
+        },
+        "router": {
+            "name": "router",
+            "shortname": "router",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "main\\router.js",
+            "line": 8,
+            "description": "路由管理",
+            "static": 1
+        },
+        "manager": {
+            "name": "manager",
+            "shortname": "manager",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "config\\manager.js",
+            "line": 5,
+            "description": "数据管理",
+            "static": 1
+        }
+    },
+    "classitems": [
+        {
+            "file": "lib\\event.js",
+            "line": 54,
+            "description": "通用的绑定事件处理",
+            "itemtype": "method",
+            "name": "bindCommonEvent",
+            "params": [
+                {
+                    "name": "要绑定事件的元素",
+                    "description": "",
+                    "type": "Element"
+                },
+                {
+                    "name": "绑定的事件类型",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "事件处理的函数映射",
+                    "description": "",
+                    "type": "Object"
+                },
+                {
+                    "name": "取得事件对应的key的函数",
+                    "description": "",
+                    "type": "Function"
+                }
+            ],
+            "class": "event"
+        },
+        {
+            "file": "lib\\event.js",
+            "line": 76,
+            "description": "支持直接绑定方法",
+            "class": "event"
+        },
+        {
+            "file": "lib\\event.js",
+            "line": 133,
+            "description": "为body添加事件代理",
+            "itemtype": "method",
+            "name": "addCommonEvent",
+            "params": [
+                {
+                    "name": "事件类型",
+                    "description": "",
+                    "type": "Type"
+                },
+                {
+                    "name": "事件处理的函数映射",
+                    "description": "",
+                    "type": "DealFnMap"
+                }
+            ],
+            "class": "event"
+        },
+        {
+            "file": "lib\\jquery-1.10.2.js",
+            "line": 1294,
+            "description": "Create key-value caches of limited size",
+            "return": {
+                "description": "Returns the Object data after storing it on itself with\n\tproperty name the (space-suffixed) string and (if the cache is larger than Expr.cacheLength)\n\tdeleting the oldest entry",
+                "type": "Function(string, Object)"
+            },
+            "class": "net"
+        },
+        {
+            "file": "lib\\jquery-1.10.2.js",
+            "line": 1314,
+            "description": "Mark a function for special use by Sizzle",
+            "params": [
+                {
+                    "name": "fn",
+                    "description": "The function to mark",
+                    "type": "Function"
+                }
+            ],
+            "class": "net"
+        },
+        {
+            "file": "lib\\jquery-1.10.2.js",
+            "line": 1323,
+            "description": "Support testing using an element",
+            "params": [
+                {
+                    "name": "fn",
+                    "description": "Passed the created div and expects a boolean result",
+                    "type": "Function"
+                }
+            ],
+            "class": "net"
+        },
+        {
+            "file": "lib\\jquery-1.10.2.js",
+            "line": 1344,
+            "description": "Adds the same handler for all of the specified attrs",
+            "params": [
+                {
+                    "name": "attrs",
+                    "description": "Pipe-separated list of attributes",
+                    "type": "String"
+                },
+                {
+                    "name": "handler",
+                    "description": "The method that will be applied",
+                    "type": "Function"
+                }
+            ],
+            "class": "net"
+        },
+        {
+            "file": "lib\\jquery-1.10.2.js",
+            "line": 1358,
+            "description": "Checks document order of two siblings",
+            "params": [
+                {
+                    "name": "a",
+                    "description": "",
+                    "type": "Element"
+                },
+                {
+                    "name": "b",
+                    "description": "",
+                    "type": "Element"
+                }
+            ],
+            "return": {
+                "description": "Returns less than 0 if a precedes b, greater than 0 if a follows b",
+                "type": "Number"
+            },
+            "class": "net"
+        },
+        {
+            "file": "lib\\jquery-1.10.2.js",
+            "line": 1387,
+            "description": "Returns a function to use in pseudos for input types",
+            "params": [
+                {
+                    "name": "type",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "class": "net"
+        },
+        {
+            "file": "lib\\jquery-1.10.2.js",
+            "line": 1398,
+            "description": "Returns a function to use in pseudos for buttons",
+            "params": [
+                {
+                    "name": "type",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "class": "net"
+        },
+        {
+            "file": "lib\\jquery-1.10.2.js",
+            "line": 1409,
+            "description": "Returns a function to use in pseudos for positionals",
+            "params": [
+                {
+                    "name": "fn",
+                    "description": "",
+                    "type": "Function"
+                }
+            ],
+            "class": "net"
+        },
+        {
+            "file": "lib\\jquery-1.10.2.js",
+            "line": 1431,
+            "description": "Detect xml",
+            "params": [
+                {
+                    "name": "elem",
+                    "description": "An element or a document",
+                    "type": "Element|Object"
+                }
+            ],
+            "class": "net"
+        },
+        {
+            "file": "lib\\jquery-1.10.2.js",
+            "line": 1445,
+            "description": "Sets document-related variables once based on the current document",
+            "params": [
+                {
+                    "name": "doc",
+                    "description": "An element or document object to use to set the document",
+                    "type": "Element|Object",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "Returns the current document",
+                "type": "Object"
+            },
+            "class": "net"
+        },
+        {
+            "file": "lib\\jquery-1.10.2.js",
+            "line": 1855,
+            "description": "Document sorting and removing duplicates",
+            "params": [
+                {
+                    "name": "results",
+                    "description": "",
+                    "type": "ArrayLike"
+                }
+            ],
+            "class": "net"
+        },
+        {
+            "file": "lib\\jquery-1.10.2.js",
+            "line": 1884,
+            "description": "Utility function for retrieving the text value of an array of DOM nodes",
+            "params": [
+                {
+                    "name": "elem",
+                    "description": "",
+                    "type": "Array|Element"
+                }
+            ],
+            "class": "net"
+        },
+        {
+            "file": "lib\\net.js",
+            "line": 13,
+            "description": "发起请求",
+            "itemtype": "method",
+            "name": "send",
+            "params": [
+                {
+                    "name": "cgiConfig",
+                    "description": "配置",
+                    "type": "Object"
+                },
+                {
+                    "name": "opt",
+                    "description": "选参",
+                    "type": "Object"
+                }
+            ],
+            "class": "net"
+        },
+        {
+            "file": "lib\\net.js",
+            "line": 67,
+            "description": "GET请求",
+            "itemtype": "method",
+            "name": "get",
+            "params": [
+                {
+                    "name": "url",
+                    "description": "URL",
+                    "type": "String"
+                },
+                {
+                    "name": "data",
+                    "description": "参数",
+                    "type": "Object"
+                },
+                {
+                    "name": "cb",
+                    "description": "回调函数",
+                    "type": "Function"
+                },
+                {
+                    "name": "global",
+                    "description": "是否触发全局 AJAX 事件",
+                    "type": "Boolean"
+                }
+            ],
+            "class": "net"
+        },
+        {
+            "file": "lib\\net.js",
+            "line": 79,
+            "description": "POST请求",
+            "itemtype": "method",
+            "name": "post",
+            "params": [
+                {
+                    "name": "url",
+                    "description": "URL",
+                    "type": "String"
+                },
+                {
+                    "name": "data",
+                    "description": "参数",
+                    "type": "Object"
+                },
+                {
+                    "name": "cb",
+                    "description": "回调函数",
+                    "type": "Function"
+                },
+                {
+                    "name": "global",
+                    "description": "是否触发全局 AJAX 事件",
+                    "type": "Boolean"
+                }
+            ],
+            "class": "net"
+        },
+        {
+            "file": "lib\\util.js",
+            "line": 13,
+            "description": "获取cookie",
+            "itemtype": "method",
+            "name": "get",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "名称",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "String"
+            },
+            "class": "util"
+        },
+        {
+            "file": "lib\\util.js",
+            "line": 25,
+            "description": "设置cookie",
+            "itemtype": "method",
+            "name": "set",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "名称",
+                    "type": "String"
+                },
+                {
+                    "name": "value",
+                    "description": "值",
+                    "type": "String"
+                },
+                {
+                    "name": "domain",
+                    "description": "域",
+                    "type": "String"
+                },
+                {
+                    "name": "path",
+                    "description": "路径",
+                    "type": "String"
+                },
+                {
+                    "name": "hour",
+                    "description": "过期时间(小时)",
+                    "type": "String"
+                }
+            ],
+            "class": "util"
+        },
+        {
+            "file": "lib\\util.js",
+            "line": 44,
+            "description": "删除cookie",
+            "itemtype": "method",
+            "name": "del",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "名称",
+                    "type": "String"
+                },
+                {
+                    "name": "domain",
+                    "description": "域",
+                    "type": "String"
+                },
+                {
+                    "name": "path",
+                    "description": "路径",
+                    "type": "String"
+                }
+            ],
+            "class": "util"
+        },
+        {
+            "file": "lib\\util.js",
+            "line": 58,
+            "description": "html模板生成器, =号转义, -号原始输出",
+            "itemtype": "method",
+            "name": "tmpl",
+            "params": [
+                {
+                    "name": "str",
+                    "description": "html 模板字符串",
+                    "type": "String"
+                },
+                {
+                    "name": "data",
+                    "description": "用于生成模板的数据对象",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "返回 html 字符串",
+                "type": "String"
+            },
+            "class": "util"
+        },
+        {
+            "file": "lib\\util.js",
+            "line": 96,
+            "description": "将 URL 参数格式转化成对象",
+            "itemtype": "method",
+            "name": "paramsToObject",
+            "params": [
+                {
+                    "name": "queryString",
+                    "description": "要转换的 key-value 字符串，默认为 location.search",
+                    "type": "String",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "util"
+        },
+        {
+            "file": "lib\\util.js",
+            "line": 121,
+            "description": "JSON对象转url字符串",
+            "itemtype": "method",
+            "name": "objectToParams",
+            "params": [
+                {
+                    "name": "obj",
+                    "description": "JSON对象",
+                    "type": "Object"
+                },
+                {
+                    "name": "decodeUri",
+                    "description": "url解码",
+                    "type": "Boolean"
+                }
+            ],
+            "return": {
+                "description": "url字符串",
+                "type": "String"
+            },
+            "class": "util"
+        },
+        {
+            "file": "lib\\util.js",
+            "line": 136,
+            "description": "是否移动手机",
+            "itemtype": "method",
+            "name": "isMobile",
+            "return": {
+                "description": "true|false",
+                "type": "Boolean"
+            },
+            "class": "util"
+        },
+        {
+            "file": "lib\\util.js",
+            "line": 145,
+            "description": "是否android",
+            "itemtype": "method",
+            "name": "isAndroid",
+            "return": {
+                "description": "true|false",
+                "type": "Boolean"
+            },
+            "class": "util"
+        },
+        {
+            "file": "lib\\util.js",
+            "line": 155,
+            "description": "是否ios",
+            "itemtype": "method",
+            "name": "isIOS",
+            "return": {
+                "description": "true|false",
+                "type": "Boolean"
+            },
+            "class": "util"
+        },
+        {
+            "file": "lib\\util.js",
+            "line": 164,
+            "description": "获取a标签href相对地址",
+            "itemtype": "method",
+            "name": "getHref",
+            "params": [
+                {
+                    "name": "item",
+                    "description": "dom节点",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "href",
+                "type": "String"
+            },
+            "class": "util"
+        },
+        {
+            "file": "lib\\util.js",
+            "line": 176,
+            "description": "深度拷贝对象",
+            "itemtype": "method",
+            "name": "cloneObject",
+            "params": [
+                {
+                    "name": "obj",
+                    "description": "任意对象",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "返回新的拷贝对象",
+                "type": "Object"
+            },
+            "class": "util"
+        },
+        {
+            "file": "lib\\util.js",
+            "line": 192,
+            "description": "插入内部样式",
+            "itemtype": "method",
+            "name": "insertStyle",
+            "params": [
+                {
+                    "name": "rules",
+                    "description": "样式",
+                    "type": "String | Array"
+                },
+                {
+                    "name": "id",
+                    "description": "样式节点Id",
+                    "type": "String"
+                }
+            ],
+            "class": "util"
+        },
+        {
+            "file": "main\\layout\\default.js",
+            "line": 2,
+            "description": "默认layout",
+            "class": "pagemanager"
+        },
+        {
+            "file": "main\\pagemanager.js",
+            "line": 42,
+            "description": "加载首页",
+            "itemtype": "method",
+            "name": "loadRoot",
+            "class": "pagemanager"
+        },
+        {
+            "file": "main\\pagemanager.js",
+            "line": 50,
+            "description": "统一加载视图方法",
+            "itemtype": "method",
+            "name": "loadView",
+            "class": "pagemanager"
+        },
+        {
+            "file": "main\\pagemanager.js",
+            "line": 65,
+            "description": "解析路径,处理url参数",
+            "itemtype": "method",
+            "name": "_parseUrlParams",
+            "params": [
+                {
+                    "name": "arr",
+                    "description": "路由匹配到的参数",
+                    "type": "Array"
+                },
+                {
+                    "name": "cb",
+                    "description": "回调函数",
+                    "type": "Function"
+                }
+            ],
+            "class": "pagemanager"
+        },
+        {
+            "file": "main\\pagemanager.js",
+            "line": 122,
+            "description": "统一路由处理函数",
+            "itemtype": "method",
+            "name": "_loadView",
+            "params": [
+                {
+                    "name": "controller",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "action",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "params",
+                    "description": "",
+                    "type": "Array"
+                }
+            ],
+            "class": "pagemanager"
+        },
+        {
+            "file": "main\\pagemanager.js",
+            "line": 232,
+            "description": "通过配置组装css请求\n(单页面模式会有先出dom后出样式的情况，不建议使用这种动态加载方式)",
+            "itemtype": "method",
+            "name": "addCssReq",
+            "params": [
+                {
+                    "name": "controller",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "action",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Array"
+            },
+            "class": "pagemanager"
+        },
+        {
+            "file": "main\\pagemanager.js",
+            "line": 256,
+            "description": "渲染公共模版",
+            "itemtype": "method",
+            "name": "renderLayout",
+            "params": [
+                {
+                    "name": "controller",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "action",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "params",
+                    "description": "",
+                    "type": "Array"
+                }
+            ],
+            "class": "pagemanager"
+        },
+        {
+            "file": "main\\pagemanager.js",
+            "line": 282,
+            "description": "渲染视图",
+            "itemtype": "method",
+            "name": "renderView",
+            "params": [
+                {
+                    "name": "obj",
+                    "description": "模块对象",
+                    "type": "String"
+                },
+                {
+                    "name": "params",
+                    "description": "参数",
+                    "type": "String"
+                }
+            ],
+            "class": "pagemanager"
+        },
+        {
+            "file": "main\\pagemanager.js",
+            "line": 308,
+            "description": "渲染404",
+            "itemtype": "method",
+            "name": "render404",
+            "class": "pagemanager"
+        },
+        {
+            "file": "main\\pagemanager.js",
+            "line": 318,
+            "description": "设置页面标题",
+            "itemtype": "method",
+            "name": "setTitle",
+            "params": [
+                {
+                    "name": "cObj",
+                    "description": "controller模块对象",
+                    "type": "Object"
+                },
+                {
+                    "name": "aObj",
+                    "description": "action模块对象",
+                    "type": "Object"
+                }
+            ],
+            "class": "pagemanager"
+        },
+        {
+            "file": "main\\pagemanager.js",
+            "line": 336,
+            "description": "改变导航选中态",
+            "itemtype": "method",
+            "name": "changeNavStatus",
+            "params": [
+                {
+                    "name": "view",
+                    "description": "当前视图",
+                    "type": "String"
+                }
+            ],
+            "class": "pagemanager"
+        },
+        {
+            "file": "main\\pagemanager.js",
+            "line": 367,
+            "description": "页面切换时全局销毁",
+            "itemtype": "method",
+            "name": "globalDestroy",
+            "class": "pagemanager"
+        },
+        {
+            "file": "main\\pagemanager.js",
+            "line": 375,
+            "description": "重置fragment标记",
+            "itemtype": "method",
+            "name": "resetFragment",
+            "class": "pagemanager"
+        },
+        {
+            "file": "main\\router.js",
+            "line": 14,
+            "description": "初始化",
+            "itemtype": "method",
+            "name": "init",
+            "class": "router"
+        },
+        {
+            "file": "main\\router.js",
+            "line": 122,
+            "description": "事件监听",
+            "itemtype": "method",
+            "name": "addEvent",
+            "class": "router"
+        },
+        {
+            "file": "main\\router.js",
+            "line": 136,
+            "description": "获取hash值",
+            "itemtype": "method",
+            "name": "getHash",
+            "params": [
+                {
+                    "name": "win",
+                    "description": "窗口对象",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "hash值",
+                "type": "String"
+            },
+            "class": "router"
+        },
+        {
+            "file": "main\\router.js",
+            "line": 147,
+            "description": "获取url片段",
+            "itemtype": "method",
+            "name": "getFragment",
+            "return": {
+                "description": "url片段",
+                "type": "String"
+            },
+            "class": "router"
+        },
+        {
+            "file": "main\\router.js",
+            "line": 172,
+            "description": "监听url变化",
+            "itemtype": "method",
+            "name": "checkUrl",
+            "class": "router"
+        },
+        {
+            "file": "main\\router.js",
+            "line": 191,
+            "description": "去除前后#",
+            "itemtype": "method",
+            "name": "stripHash",
+            "params": [
+                {
+                    "name": "url",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "class": "router"
+        },
+        {
+            "file": "main\\router.js",
+            "line": 200,
+            "description": "去除前后斜杠",
+            "itemtype": "method",
+            "name": "stripSlash",
+            "params": [
+                {
+                    "name": "url",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "class": "router"
+        },
+        {
+            "file": "main\\router.js",
+            "line": 209,
+            "description": "导航",
+            "itemtype": "method",
+            "name": "navigate",
+            "params": [
+                {
+                    "name": "url",
+                    "description": "地址",
+                    "type": "String"
+                },
+                {
+                    "name": "slient",
+                    "description": "不改变地址栏",
+                    "type": "Boolean"
+                },
+                {
+                    "name": "replacement",
+                    "description": "替换浏览器的当前会话历史(h5模式时支持)",
+                    "type": "Boolean"
+                }
+            ],
+            "class": "router"
+        },
+        {
+            "file": "main\\router.js",
+            "line": 250,
+            "description": "低端浏览器设置iframe历史",
+            "itemtype": "method",
+            "name": "historySet",
+            "params": [
+                {
+                    "name": "hash",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "historyHash",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "class": "router"
+        },
+        {
+            "file": "main\\router.js",
+            "line": 269,
+            "description": "重定向",
+            "itemtype": "method",
+            "name": "redirect",
+            "params": [
+                {
+                    "name": "url",
+                    "description": "地址",
+                    "type": "String"
+                },
+                {
+                    "name": "slient",
+                    "description": "不改变地址栏",
+                    "type": "Boolean"
+                },
+                {
+                    "name": "replacement",
+                    "description": "替换浏览器的当前会话历史(h5模式时支持)",
+                    "type": "Boolean"
+                }
+            ],
+            "class": "router"
+        },
+        {
+            "file": "main\\router.js",
+            "line": 280,
+            "description": "路由匹配",
+            "itemtype": "method",
+            "name": "matchRoute",
+            "params": [
+                {
+                    "name": "rule",
+                    "description": "路由规则",
+                    "type": "String"
+                },
+                {
+                    "name": "url",
+                    "description": "地址",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "参数数组",
+                "type": "Array"
+            },
+            "class": "router"
+        },
+        {
+            "file": "main\\router.js",
+            "line": 309,
+            "description": "加载页面",
+            "itemtype": "method",
+            "name": "loadUrl",
+            "params": [
+                {
+                    "name": "url",
+                    "description": "地址",
+                    "type": "String"
+                }
+            ],
+            "class": "router"
+        }
+    ],
+    "warnings": [
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " lib\\jquery-1.10.2.js:1294"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " lib\\jquery-1.10.2.js:1358"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " lib\\jquery-1.10.2.js:1445"
+        },
+        {
+            "message": "Missing item type\n支持直接绑定方法",
+            "line": " lib\\event.js:76"
+        },
+        {
+            "message": "Missing item type\nCreate key-value caches of limited size",
+            "line": " lib\\jquery-1.10.2.js:1294"
+        },
+        {
+            "message": "Missing item type\nMark a function for special use by Sizzle",
+            "line": " lib\\jquery-1.10.2.js:1314"
+        },
+        {
+            "message": "Missing item type\nSupport testing using an element",
+            "line": " lib\\jquery-1.10.2.js:1323"
+        },
+        {
+            "message": "Missing item type\nAdds the same handler for all of the specified attrs",
+            "line": " lib\\jquery-1.10.2.js:1344"
+        },
+        {
+            "message": "Missing item type\nChecks document order of two siblings",
+            "line": " lib\\jquery-1.10.2.js:1358"
+        },
+        {
+            "message": "Missing item type\nReturns a function to use in pseudos for input types",
+            "line": " lib\\jquery-1.10.2.js:1387"
+        },
+        {
+            "message": "Missing item type\nReturns a function to use in pseudos for buttons",
+            "line": " lib\\jquery-1.10.2.js:1398"
+        },
+        {
+            "message": "Missing item type\nReturns a function to use in pseudos for positionals",
+            "line": " lib\\jquery-1.10.2.js:1409"
+        },
+        {
+            "message": "Missing item type\nDetect xml",
+            "line": " lib\\jquery-1.10.2.js:1431"
+        },
+        {
+            "message": "Missing item type\nSets document-related variables once based on the current document",
+            "line": " lib\\jquery-1.10.2.js:1445"
+        },
+        {
+            "message": "Missing item type\nDocument sorting and removing duplicates",
+            "line": " lib\\jquery-1.10.2.js:1855"
+        },
+        {
+            "message": "Missing item type\nUtility function for retrieving the text value of an array of DOM nodes",
+            "line": " lib\\jquery-1.10.2.js:1884"
+        },
+        {
+            "message": "Missing item type\n默认layout",
+            "line": " main\\layout\\default.js:2"
+        }
+    ]
+}
