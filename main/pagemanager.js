@@ -147,6 +147,8 @@ define('main/pagemanager', function(require, exports, module) {
 				_self.currentViewObj = null;
 			}
 
+			params = params || [];
+
 			//渲染公共模版
 			_self.renderLayout(controller, action, params);
 
