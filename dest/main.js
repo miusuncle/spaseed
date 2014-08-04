@@ -166,6 +166,8 @@ define('main/pagemanager', function(require, exports, module) {
 				_self.currentViewObj = null;
 			}
 
+			params = params || [];
+
 			//渲染公共模版
 			_self.renderLayout(controller, action, params);
 
@@ -301,8 +303,8 @@ define('main/pagemanager', function(require, exports, module) {
 		/**
 		 * 渲染视图
 		 * @method renderView
-		 * @param {String} obj 模块对象
-		 * @param {String} params 参数
+		 * @param {Object} obj 模块对象
+		 * @param {Array} params 参数
 		 */
 		renderView: function (obj, params) {
 			if (obj) {
@@ -1100,4 +1102,7 @@ define('modules/page3/page3', function (require, exports, module) {
     };
         
     module.exports = page3;
+});
+define('widget/widget', function(require, exports, module) {
+	module.exports = {};
 });

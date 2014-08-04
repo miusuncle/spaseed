@@ -774,7 +774,7 @@
         },
         {
             "file": "main\\pagemanager.js",
-            "line": 232,
+            "line": 234,
             "description": "通过配置组装css请求\n(单页面模式会有先出dom后出样式的情况，不建议使用这种动态加载方式)",
             "itemtype": "method",
             "name": "addCssReq",
@@ -798,7 +798,7 @@
         },
         {
             "file": "main\\pagemanager.js",
-            "line": 256,
+            "line": 258,
             "description": "渲染公共模版",
             "itemtype": "method",
             "name": "renderLayout",
@@ -823,7 +823,7 @@
         },
         {
             "file": "main\\pagemanager.js",
-            "line": 282,
+            "line": 284,
             "description": "渲染视图",
             "itemtype": "method",
             "name": "renderView",
@@ -831,19 +831,19 @@
                 {
                     "name": "obj",
                     "description": "模块对象",
-                    "type": "String"
+                    "type": "Object"
                 },
                 {
                     "name": "params",
                     "description": "参数",
-                    "type": "String"
+                    "type": "Array"
                 }
             ],
             "class": "pagemanager"
         },
         {
             "file": "main\\pagemanager.js",
-            "line": 308,
+            "line": 310,
             "description": "渲染404",
             "itemtype": "method",
             "name": "render404",
@@ -851,7 +851,7 @@
         },
         {
             "file": "main\\pagemanager.js",
-            "line": 318,
+            "line": 320,
             "description": "设置页面标题",
             "itemtype": "method",
             "name": "setTitle",
@@ -871,7 +871,7 @@
         },
         {
             "file": "main\\pagemanager.js",
-            "line": 336,
+            "line": 338,
             "description": "改变导航选中态",
             "itemtype": "method",
             "name": "changeNavStatus",
@@ -886,7 +886,7 @@
         },
         {
             "file": "main\\pagemanager.js",
-            "line": 367,
+            "line": 369,
             "description": "页面切换时全局销毁",
             "itemtype": "method",
             "name": "globalDestroy",
@@ -894,7 +894,7 @@
         },
         {
             "file": "main\\pagemanager.js",
-            "line": 375,
+            "line": 377,
             "description": "重置fragment标记",
             "itemtype": "method",
             "name": "resetFragment",

@@ -284,8 +284,8 @@ define('main/pagemanager', function(require, exports, module) {
 		/**
 		 * 渲染视图
 		 * @method renderView
-		 * @param {String} obj 模块对象
-		 * @param {String} params 参数
+		 * @param {Object} obj 模块对象
+		 * @param {Array} params 参数
 		 */
 		renderView: function (obj, params) {
 			if (obj) {

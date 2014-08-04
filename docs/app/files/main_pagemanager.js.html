@@ -242,6 +242,8 @@ define(&#x27;main/pagemanager&#x27;, function(require, exports, module) {
 				_self.currentViewObj = null;
 			}
 
+			params = params || [];
+
 			//渲染公共模版
 			_self.renderLayout(controller, action, params);
 
@@ -377,8 +379,8 @@ define(&#x27;main/pagemanager&#x27;, function(require, exports, module) {
 		/**
 		 * 渲染视图
 		 * @method renderView
-		 * @param {String} obj 模块对象
-		 * @param {String} params 参数
+		 * @param {Object} obj 模块对象
+		 * @param {Array} params 参数
 		 */
 		renderView: function (obj, params) {
 			if (obj) {
