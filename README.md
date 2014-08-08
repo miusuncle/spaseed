@@ -1,5 +1,7 @@
 # spaseed —  a lightweight framework for single-page application
 
+[![Build Status](https://travis-ci.org/evanyuanvip/spaseed.svg?branch=master)](https://travis-ci.org/evanyuanvip/spaseed)
+
 This project is a set that contains automated workflow, development, file organization norms SPA solutions. After a key building in the browser to access templates, quick and enjoy the fun of coding.
 
 ## Getting Started
