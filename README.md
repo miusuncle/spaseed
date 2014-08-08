@@ -17,16 +17,17 @@ Now browse to the app at `http://localhost:8000`.
 
 ### Development
 
-Install Dependencies
+Install dependencies:
 
 ```
 npm install
 ```
 
+If you do not install grunt command:
+
 ```
 npm install -g grunt-cli
 ```
-
 
 Execution `grunt`, real-time template replace, merge, document generation:
 
@@ -34,6 +35,11 @@ Execution `grunt`, real-time template replace, merge, document generation:
 grunt
 ```
 
+### Unit Testing
+
+```
+npm test
+```
 
 ## Directory Layout
 
@@ -53,6 +59,7 @@ grunt
       router.js            --> routing management
       startup.js           --> entry module
     modules/               --> all page module
+    test/                  --> test cases
     widget/                --> common components directory
     app.js                 --> example server
     index.html             --> app layout file 

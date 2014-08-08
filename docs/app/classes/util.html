@@ -283,7 +283,7 @@
             
         
         
-        <a href="../files/lib_util.js.html#l176"><code>lib\util.js:176</code></a>
+        <a href="../files/lib_util.js.html#l179"><code>lib\util.js:179</code></a>
         
         </p>
 
@@ -628,7 +628,7 @@
             
         
         
-        <a href="../files/lib_util.js.html#l164"><code>lib\util.js:164</code></a>
+        <a href="../files/lib_util.js.html#l167"><code>lib\util.js:167</code></a>
         
         </p>
 
@@ -737,7 +737,7 @@
             
         
         
-        <a href="../files/lib_util.js.html#l192"><code>lib\util.js:192</code></a>
+        <a href="../files/lib_util.js.html#l195"><code>lib\util.js:195</code></a>
         
         </p>
 
@@ -836,7 +836,7 @@
             
         
         
-        <a href="../files/lib_util.js.html#l145"><code>lib\util.js:145</code></a>
+        <a href="../files/lib_util.js.html#l148"><code>lib\util.js:148</code></a>
         
         </p>
 
@@ -909,7 +909,7 @@
             
         
         
-        <a href="../files/lib_util.js.html#l155"><code>lib\util.js:155</code></a>
+        <a href="../files/lib_util.js.html#l158"><code>lib\util.js:158</code></a>
         
         </p>
 
@@ -982,7 +982,7 @@
             
         
         
-        <a href="../files/lib_util.js.html#l136"><code>lib\util.js:136</code></a>
+        <a href="../files/lib_util.js.html#l139"><code>lib\util.js:139</code></a>
         
         </p>
 
@@ -1071,7 +1071,7 @@
             
         
         
-        <a href="../files/lib_util.js.html#l121"><code>lib\util.js:121</code></a>
+        <a href="../files/lib_util.js.html#l124"><code>lib\util.js:124</code></a>
         
         </p>
 
@@ -1194,7 +1194,7 @@
             
         
         
-        <a href="../files/lib_util.js.html#l96"><code>lib\util.js:96</code></a>
+        <a href="../files/lib_util.js.html#l99"><code>lib\util.js:99</code></a>
         
         </p>
 
@@ -1450,6 +1450,12 @@
                     
                 </li>
             
+                <li class="arg">
+                    
+                        <code class="optional">[mixinTmpl]</code>
+                    
+                </li>
+            
             </ul><span class="paren">)</span>
         </div>
     
@@ -1513,7 +1519,7 @@
                     
 
                     <div class="param-description">
-                        <p>html 模板字符串</p>
+                        <p>html模板字符串 | script模版元素Id</p>
 
                     </div>
 
@@ -1530,6 +1536,23 @@
 
                     <div class="param-description">
                         <p>用于生成模板的数据对象</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name optional">[mixinTmpl]</code>
+                        <span class="type">Object</span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>混合模版对象</p>
 
                     </div>
 
@@ -1556,6 +1579,16 @@
         </div>
     
 
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>    var careerTmpl = &#39;&lt;div&gt;&lt;%=career%&gt;&lt;/div&gt;&#39;;
+    util.tmpl(&#39;&lt;h1&gt;&lt;%=user%&gt;&lt;/h1&gt; &lt;%#careerTmpl%&gt;&#39;, {user:&#39;evanyuan&#39;, career: &#39;前端工程师&#39;}, {careerTmpl: careerTmpl});</code></pre>
+
+            </div>
+        </div>
     
 </div>
 

@@ -552,24 +552,33 @@
             "params": [
                 {
                     "name": "str",
-                    "description": "html 模板字符串",
+                    "description": "html模板字符串 | script模版元素Id",
                     "type": "String"
                 },
                 {
                     "name": "data",
                     "description": "用于生成模板的数据对象",
                     "type": "Object"
+                },
+                {
+                    "name": "mixinTmpl",
+                    "description": "混合模版对象",
+                    "type": "Object",
+                    "optional": true
                 }
             ],
             "return": {
                 "description": "返回 html 字符串",
                 "type": "String"
             },
+            "example": [
+                " \n\t\tvar careerTmpl = '<div><%=career%></div>';\n\t\tutil.tmpl('<h1><%=user%></h1> <%#careerTmpl%>', {user:'evanyuan', career: '前端工程师'}, {careerTmpl: careerTmpl});"
+            ],
             "class": "util"
         },
         {
             "file": "lib\\util.js",
-            "line": 96,
+            "line": 99,
             "description": "将 URL 参数格式转化成对象",
             "itemtype": "method",
             "name": "paramsToObject",
@@ -589,7 +598,7 @@
         },
         {
             "file": "lib\\util.js",
-            "line": 121,
+            "line": 124,
             "description": "JSON对象转url字符串",
             "itemtype": "method",
             "name": "objectToParams",
@@ -613,7 +622,7 @@
         },
         {
             "file": "lib\\util.js",
-            "line": 136,
+            "line": 139,
             "description": "是否移动手机",
             "itemtype": "method",
             "name": "isMobile",
@@ -625,7 +634,7 @@
         },
         {
             "file": "lib\\util.js",
-            "line": 145,
+            "line": 148,
             "description": "是否android",
             "itemtype": "method",
             "name": "isAndroid",
@@ -637,7 +646,7 @@
         },
         {
             "file": "lib\\util.js",
-            "line": 155,
+            "line": 158,
             "description": "是否ios",
             "itemtype": "method",
             "name": "isIOS",
@@ -649,7 +658,7 @@
         },
         {
             "file": "lib\\util.js",
-            "line": 164,
+            "line": 167,
             "description": "获取a标签href相对地址",
             "itemtype": "method",
             "name": "getHref",
@@ -668,7 +677,7 @@
         },
         {
             "file": "lib\\util.js",
-            "line": 176,
+            "line": 179,
             "description": "深度拷贝对象",
             "itemtype": "method",
             "name": "cloneObject",
@@ -687,7 +696,7 @@
         },
         {
             "file": "lib\\util.js",
-            "line": 192,
+            "line": 195,
             "description": "插入内部样式",
             "itemtype": "method",
             "name": "insertStyle",

@@ -153,38 +153,41 @@ define(&#x27;lib/util&#x27;, function(require, exports, module) {
 		/**
 		 * html模板生成器, =号转义, -号原始输出
 		 * @method tmpl
-		 * @param  {String} str html 模板字符串
+		 * @param  {String} str html模板字符串 | script模版元素Id
 		 * @param  {Object} data 用于生成模板的数据对象
+		 * @param  {Object} [mixinTmpl] 混合模版对象
 		 * @return {String} 返回 html 字符串
+		 * @example 
+		 *		var careerTmpl = &#x27;&lt;div&gt;&lt;%=career%&gt;&lt;/div&gt;&#x27;;
+		 * 		util.tmpl(&#x27;&lt;h1&gt;&lt;%=user%&gt;&lt;/h1&gt; &lt;%#careerTmpl%&gt;&#x27;, {user:&#x27;evanyuan&#x27;, career: &#x27;前端工程师&#x27;}, {careerTmpl: careerTmpl});
 		 */
-		tmpl: function(){
-			var cache = {};
-			function _getTmplStr(rawStr, mixinTmpl) {
-				if(mixinTmpl) {
-					for(var p in mixinTmpl) {
-						var r = new RegExp(&#x27;&lt;%#&#x27; + p + &#x27;%&gt;&#x27;, &#x27;g&#x27;);
-						rawStr = rawStr.replace(r, mixinTmpl[p]);
+		tmpl: function () {
+      		var cache = {},
+				_getTmplStr = function (rawStr, mixinTmpl) {
+					if (mixinTmpl) {
+						for (var p in mixinTmpl) {
+							var r = new RegExp(&#x27;&lt;%#&#x27; + p + &#x27;%&gt;&#x27;, &#x27;g&#x27;);
+							rawStr = rawStr.replace(r, mixinTmpl[p]);
+						}
 					}
-				}
-				return rawStr;
-			}
-			return function tmpl(str, data, opt) {
-				opt = opt || {};
-				var key = opt.key, mixinTmpl = opt.mixinTmpl, strIsKey = !/\W/.test(str);
-				key = key || (strIsKey ? str : null);
-				var fn = key ? cache[key] = cache[key] || tmpl(_getTmplStr(strIsKey ? document.getElementById(str).innerHTML : str, mixinTmpl)) :
-				new Function(&quot;obj&quot;, &quot;var _p_=[],print=function(){_p_.push.apply(_p_,arguments);};with(obj){_p_.push(&#x27;&quot; + str
-					.replace(/[\r\t\n]/g, &quot; &quot;)
-					.split(&quot;\\&#x27;&quot;).join(&quot;\\\\&#x27;&quot;)
-					.split(&quot;&#x27;&quot;).join(&quot;\\&#x27;&quot;)
-					.split(&quot;&lt;%&quot;).join(&quot;\t&quot;)
-					.replace(/\t-(.*?)%&gt;/g, &quot;&#x27;,$1,&#x27;&quot;)
-					.replace(/\t=(.*?)%&gt;/g, &quot;&lt;escapehtml&gt;&#x27;,$1,&#x27;&lt;/escapehtml&gt;&quot;)
-					.split(&quot;\t&quot;).join(&quot;&#x27;);&quot;)
-					.split(&quot;%&gt;&quot;).join(&quot;_p_.push(&#x27;&quot;)
-				+ &quot;&#x27;);}return _p_.join(&#x27;&#x27;).replace(new RegExp(&#x27;&lt;escapehtml&gt;(.*?)&lt;/escapehtml&gt;&#x27;, &#x27;g&#x27;), function($1,$2){&quot;
-				+ &quot;return $2.replace(/&amp;(?!\w+;)/g, &#x27;&amp;amp;&#x27;).replace(/&lt;/g, &#x27;&amp;lt;&#x27;).replace(/&gt;/g, &#x27;&amp;gt;&#x27;).replace(/\&quot;/g, &#x27;&amp;quot;&#x27;)})&quot;);
-				return data ? fn( data ) : fn;
+					return rawStr;
+				};
+			return function tmpl(str, data, mixinTmpl) {
+				var strIsKey = !/\W/.test(str);
+        		!strIsKey &amp;&amp; (str = _getTmplStr(str, mixinTmpl));
+				var fn = strIsKey ? cache[str] = cache[str] || tmpl(_getTmplStr(document.getElementById(str).innerHTML, mixinTmpl)) :
+					new Function(&quot;obj&quot;, &quot;var _p_=[];_p_.push(&#x27;&quot; + str
+						.replace(/[\r\t\n]/g, &quot; &quot;)
+						.split(&quot;\\&#x27;&quot;).join(&quot;\\\\&#x27;&quot;)
+						.split(&quot;&#x27;&quot;).join(&quot;\\&#x27;&quot;)
+						.split(&quot;&lt;%&quot;).join(&quot;\t&quot;)
+						.replace(/\t-(.*?)%&gt;/g, &quot;&#x27;,obj.$1,&#x27;&quot;)
+						.replace(/\t=(.*?)%&gt;/g, &quot;&lt;escapehtml&gt;&#x27;,obj.$1,&#x27;&lt;/escapehtml&gt;&quot;)
+						.split(&quot;\t&quot;).join(&quot;&#x27;);&quot;)
+						.split(&quot;%&gt;&quot;).join(&quot;_p_.push(&#x27;&quot;)
+	        		+ &quot;&#x27;);return _p_.join(&#x27;&#x27;).replace(new RegExp(&#x27;&lt;escapehtml&gt;(.*?)&lt;/escapehtml&gt;&#x27;, &#x27;g&#x27;), function($1,$2){&quot;
+					+ &quot;return $2.replace(/&amp;(?!\w+;)/g, &#x27;&amp;amp;&#x27;).replace(/&lt;/g, &#x27;&amp;lt;&#x27;).replace(/&gt;/g, &#x27;&amp;gt;&#x27;).replace(/\&quot;/g, &#x27;&amp;quot;&#x27;)})&quot;);
+				return data ? fn(data) : fn;
 			};
 		}(),
 
