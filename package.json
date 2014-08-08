@@ -2,6 +2,7 @@
   "name": "spaseed",
   "version": "1.0.0",
   "description": "a lightweight framework for single-page application",
+  "repository": "https://github.com/evanyuanvip/spaseed",
   "license": "MIT",
   "devDependencies": {
     "grunt": "~0.4.2",
