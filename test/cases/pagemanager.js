@@ -82,7 +82,7 @@ define('test/cases/pagemanager', function(require) {
         });
         it('Should render 404 page correctly', function () {
             pageManager.loadView('test_ctrl','aaa');
-            $('#container').find('p').text().should.equal('405');
+            $('#container').find('p').text().should.equal('404');
             $('#container').html('');
         });
     });
