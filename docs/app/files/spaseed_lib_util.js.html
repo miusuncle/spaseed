@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>lib\util.js - spaseed</title>
+    <title>spaseed\lib\util.js - spaseed</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -38,13 +38,15 @@
         <div id="api-tabview-panel">
             <ul id="api-classes" class="apis classes">
             
-                <li><a href="../classes/event.html">event</a></li>
+                <li><a href="../classes/dataManager.html">dataManager</a></li>
             
-                <li><a href="../classes/manager.html">manager</a></li>
+                <li><a href="../classes/event.html">event</a></li>
             
                 <li><a href="../classes/net.html">net</a></li>
             
-                <li><a href="../classes/pagemanager.html">pagemanager</a></li>
+                <li><a href="../classes/pageConfig.html">pageConfig</a></li>
+            
+                <li><a href="../classes/pageManager.html">pageManager</a></li>
             
                 <li><a href="../classes/router.html">router</a></li>
             
@@ -89,12 +91,12 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: lib\util.js</h1>
+                        <h1 class="file-heading">File: spaseed\lib\util.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 
-define(&#x27;lib/util&#x27;, function(require, exports, module) {
+define(&#x27;spaseed/lib/util&#x27;, function(require, exports, module) {
 	var $ = require(&#x27;$&#x27;);
 	window.console = window.console || {log:function(){}};
 
@@ -166,7 +168,7 @@ define(&#x27;lib/util&#x27;, function(require, exports, module) {
 				_getTmplStr = function (rawStr, mixinTmpl) {
 					if (mixinTmpl) {
 						for (var p in mixinTmpl) {
-							var r = new RegExp(&#x27;&lt;%#&#x27; + p + &#x27;%&gt;&#x27;, &#x27;g&#x27;);
+							var r = new RegExp(&#x27;&lt;%#\\s?&#x27; + p + &#x27;%&gt;&#x27;, &#x27;g&#x27;);
 							rawStr = rawStr.replace(r, mixinTmpl[p]);
 						}
 					}
@@ -176,16 +178,16 @@ define(&#x27;lib/util&#x27;, function(require, exports, module) {
 				var strIsKey = !/\W/.test(str);
         		!strIsKey &amp;&amp; (str = _getTmplStr(str, mixinTmpl));
 				var fn = strIsKey ? cache[str] = cache[str] || tmpl(_getTmplStr(document.getElementById(str).innerHTML, mixinTmpl)) :
-					new Function(&quot;obj&quot;, &quot;var _p_=[];_p_.push(&#x27;&quot; + str
+					new Function(&quot;obj&quot;, &quot;var _p_=[];with(obj){_p_.push(&#x27;&quot; + str
 						.replace(/[\r\t\n]/g, &quot; &quot;)
 						.split(&quot;\\&#x27;&quot;).join(&quot;\\\\&#x27;&quot;)
 						.split(&quot;&#x27;&quot;).join(&quot;\\&#x27;&quot;)
 						.split(&quot;&lt;%&quot;).join(&quot;\t&quot;)
-						.replace(/\t-(.*?)%&gt;/g, &quot;&#x27;,obj.$1,&#x27;&quot;)
-						.replace(/\t=(.*?)%&gt;/g, &quot;&lt;escapehtml&gt;&#x27;,obj.$1,&#x27;&lt;/escapehtml&gt;&quot;)
+						.replace(/\t-(.*?)%&gt;/g, &quot;&#x27;,$1,&#x27;&quot;)
+						.replace(/\t=(.*?)%&gt;/g, &quot;&lt;escapehtml&gt;&#x27;,$1,&#x27;&lt;/escapehtml&gt;&quot;)
 						.split(&quot;\t&quot;).join(&quot;&#x27;);&quot;)
 						.split(&quot;%&gt;&quot;).join(&quot;_p_.push(&#x27;&quot;)
-	        		+ &quot;&#x27;);return _p_.join(&#x27;&#x27;).replace(new RegExp(&#x27;&lt;escapehtml&gt;(.*?)&lt;/escapehtml&gt;&#x27;, &#x27;g&#x27;), function($1,$2){&quot;
+	        		+ &quot;&#x27;);}return _p_.join(&#x27;&#x27;).replace(new RegExp(&#x27;&lt;escapehtml&gt;(.*?)&lt;/escapehtml&gt;&#x27;, &#x27;g&#x27;), function($1,$2){&quot;
 					+ &quot;return $2.replace(/&amp;(?!\w+;)/g, &#x27;&amp;amp;&#x27;).replace(/&lt;/g, &#x27;&amp;lt;&#x27;).replace(/&gt;/g, &#x27;&amp;gt;&#x27;).replace(/\&quot;/g, &#x27;&amp;quot;&#x27;)})&quot;);
 				return data ? fn(data) : fn;
 			};

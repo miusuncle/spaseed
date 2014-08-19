@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>main\router.js - spaseed</title>
+    <title>spaseed\main\router.js - spaseed</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -38,13 +38,15 @@
         <div id="api-tabview-panel">
             <ul id="api-classes" class="apis classes">
             
-                <li><a href="../classes/event.html">event</a></li>
+                <li><a href="../classes/dataManager.html">dataManager</a></li>
             
-                <li><a href="../classes/manager.html">manager</a></li>
+                <li><a href="../classes/event.html">event</a></li>
             
                 <li><a href="../classes/net.html">net</a></li>
             
-                <li><a href="../classes/pagemanager.html">pagemanager</a></li>
+                <li><a href="../classes/pageConfig.html">pageConfig</a></li>
+            
+                <li><a href="../classes/pageManager.html">pageManager</a></li>
             
                 <li><a href="../classes/router.html">router</a></li>
             
@@ -89,12 +91,12 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: main\router.js</h1>
+                        <h1 class="file-heading">File: spaseed\main\router.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 
-define(&#x27;main/router&#x27;, function(require, exports, module) {
+define(&#x27;spaseed/main/router&#x27;, function(require, exports, module) {
 
   var docMode = document.documentMode;
   var oldIE = (/msie [\w.]+/.test(navigator.userAgent.toLowerCase()) &amp;&amp; (!docMode || docMode &lt;= 7));
@@ -108,6 +110,7 @@ define(&#x27;main/router&#x27;, function(require, exports, module) {
   var router = {
     /**
      * 初始化
+     * @param {Object} option 参数
      * @method init
      */
     init: function (option) {
@@ -216,7 +219,6 @@ define(&#x27;main/router&#x27;, function(require, exports, module) {
 
     /**
      * 事件监听
-     * @method addEvent
      */
     addEvent: function (elem, event, fn) {
       if (elem.addEventListener) {
@@ -266,7 +268,6 @@ define(&#x27;main/router&#x27;, function(require, exports, module) {
 
     /**
      * 监听url变化
-     * @method checkUrl
      */
     checkUrl: function () {
       var current = this.getFragment();
@@ -285,8 +286,6 @@ define(&#x27;main/router&#x27;, function(require, exports, module) {
 
     /**
      * 去除前后#
-     * @method stripHash
-     * @param {String} url 
      */
     stripHash: function (url) {
       return url.replace(/^\#+|\#+$/g, &#x27;&#x27;);
@@ -294,8 +293,6 @@ define(&#x27;main/router&#x27;, function(require, exports, module) {
 
     /**
      * 去除前后斜杠
-     * @method stripSlash
-     * @param {String} url 
      */
     stripSlash: function (url) {
       return url.replace(/^\/+|\/+$/g, &#x27;&#x27;);
@@ -337,16 +334,20 @@ define(&#x27;main/router&#x27;, function(require, exports, module) {
         url = url.replace(_self.debug, &#x27;&#x27;);
         !url &amp;&amp; (url = &#x27;/&#x27;);
       }
+
+      /**
+       * 当前url片段
+       * @property fragment
+       * @type String
+       */
       _self.fragment = url;
+
       _self.loadUrl(url);
 
     },
 
     /**
      * 低端浏览器设置iframe历史
-     * @method historySet
-     * @param {String} hash 
-     * @param {String} historyHash
      */
     historySet : function(hash, historyHash) {
         var iframeDoc = this.iframe.document;

@@ -2,22 +2,21 @@ module.exports = function(grunt){
 	grunt.initConfig({
 		pkg:grunt.file.readJSON('package.json'),
 		concat:{
-			lib:{
-				src:['lib/~.js'],
-				dest:'dest/lib.js'
+			spaseed:{
+				src:['spaseed/~.js'],
+				dest:'dest/spaseed.js'
 			},
-			main:{
-				src:['main/~.js','config/~.js','modules/~.js','widget/~.js'],
-				dest:'dest/main.js'
+			app:{
+				src:['config/~.js','main/~.js','modules/~.js'],
+				dest:'dest/app.js'
 			}
 		},
 		watch:{
 			files:[
+				'spaseed/~.js','spaseed/~.tpl','spaseed/~.ejs',
                 'modules/~.js','modules/~.tpl','modules/~.ejs',
-                'widget/~.js','widget/~.tpl','widget/~.ejs',
-                'main/~.js','main/~.tpl',
-                'lib/~.js',
-                'config/~.js'
+                'config/~.js',
+                'main/~.js'
             ],
 			tasks:['concat']
 		},
@@ -27,7 +26,7 @@ module.exports = function(grunt){
 		      description: '<%= pkg.description %>',
 		      version: '<%= pkg.version %>',
 		      options: {
-		        paths: ['lib','main','config','widget'],
+		        paths: ['spaseed'],
 		        themedir: 'docs/themes/default',
 		        outdir: 'docs/app/'
 		      }

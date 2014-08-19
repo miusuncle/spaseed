@@ -1,5 +1,5 @@
 
-define('lib/net', function (require, exports, module) {
+define('spaseed/lib/net', function (require, exports, module) {
     var $ = require('$');
     var util = require('util');
     var console = window.console;

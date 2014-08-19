@@ -1,5 +1,5 @@
 
-define('lib/util', function(require, exports, module) {
+define('spaseed/lib/util', function(require, exports, module) {
 	var $ = require('$');
 	window.console = window.console || {log:function(){}};
 
@@ -71,7 +71,7 @@ define('lib/util', function(require, exports, module) {
 				_getTmplStr = function (rawStr, mixinTmpl) {
 					if (mixinTmpl) {
 						for (var p in mixinTmpl) {
-							var r = new RegExp('<%#' + p + '%>', 'g');
+							var r = new RegExp('<%#\\s?' + p + '%>', 'g');
 							rawStr = rawStr.replace(r, mixinTmpl[p]);
 						}
 					}
@@ -81,16 +81,16 @@ define('lib/util', function(require, exports, module) {
 				var strIsKey = !/\W/.test(str);
         		!strIsKey && (str = _getTmplStr(str, mixinTmpl));
 				var fn = strIsKey ? cache[str] = cache[str] || tmpl(_getTmplStr(document.getElementById(str).innerHTML, mixinTmpl)) :
-					new Function("obj", "var _p_=[];_p_.push('" + str
+					new Function("obj", "var _p_=[];with(obj){_p_.push('" + str
 						.replace(/[\r\t\n]/g, " ")
 						.split("\\'").join("\\\\'")
 						.split("'").join("\\'")
 						.split("<%").join("\t")
-						.replace(/\t-(.*?)%>/g, "',obj.$1,'")
-						.replace(/\t=(.*?)%>/g, "<escapehtml>',obj.$1,'</escapehtml>")
+						.replace(/\t-(.*?)%>/g, "',$1,'")
+						.replace(/\t=(.*?)%>/g, "<escapehtml>',$1,'</escapehtml>")
 						.split("\t").join("');")
 						.split("%>").join("_p_.push('")
-	        		+ "');return _p_.join('').replace(new RegExp('<escapehtml>(.*?)</escapehtml>', 'g'), function($1,$2){"
+	        		+ "');}return _p_.join('').replace(new RegExp('<escapehtml>(.*?)</escapehtml>', 'g'), function($1,$2){"
 					+ "return $2.replace(/&(?!\w+;)/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\"/g, '&quot;')})");
 				return data ? fn(data) : fn;
 			};

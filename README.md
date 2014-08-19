@@ -45,26 +45,32 @@ npm test
 
 ## Directory Layout
 
-    config/                --> app configuration directory
-      dao_config.js        --> cgi configuration
-      manager.js           --> fetch and manage data
-    dest/                  --> packaged file directory
-    docs/                  --> document generation directory
-    lib/                   --> lib file directory
-      event.js             --> event package
-      jquery-1.10.2.js     --> use jquery-1.10.2
-      net.js               --> network requests package
-      util.js              --> public method package
-    main/                  --> main logical directory for framework
-      default/             --> public rendering
-      pagemanager.js       --> page switching management logic
-      router.js            --> routing management
-      startup.js           --> entry module
-    modules/               --> all page module
-    test/                  --> test cases
-    widget/                --> common components directory
-    app.js                 --> example server
-    index.html             --> app layout file 
+    config/                  --> app configuration directory
+      dao_config.js          --> cgi configuration
+      page_config.js         --> page management configuration
+      manager.js             --> fetch and manage data
+    dest/                    --> packaged file directory
+    docs/                    --> document generation directory
+    main/                    --> app main directory
+      startup.js             --> app entry module
+    modules/                 --> all page module
+    spaseed/                 --> spaseed directory
+      config/                --> spaseed configuration
+        page_config.js       --> page basic configuration
+      layout/                --> public rendering
+      lib/                   --> lib file directory
+        event.js             --> event package
+        jquery-1.10.2.js     --> use jquery-1.10.2
+        net.js               --> network requests package
+        util.js              --> public method package
+      main/                  --> main logical directory for framework
+        pagemanager.js       --> page switching management logic
+        datamanager.js       --> data basic management
+        router.js            --> routing management
+        entry.js             --> spaseed entry module
+    test/                    --> test cases
+    app.js                   --> example server
+    index.html               --> app layout file 
   
 
 

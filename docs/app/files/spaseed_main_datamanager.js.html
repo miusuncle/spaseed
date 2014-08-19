@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>config\manager.js - spaseed</title>
+    <title>spaseed\main\datamanager.js - spaseed</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -38,13 +38,15 @@
         <div id="api-tabview-panel">
             <ul id="api-classes" class="apis classes">
             
-                <li><a href="../classes/event.html">event</a></li>
+                <li><a href="../classes/dataManager.html">dataManager</a></li>
             
-                <li><a href="../classes/manager.html">manager</a></li>
+                <li><a href="../classes/event.html">event</a></li>
             
                 <li><a href="../classes/net.html">net</a></li>
             
-                <li><a href="../classes/pagemanager.html">pagemanager</a></li>
+                <li><a href="../classes/pageConfig.html">pageConfig</a></li>
+            
+                <li><a href="../classes/pageManager.html">pageManager</a></li>
             
                 <li><a href="../classes/router.html">router</a></li>
             
@@ -89,100 +91,84 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: config\manager.js</h1>
+                        <h1 class="file-heading">File: spaseed\main\datamanager.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
-define(&#x27;config/manager&#x27;, function(require, exports, module) {
-	var net = require(&#x27;net&#x27;);
-	var config = require(&#x27;daoConfig&#x27;);
+define(&#x27;spaseed/main/datamanager&#x27;, function(require, exports, module) {
+
+	var cache = {};
 
 	/**
 	 * 数据管理
-	 * @class manager
+	 * @class dataManager
 	 * @static
 	 */
-	var manager = {
+	var dataManager = {
 
-		_errorHandler: function (ret) {
+		_errorHandler: function (ret, tipErr) {
 			//错误提示
-			console.log(ret.msg || &#x27;连接服务器异常，请稍后再试&#x27;);
+			tipErr !== false &amp;&amp; console.log(ret.msg || &#x27;连接服务器异常，请稍后再试&#x27;);
 		},
 
-		commonCb: function (ret, cb, fail) {
+		/**
+		 * 公共回调
+		 * @method commonCb
+		 * @param {Object}   ret     CGI返回JSON对象
+		 * @param {Function} cb      成功回调(ret.code == 0)
+		 * @param {Function} fail    失败回调
+		 * @param {Boolean}  tipErr  提示公共错误 @default true
+		 */
+		commonCb: function (ret, cb, fail, tipErr) {
 			var _self = this,
 				_code = ret.code;
 			if (_code == 0) {
 				cb &amp;&amp; cb(ret.data);
 			} else {
-				_self._errorHandler(ret);
+				_self._errorHandler(ret, tipErr);
 				fail &amp;&amp; fail(ret);
 			}
 		},
 
-		queryPage1: function (data, cb, fail) {
-			
-			var _self = this,
-				_cb = function (ret) {
-					_self.commonCb(ret, cb, fail);
-				};
-
-			//获取服务端数据
-			/*net.send(config.get(&#x27;queryPage1&#x27;), {
-				data: data,
-				cb: _cb
-			});*/
-			
-			cb({
-				&quot;title&quot;: &quot;Page 1&quot;,
-				&quot;description&quot;: &quot;This is page 1&quot;
-			})
-
+		/**
+		 * 获取缓存数据
+		 * @method get
+		 * @param {String} name 名称
+		 * @return 缓存数据
+		 */
+		get: function (name) {
+			return cache[name];
 		},
 
-		queryPage2: function (data, cb, fail) {
-			
-			var _self = this,
-				_cb = function (ret) {
-					_self.commonCb(ret, cb, fail);
-				};
-
-			//获取服务端数据
-			/*net.send(config.get(&#x27;queryPage2&#x27;), {
-				data: data,
-				cb: _cb
-			});*/
-			
-			cb({
-				&quot;title&quot;: &quot;Page 2&quot;,
-				&quot;description&quot;: &quot;This is page 2&quot;
-			})
-
+		/**
+		 * 设置缓存数据
+		 * @method set
+		 * @param {String} name 名称
+		 * @param value 值
+		 */
+		set: function (name, value) {
+			cache[name] = value;
 		},
 
-		queryPage3: function (data, cb, fail) {
-			
-			var _self = this,
-				_cb = function (ret) {
-					_self.commonCb(ret, cb, fail);
-				};
+		/**
+		 * 获取所有缓存数据
+		 * @method getCache
+		 * @return cache 缓存对象
+		 */
+		getCache: function () {
+			return cache;
+		},
 
-			//获取服务端数据
-			/*net.send(config.get(&#x27;queryPage3&#x27;), {
-				data: data,
-				cb: _cb
-			});*/
-			
-			cb({
-				&quot;title&quot;: &quot;Page 3&quot;,
-				&quot;description&quot;: &quot;This is page 3&quot;
-			})
-
+		/**
+		 * 清除所有缓存数据
+		 * @method clearCache
+		 */
+		clearCache: function () {
+			cache = {};
 		}
-
 	};
 
-	module.exports = manager;
+	module.exports = dataManager;
 
 });
 

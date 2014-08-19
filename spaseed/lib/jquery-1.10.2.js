@@ -12,7 +12,7 @@
  *
  * Date: 2013-07-03T13:48Z
  */
- define('lib/jquery-1.10.2', function(require) {
+ define('spaseed/lib/jquery-1.10.2', function(require) {
 (function( window, undefined ) {
 
 // Can't do this because several apps including ASP.NET trace

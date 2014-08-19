@@ -1,6 +1,7 @@
 
 define('modules/page1/page1', function (require, exports, module) {
     var $ = require('$');
+    var pageManager = require('pageManager');
     var manager = require('manager');
     var util = require('util');
     var evt = require('event');
@@ -18,7 +19,7 @@ define('modules/page1/page1', function (require, exports, module) {
         render: function () {
 
             manager.queryPage1({}, function(data) {
-            	$('#container').html(util.tmpl(_tpl.main, {
+            	pageManager.container.html(util.tmpl(_tpl.main, {
         			data: data
         		}));
             });

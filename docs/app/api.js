@@ -1,10 +1,11 @@
 YUI.add("yuidoc-meta", function(Y) {
    Y.YUIDoc = { meta: {
     "classes": [
+        "dataManager",
         "event",
-        "manager",
         "net",
-        "pagemanager",
+        "pageConfig",
+        "pageManager",
         "router",
         "util"
     ],

@@ -1,5 +1,5 @@
 
-define('main/router', function(require, exports, module) {
+define('spaseed/main/router', function(require, exports, module) {
 
   var docMode = document.documentMode;
   var oldIE = (/msie [\w.]+/.test(navigator.userAgent.toLowerCase()) && (!docMode || docMode <= 7));
@@ -13,6 +13,7 @@ define('main/router', function(require, exports, module) {
   var router = {
     /**
      * 初始化
+     * @param {Object} option 参数
      * @method init
      */
     init: function (option) {
@@ -121,7 +122,6 @@ define('main/router', function(require, exports, module) {
 
     /**
      * 事件监听
-     * @method addEvent
      */
     addEvent: function (elem, event, fn) {
       if (elem.addEventListener) {
@@ -171,7 +171,6 @@ define('main/router', function(require, exports, module) {
 
     /**
      * 监听url变化
-     * @method checkUrl
      */
     checkUrl: function () {
       var current = this.getFragment();
@@ -190,8 +189,6 @@ define('main/router', function(require, exports, module) {
 
     /**
      * 去除前后#
-     * @method stripHash
-     * @param {String} url 
      */
     stripHash: function (url) {
       return url.replace(/^\#+|\#+$/g, '');
@@ -199,8 +196,6 @@ define('main/router', function(require, exports, module) {
 
     /**
      * 去除前后斜杠
-     * @method stripSlash
-     * @param {String} url 
      */
     stripSlash: function (url) {
       return url.replace(/^\/+|\/+$/g, '');
@@ -242,16 +237,20 @@ define('main/router', function(require, exports, module) {
         url = url.replace(_self.debug, '');
         !url && (url = '/');
       }
+
+      /**
+       * 当前url片段
+       * @property fragment
+       * @type String
+       */
       _self.fragment = url;
+
       _self.loadUrl(url);
 
     },
 
     /**
      * 低端浏览器设置iframe历史
-     * @method historySet
-     * @param {String} hash 
-     * @param {String} historyHash
      */
     historySet : function(hash, historyHash) {
         var iframeDoc = this.iframe.document;

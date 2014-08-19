@@ -38,13 +38,15 @@
         <div id="api-tabview-panel">
             <ul id="api-classes" class="apis classes">
             
-                <li><a href="../classes/event.html">event</a></li>
+                <li><a href="../classes/dataManager.html">dataManager</a></li>
             
-                <li><a href="../classes/manager.html">manager</a></li>
+                <li><a href="../classes/event.html">event</a></li>
             
                 <li><a href="../classes/net.html">net</a></li>
             
-                <li><a href="../classes/pagemanager.html">pagemanager</a></li>
+                <li><a href="../classes/pageConfig.html">pageConfig</a></li>
+            
+                <li><a href="../classes/pageManager.html">pageManager</a></li>
             
                 <li><a href="../classes/router.html">router</a></li>
             
@@ -97,7 +99,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/main_router.js.html#l8"><code>main\router.js:8</code></a>
+            Defined in: <a href="../files/spaseed_main_router.js.html#l8"><code>spaseed\main\router.js:8</code></a>
         </div>
     
 
@@ -123,6 +125,8 @@
             <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
         
         
+            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
+        
         
         
     </ul>
@@ -138,20 +142,6 @@
                     <ul class="index-list methods">
                         
                             <li class="index-item method">
-                                <a href="#method_addEvent">addEvent</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#method_checkUrl">checkUrl</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
                                 <a href="#method_getFragment">getFragment</a>
 
                                 
@@ -160,13 +150,6 @@
                         
                             <li class="index-item method">
                                 <a href="#method_getHash">getHash</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#method_historySet">historySet</a>
 
                                 
                                 
@@ -207,15 +190,18 @@
                                 
                             </li>
                         
-                            <li class="index-item method">
-                                <a href="#method_stripHash">stripHash</a>
+                    </ul>
+                </div>
+            
 
-                                
-                                
-                            </li>
+            
+                <div class="index-section properties">
+                    <h3>Properties</h3>
+
+                    <ul class="index-list properties">
                         
-                            <li class="index-item method">
-                                <a href="#method_stripSlash">stripSlash</a>
+                            <li class="index-item property">
+                                <a href="#property_fragment">fragment</a>
 
                                 
                                 
@@ -228,123 +214,11 @@
             
 
             
-
-            
         </div>
 
         
             <div id="methods" class="api-class-tabpanel">
                 <h2 class="off-left">Methods</h2>
-
-                
-                    <div id="method_addEvent" class="method item">
-    <h3 class="name"><code>addEvent</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/main_router.js.html#l122"><code>main\router.js:122</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>事件监听</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method_checkUrl" class="method item">
-    <h3 class="name"><code>checkUrl</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/main_router.js.html#l172"><code>main\router.js:172</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>监听url变化</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
 
                 
                     <div id="method_getFragment" class="method item">
@@ -383,7 +257,7 @@
             
         
         
-        <a href="../files/main_router.js.html#l147"><code>main\router.js:147</code></a>
+        <a href="../files/spaseed_main_router.js.html#l147"><code>spaseed\main\router.js:147</code></a>
         
         </p>
 
@@ -466,7 +340,7 @@
             
         
         
-        <a href="../files/main_router.js.html#l136"><code>main\router.js:136</code></a>
+        <a href="../files/spaseed_main_router.js.html#l136"><code>spaseed\main\router.js:136</code></a>
         
         </p>
 
@@ -527,8 +401,8 @@
 </div>
 
                 
-                    <div id="method_historySet" class="method item">
-    <h3 class="name"><code>historySet</code></h3>
+                    <div id="method_init" class="method item">
+    <h3 class="name"><code>init</code></h3>
 
     
         <div class="args">
@@ -536,13 +410,7 @@
             
                 <li class="arg">
                     
-                        <code>hash</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>historyHash</code>
+                        <code>option</code>
                     
                 </li>
             
@@ -575,100 +443,7 @@
             
         
         
-        <a href="../files/main_router.js.html#l250"><code>main\router.js:250</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>低端浏览器设置iframe历史</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">hash</code>
-                        <span class="type">String</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                         
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">historyHash</code>
-                        <span class="type">String</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                         
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method_init" class="method item">
-    <h3 class="name"><code>init</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/main_router.js.html#l14"><code>main\router.js:14</code></a>
+        <a href="../files/spaseed_main_router.js.html#l14"><code>spaseed\main\router.js:14</code></a>
         
         </p>
 
@@ -683,6 +458,30 @@
 
     </div>
 
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">option</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>参数</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
     
 
     
@@ -733,7 +532,7 @@
             
         
         
-        <a href="../files/main_router.js.html#l309"><code>main\router.js:309</code></a>
+        <a href="../files/spaseed_main_router.js.html#l308"><code>spaseed\main\router.js:308</code></a>
         
         </p>
 
@@ -832,7 +631,7 @@
             
         
         
-        <a href="../files/main_router.js.html#l280"><code>main\router.js:280</code></a>
+        <a href="../files/spaseed_main_router.js.html#l279"><code>spaseed\main\router.js:279</code></a>
         
         </p>
 
@@ -963,7 +762,7 @@
             
         
         
-        <a href="../files/main_router.js.html#l209"><code>main\router.js:209</code></a>
+        <a href="../files/spaseed_main_router.js.html#l204"><code>spaseed\main\router.js:204</code></a>
         
         </p>
 
@@ -1096,7 +895,7 @@
             
         
         
-        <a href="../files/main_router.js.html#l269"><code>main\router.js:269</code></a>
+        <a href="../files/spaseed_main_router.js.html#l268"><code>spaseed\main\router.js:268</code></a>
         
         </p>
 
@@ -1175,28 +974,17 @@
 </div>
 
                 
-                    <div id="method_stripHash" class="method item">
-    <h3 class="name"><code>stripHash</code></h3>
+            </div>
+        
 
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>url</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
+        
+            <div id="properties" class="api-class-tabpanel">
+                <h2 class="off-left">Properties</h2>
 
-    
-
-    
-
-    
+                
+                    <div id="property_fragment" class="property item">
+    <h3 class="name"><code>fragment</code></h3>
+    <span class="type">String</span>
 
     
 
@@ -1217,10 +1005,9 @@
             
         
         
-        <a href="../files/main_router.js.html#l191"><code>main\router.js:191</code></a>
+        <a href="../files/spaseed_main_router.js.html#l241"><code>spaseed\main\router.js:241</code></a>
         
         </p>
-
 
         
 
@@ -1228,121 +1015,10 @@
     </div>
 
     <div class="description">
-        <p>去除前后#</p>
+        <p>当前url片段</p>
 
     </div>
 
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">url</code>
-                        <span class="type">String</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                         
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method_stripSlash" class="method item">
-    <h3 class="name"><code>stripSlash</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>url</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/main_router.js.html#l200"><code>main\router.js:200</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>去除前后斜杠</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">url</code>
-                        <span class="type">String</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                         
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
     
 
     
@@ -1352,8 +1028,6 @@
 
                 
             </div>
-        
-
         
 
         

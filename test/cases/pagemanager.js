@@ -54,34 +54,34 @@ define('modules/test_ctrl2/test_action/test_action', function (require, exports,
 
 define('test/cases/pagemanager', function(require) {
     var $ = require('$'),
-        pageManager = require('pagemanager'),
+        pageManager = require('pageManager'),
         router = require('router');
 
     describe('pagemanager', function () {
         it('Should render single controller page correctly', function () {
-            pageManager.loadView('test_single_ctrl');
+            pageManager.loadCommon('test_single_ctrl');
             $('#container').text().should.equal('test_single_ctrl');
         });
         it('Should render complete controller action page correctly', function () {
-            pageManager.loadView('test_ctrl','test_action');
+            pageManager.loadCommon('test_ctrl','test_action');
             $('#container').find('h1').text().should.equal('test_ctrl');
-            $('#subcontainer').text().should.equal('test_action');
+            $('#container').find('#subcontainer').text().should.equal('test_action');
         });
         it('Should render no controller page correctly', function () {
-            pageManager.loadView('test_ctrl2','test_action');
+            pageManager.loadCommon('test_ctrl2','test_action');
             $('#container').text().should.equal('test_nocontrl_action');
         });
         it('Should render url params page correctly', function () {
             router.navigate('test_ctrl/test_action2?r=123', false, true);
-            pageManager.loadView('test_ctrl','test_action2?r=123');
+            pageManager.loadCommon('test_ctrl','test_action2?r=123');
             argVar[0].r.should.equal('123');
             router.navigate('test_ctrl/test_action2/111?r=1234', false, true);
-            pageManager.loadView('test_ctrl','test_action2', '111?r=1234');
+            pageManager.loadCommon('test_ctrl','test_action2', '111?r=1234');
             argVar[0].should.equal('111');
             argVar[1].r.should.equal('1234');
         });
         it('Should render 404 page correctly', function () {
-            pageManager.loadView('test_ctrl','aaa');
+            pageManager.loadCommon('test_ctrl','aaa');
             $('#container').find('p').text().should.equal('404');
             $('#container').html('');
         });

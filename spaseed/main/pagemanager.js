@@ -1,90 +1,78 @@
 
-define('main/pagemanager', function(require, exports, module) {
+define('spaseed/main/pagemanager', function(require, exports, module) {
 	var $ = require('$');
 	var router = require('router');
 	var util = require('util');
-
-	//首页模块名
-	var root = 'page1';
-
-	//layout配置
-	var layoutConfig = {
-		'default': require('main/layout/default')
-	};
-
-	//css配置
-	var cssConfig = {};
-
-	//页面主容器
-	var pageContainer = $('#container');
-
-	//切换页面需要更改class的对象
-	var pageClassWrap = pageContainer;
-
-	//页面默认class, 切换页面需要保留的class
-	var pageDefaultClass = '';
-
-	//默认标题
-	var defaultTitle = window.defaultTitle = 'spaseed';
-
-	//导航容器
-	var navContainer = [$('body')];
-
-	//导航选中态class
-	var navActiveClass = 'active';
+	var spaseedPageConfig = require('spaseed/config/page_config');
 
 	/** 
 	 * 页面管理
-	 * @class pagemanager
+	 * @class pageManager
 	 * @static
 	 */
 	var pageManager = {
+
+		config: {},
+
+		/**
+		 * 初始化
+		 * @param {Object} pageConfig 页面配置对象
+		 * @method init
+		 */
+		init: function (pageConfig) {
+			var config = this.config;
+			pageConfig = pageConfig || {};
+			$.extend(true, config, spaseedPageConfig, pageConfig);
+
+			/**
+			 * 页面包裹容器
+			 * @property pageWrapper
+			 * @type Object
+			 */
+			this.pageWrapper = $(config.pageWrapper);
+		},	
+
+
 		/**
 		 * 加载首页
-		 * @method loadRoot
 		 */
 		loadRoot: function () {
-			this._loadView(root);
+			this.loadView(this.config.root);
 		},
 
 		/**
 		 * 统一加载视图方法
-		 * @method loadView
 		 */
-		loadView: function () {
+		loadCommon: function () {
 			var _self = this,
 				arr = [].slice.call(arguments);
 
 			//解析路径
-			this._parseUrl(arr, function (controller, action, params) {
+			this.parseUrl(arr, function (controller, action, params) {
 				//处理路由, 加载视图
-				_self._loadView(controller, action, params);
+				_self.loadView(controller, action, params);
 			})
 		},
 
 		/**
 		 * 解析路径,处理url参数
-		 * @method _parseUrlParams
+		 * @method parseUrl
 		 * @param {Array}    arr 路由匹配到的参数
 		 * @param {Function} cb  回调函数
 		 */
-		_parseUrl: function (arr, cb) {
+		parseUrl: function (arr, cb) {
 			var controller = null,
 				action = null,
 				params = [],
 				urlPara = null,
 				clearParaStr = function (str) {
 					return str.split('?')[0];
-				};
+				},
+				locationSearch = /\?.*/.exec(location.href);
 
 			//获取url参数
-			if (location.search) {
-				var searchArr = location.search.substring(1).split('&');
-				urlPara = {};
-				for (var i=0, item; item = searchArr[i]; i++) {
-					var itemArr = item.split('=');
-					urlPara[itemArr[0]] = itemArr[1];
-				}
+			if (locationSearch) {
+				urlPara = util.paramsToObject(locationSearch[0]);
 			}
 
 			//获取controller
@@ -117,21 +105,32 @@ define('main/pagemanager', function(require, exports, module) {
 			urlPara && params.push(urlPara);
 
 			cb(controller, action, params);
+
 		},
 
 		/**
 		 * 统一路由处理函数
-		 * @method _loadView
+		 * @method loadView
 		 * @param {String} controller 
 		 * @param {String} action 
 		 * @param {Array} params 
 		 */
-		_loadView: function (controller, action, params) {
-			var _self = this;
+		loadView: function (controller, action, params) {
+			var _self = this,
+				config = this.config;
+
+			//渲染前执行业务逻辑
+			if (config.beforeRender) {
+				if (config.beforeRender(controller, action, params) === false) {
+					return
+				}
+			};
 
 			if (_self.currentViewObj) {
+
 				//全局销毁
 				_self.globalDestroy();
+
 				//销毁前一个
 				var destroy = _self.currentViewObj.destroy;
                 try {
@@ -150,17 +149,32 @@ define('main/pagemanager', function(require, exports, module) {
 			params = params || [];
 
 			//渲染公共模版
-			_self.renderLayout(controller, action, params);
+			this.renderLayout(controller, action, params);
+
+			//存储主要jQuery dom对象
+
+			/**
+			 * 页面主容器
+			 * @property container
+			 * @type Object
+			 */
+			this.container = $(config.container);
+
+			/**
+			 * 切换页面需要更改class的容器
+			 * @property classWrapper
+			 * @type Object
+			 */
+			this.classWrapper = $(config.classWrapper);
 
 			//模块基础路径
-			var basePath = 'modules/';
+			var basePath = config.basePath;
 
 			//模块id按照如下规则组成
 			var controllerId = basePath + controller + '/' + controller,
-				actionId = basePath + controller + '/' + action + '/' + action,
-				view = action || controller;
+				actionId = basePath + controller + '/' + action + '/' + action;
 
-			var moduleArr = [];
+			var moduleArr = []; 
 
 			//检查是否存在controller模块
 			if (seajs.hasDefined[controllerId]) {
@@ -221,10 +235,14 @@ define('main/pagemanager', function(require, exports, module) {
 				}
 
 				//更改导航状态
-		  		_self.changeNavStatus(view); 
+				if (config.changeNavStatus) {
+					config.changeNavStatus(controller, action);
+				} else {
+					_self.changeNavStatus(controller, action);
+				}
 
 		  		//设置页面标题
-		  		_self.setTitle(cObj, aObj);
+		  		_self.setTitle(cObj, aObj); 
 				
 			});
 
@@ -234,13 +252,10 @@ define('main/pagemanager', function(require, exports, module) {
 		/**
 		 * 通过配置组装css请求
 		 * (单页面模式会有先出dom后出样式的情况，不建议使用这种动态加载方式)
-		 * @method addCssReq
-		 * @param  {String} controller 
-		 * @param  {String} action 
-		 * @return {Array}  
 		 */
 		addCssReq: function (controller, action) {
-			var controllerCssReq = cssConfig[controller],
+			var cssConfig = this.config.css,
+				controllerCssReq = cssConfig[controller],
 				actionCssReq = cssConfig[controller + '_' + action],
 				reqUrl = [],
 				concatReqUrl = function (cssArr) {
@@ -257,45 +272,48 @@ define('main/pagemanager', function(require, exports, module) {
 
 		/**
 		 * 渲染公共模版
-		 * @method renderLayout
-		 * @param {String} controller 
-		 * @param {String} action 
-		 * @param {Array} params 
 		 */
 		renderLayout: function (controller, action, params) {
 			var _self = this,
+				config = _self.config,
+				layoutConfig = config.layout,
+				layout = 'default',
 				_render = function (layoutName) {
-				if (_self.layout != layoutName) {
-					layoutConfig[layoutName].render();
-					_self.layout = layoutName;
-				} 
-			};
-			//可通过controller参数使用其他layout
-			/*switch (controller) {
-				case 'xx':
-					_render('xx');
-					break;
-				default:
-					_render('default');
-			}*/
-			_render('default');
+					if (_self.layout != layoutName) {
+						require.async(layoutConfig[layoutName]['module'], function (_layout) {
+							_layout.render(config.sidebar);
+						})
+						_self.layout = layoutName;
+					} 
+				};
+
+			loop: for (var key in layoutConfig) {
+				var controllerArr = layoutConfig[key].controller || [];
+				for (var i = 0, c; c = controllerArr[i]; i++) {
+					if (controller === c) {
+						layout = key;
+						break loop;
+					}
+				}
+			}
+			_render(layout);
 		},
 
 		/**
 		 * 渲染视图
-		 * @method renderView
-		 * @param {Object} obj 模块对象
-		 * @param {Array} params 参数
 		 */
 		renderView: function (obj, params) {
 			if (obj) {
-				var defaultClass = pageDefaultClass;
+				var config = this.config,
+				 	defaultClass = config.defaultClass,
+					classWrapper = this.classWrapper;
+
 				//页面模块通过属性pageClass来变更样式
 				if (obj.pageClass) { 
-					pageClassWrap.attr('class', defaultClass + ' ' + obj.pageClass);
+					classWrapper.attr('class', defaultClass + ' ' + obj.pageClass);
 				} else {
-					if (pageClassWrap.attr('class') != defaultClass) {
-						pageClassWrap.attr('class', defaultClass);
+					if (classWrapper.attr('class') !== defaultClass) {
+						classWrapper.attr('class', defaultClass);
 					}
 				}
 			}
@@ -312,16 +330,14 @@ define('main/pagemanager', function(require, exports, module) {
 		 * @method render404
 		 */
 		render404: function () {
-			var notFound = '<h2 id="tt404" style="text-align:center;padding-top:100px;font-size:20px;line-height:1.5;color:#999"> <p>404</p> 您访问的页面没有找到! </h2>';
-			var container = pageContainer;
-			container && container.html(notFound);
+			var notFound = '<h2 id="tt404" style="text-align:center;padding-top:100px;font-size:20px;line-height:1.5;color:#999">'+
+						   ' <p style="font-size:44px">404</p> 您访问的页面没有找到! </h2>';
+			var container = this.container;
+			container.html(notFound);
 		},
 
 		/**
 		 * 设置页面标题
-		 * @method setTitle
-		 * @param {Object} cObj controller模块对象
-		 * @param {Object} aObj action模块对象
 		 */
 		setTitle: function (cObj, aObj) {
 			if (aObj && aObj.title) {
@@ -329,6 +345,7 @@ define('main/pagemanager', function(require, exports, module) {
 			} else if (cObj && cObj.title) {
 				document.title = cObj.title;
 			} else {
+				var defaultTitle = this.config.defaultTitle;
 				if (document.title != defaultTitle) {
 					document.title = defaultTitle;
 				}
@@ -337,19 +354,21 @@ define('main/pagemanager', function(require, exports, module) {
 
 		/**
 		 * 改变导航选中态
-		 * @method changeNavStatus
-		 * @param {String} view 当前视图
 		 */
-		changeNavStatus: function (view) {
+		changeNavStatus: function (controller, action) {
 			var _self = this,
-				fragment = this.fragment;
+				fragment = this.fragment,
+				config = this.config,
+				root = config.root,
+				navContainer = config.navContainer,
+				navActiveClass = config.navActiveClass;
 
 			var changeNav = function (navcon, links) {
 				navcon.find('.' + navActiveClass).removeClass(navActiveClass);
 				for (var i = 0, item; item = links[i]; i++) {
 			        var href = util.getHref(item);
 			        
-			        if ( (href === '/' && view === root) || (href !== '/' && fragment.indexOf(href) == 0) ) {
+			        if ( (href === '/' && controller === root) || (href !== '/' && fragment.indexOf(href) == 0) ) {
 			          var itemParent = $(item).parent();
 			          if (navcon.find('.' + navActiveClass).length) {
 			          	(fragment === href) && itemParent.addClass(navActiveClass);
@@ -362,20 +381,20 @@ define('main/pagemanager', function(require, exports, module) {
 			};
 
 			for (var i=0, navcon; navcon = navContainer[i]; i++) {
+				navcon = $(navcon);
 				changeNav(navcon, navcon.find('a'));
 			}
 		},
 
 		/**
 		 * 页面切换时全局销毁
-		 * @method globalDestroy
 		 */
 		globalDestroy: function () {
-			
+
 		},
 
 		/**
-		 * 重置fragment标记
+		 * 重置fragment标记(用于强制刷新controller)
 		 * @method resetFragment
 		 */
 		resetFragment: function () {

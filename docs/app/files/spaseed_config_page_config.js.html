@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>main\layout\default.js - spaseed</title>
+    <title>spaseed\config\page_config.js - spaseed</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -38,13 +38,15 @@
         <div id="api-tabview-panel">
             <ul id="api-classes" class="apis classes">
             
-                <li><a href="../classes/event.html">event</a></li>
+                <li><a href="../classes/dataManager.html">dataManager</a></li>
             
-                <li><a href="../classes/manager.html">manager</a></li>
+                <li><a href="../classes/event.html">event</a></li>
             
                 <li><a href="../classes/net.html">net</a></li>
             
-                <li><a href="../classes/pagemanager.html">pagemanager</a></li>
+                <li><a href="../classes/pageConfig.html">pageConfig</a></li>
+            
+                <li><a href="../classes/pageManager.html">pageManager</a></li>
             
                 <li><a href="../classes/router.html">router</a></li>
             
@@ -89,27 +91,137 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: main\layout\default.js</h1>
+                        <h1 class="file-heading">File: spaseed\config\page_config.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
-
-/**
- * 默认layout
- */
-define(&#x27;main/layout/default&#x27;, function(require, exports, module) {
+define(&#x27;spaseed/config/page_config&#x27;, function(require, exports, module) {
 	var $ = require(&#x27;$&#x27;);
-	var util = require(&#x27;util&#x27;);
 
-	var layout = {
-		_tmpl: {
-			main: TEMPLATE.MAIN
+	/** 
+	 * 页面管理参数配置
+	 * @class pageConfig
+	 * @static
+	 */
+	var pageConfig = {
+
+		/**
+		 * 页面模块基础路径
+		 * @property basePath
+		 * @type String
+		 * @default &#x27;modules/&#x27;
+		 */
+		&#x27;basePath&#x27;: &#x27;modules/&#x27;,
+
+		/**
+		 * 页面包裹选择器
+		 * @property pageWrapper
+		 * @type String
+		 * @default &#x27;#pageWrapper&#x27;
+		 */
+		&#x27;pageWrapper&#x27;: &#x27;#pageWrapper&#x27;,
+
+		/**
+		 * 页面主容器选择器
+		 * @property container
+		 * @type String
+		 * @default &#x27;#container&#x27;
+		 */
+		&#x27;container&#x27;: &#x27;#container&#x27;,
+
+		/**
+		 * 切换页面需要更改class的容器选择器
+		 * @property classWrapper
+		 * @type String
+		 * @default &#x27;#container&#x27;
+		 */
+		&#x27;classWrapper&#x27;: &#x27;#container&#x27;,
+
+		/**
+		 * 切换页面需要保留的class
+		 * @property defaultClass
+		 * @type String
+		 * @default &#x27;&#x27;
+		 */
+		&#x27;defaultClass&#x27;: &#x27;&#x27;,
+
+		/**
+		 * 默认标题
+		 * @property defaultTitle
+		 * @type String
+		 * @default &#x27;spaseed&#x27;
+		 */
+		&#x27;defaultTitle&#x27;: &#x27;spaseed&#x27;,
+
+		/**
+		 * 导航容器选择器, 在各容器中遍历a标签, 执行选中态匹配
+		 * @property navContainer
+		 * @type Array
+		 * @default [&#x27;body&#x27;]
+		 */
+		&#x27;navContainer&#x27;: [&#x27;body&#x27;],
+
+		/**
+		 * 导航选中class名
+		 * @property navActiveClass
+		 * @type String
+		 * @default &#x27;active&#x27;
+		 */
+		&#x27;navActiveClass&#x27;: &#x27;active&#x27;,
+
+		/**
+		 * 渲染前执行方法
+		 * @property beforeRender
+		 * @type Function
+		 * @default function (controller, action, params) {}
+		 */
+		&#x27;beforeRender&#x27;: function (controller, action, params) {
 		},
-		render: function () {
-			
-		}
+
+		/**
+		 * 改变导航选中态
+		 * @property changeNavStatus
+		 * @type Function
+		 * @default 通用方法
+		 */
+		&#x27;changeNavStatus&#x27;: null,
+
+		/**
+		 * layout模版
+		 * @property layout
+		 * @type Object
+		 * @default {
+						&#x27;default&#x27;: {
+							&#x27;controller&#x27;: [],
+							&#x27;module&#x27;: &#x27;spaseed/layout/default&#x27;
+						}
+					}
+		 */
+		&#x27;layout&#x27;: {
+			&#x27;default&#x27;: {
+				&#x27;controller&#x27;: [],
+				&#x27;module&#x27;: &#x27;spaseed/layout/default&#x27;
+			}
+		},
+
+		/**
+		 * 首页模块名
+		 * @property root
+		 * @type String
+		 * @default &#x27;home&#x27;
+		 */
+		&#x27;root&#x27;: &#x27;home&#x27;,
+
+		/**
+		 * css配置
+		 * @property css
+		 * @type Object
+		 * @default {}
+		 */
+		&#x27;css&#x27;: {}
 	};
-	module.exports = layout;
+
+	module.exports = pageConfig;
 });
 
     </pre>
