@@ -43,46 +43,6 @@
 
 		var basePath = '/dest/'; 
 
-		var loader = {
-			load: function (url, cb) {
-				var urlArr = [];
-				if (typeof(url) == 'string') {
-					urlArr.push(url);
-				} else {
-					urlArr = url;
-				}
-			    var len = urlArr.length,
-			    	callback = function () {
-						if (!--len) {
-							cb && cb();
-						}
-				    };
-			    for (var i = 0, url; url = urlArr[i]; i++) {
-					this._load(url, callback);
-			    }
-			},
-			_load: function (url, cb) {
-				this._scriptLoad(url, cb);
-			},
-			_scriptLoad: function (url, cb) {
-				var el = doc.createElement('script');
-				el.setAttribute('type', 'text/javascript');
-				el.setAttribute('src', basePath + url + '?max_age=20000000');
-				el.setAttribute('async', true);
-				el.onerror = function() {
-					cb();
-					el.onerror = null;
-				};
-				el.onload = el.onreadystatechange = function() {
-					if (!this.readyState || this.readyState === 'loaded' || this.readyState === 'complete') {
-						cb();
-						el.onload = el.onreadystatechange = null;
-					}
-				};
-				doc.getElementsByTagName("head")[0].appendChild(el);
-			}
-		};
-
 		function configSeajs () {
 			seajs.config({
 		        base: basePath,
@@ -106,12 +66,10 @@
 		    });
 		}
 
-		function loadModule () {
+		function loadJs () {
 			configSeajs();
 
-			var jsArr = ['spaseed.js', 'app.js'];
-
-			loader.load(jsArr, start);
+			seajs.use([basePath + 'spaseed.js', basePath + 'app.js'], start);
 		}
 
 		function start () {
@@ -120,7 +78,8 @@
 			});
 		}
 
-		loadModule();
+		loadJs();
+
 	})(window, document);
 
 	</script>
