@@ -164,7 +164,11 @@ define(&#x27;spaseed/lib/util&#x27;, function(require, exports, module) {
 		 * 		util.tmpl(&#x27;&lt;h1&gt;&lt;%=user%&gt;&lt;/h1&gt; &lt;%#careerTmpl%&gt;&#x27;, {user:&#x27;evanyuan&#x27;, career: &#x27;前端工程师&#x27;}, {careerTmpl: careerTmpl});
 		 */
 		tmpl: function () {
-      		var cache = {},
+      		var _cache = {},
+  				_escape = function (str) {
+  					str = (str || &#x27;&#x27;).toString();
+			    	return str.replace(/&amp;(?!\w+;)/g, &#x27;&amp;amp;&#x27;).replace(/&lt;/g, &#x27;&amp;lt;&#x27;).replace(/&gt;/g, &#x27;&amp;gt;&#x27;).replace(/\&quot;/g, &#x27;&amp;quot;&#x27;);
+				},
 				_getTmplStr = function (rawStr, mixinTmpl) {
 					if (mixinTmpl) {
 						for (var p in mixinTmpl) {
@@ -174,22 +178,28 @@ define(&#x27;spaseed/lib/util&#x27;, function(require, exports, module) {
 					}
 					return rawStr;
 				};
+      			
 			return function tmpl(str, data, mixinTmpl) {
 				var strIsKey = !/\W/.test(str);
         		!strIsKey &amp;&amp; (str = _getTmplStr(str, mixinTmpl));
-				var fn = strIsKey ? cache[str] = cache[str] || tmpl(_getTmplStr(document.getElementById(str).innerHTML, mixinTmpl)) :
-					new Function(&quot;obj&quot;, &quot;var _p_=[];with(obj){_p_.push(&#x27;&quot; + str
-						.replace(/[\r\t\n]/g, &quot; &quot;)
-						.split(&quot;\\&#x27;&quot;).join(&quot;\\\\&#x27;&quot;)
-						.split(&quot;&#x27;&quot;).join(&quot;\\&#x27;&quot;)
-						.split(&quot;&lt;%&quot;).join(&quot;\t&quot;)
-						.replace(/\t-(.*?)%&gt;/g, &quot;&#x27;,$1,&#x27;&quot;)
-						.replace(/\t=(.*?)%&gt;/g, &quot;&lt;escapehtml&gt;&#x27;,$1,&#x27;&lt;/escapehtml&gt;&quot;)
-						.split(&quot;\t&quot;).join(&quot;&#x27;);&quot;)
-						.split(&quot;%&gt;&quot;).join(&quot;_p_.push(&#x27;&quot;)
-	        		+ &quot;&#x27;);}return _p_.join(&#x27;&#x27;).replace(new RegExp(&#x27;&lt;escapehtml&gt;(.*?)&lt;/escapehtml&gt;&#x27;, &#x27;g&#x27;), function($1,$2){&quot;
-					+ &quot;return $2.replace(/&amp;(?!\w+;)/g, &#x27;&amp;amp;&#x27;).replace(/&lt;/g, &#x27;&amp;lt;&#x27;).replace(/&gt;/g, &#x27;&amp;gt;&#x27;).replace(/\&quot;/g, &#x27;&amp;quot;&#x27;)})&quot;);
-				return data ? fn(data) : fn;
+
+	        	var fn = strIsKey ? _cache[str] = _cache[str] || tmpl(_getTmplStr(document.getElementById(str).innerHTML, mixinTmpl)) :
+                    new Function(&quot;obj&quot;, &quot;_escape&quot;, &quot;var _p=&#x27;&#x27;;with(obj){_p+=&#x27;&quot; + str
+                        .replace(/[\r\t\n]/g, &quot; &quot;)
+                        .split(&quot;\\&#x27;&quot;).join(&quot;\\\\&#x27;&quot;)
+                        .split(&quot;&#x27;&quot;).join(&quot;\\&#x27;&quot;)
+                        .split(&quot;&lt;%&quot;).join(&quot;\t&quot;)
+                        .replace(/\t-(.*?)%&gt;/g, &quot;&#x27;+$1+&#x27;&quot;)
+                        .replace(/\t=(.*?)%&gt;/g, &quot;&#x27;+_escape($1)+&#x27;&quot;)
+                        .split(&quot;\t&quot;).join(&quot;&#x27;;&quot;)
+                        .split(&quot;%&gt;&quot;).join(&quot;_p+=&#x27;&quot;)
+                    + &quot;&#x27;;} return _p;&quot;);
+
+	        	var render = function (data) {
+	        		return fn(data, _escape)
+	        	};
+
+				return data ? render(data) : render;
 			};
 		}(),
 

@@ -67,7 +67,11 @@ define('spaseed/lib/util', function(require, exports, module) {
 		 * 		util.tmpl('<h1><%=user%></h1> <%#careerTmpl%>', {user:'evanyuan', career: '前端工程师'}, {careerTmpl: careerTmpl});
 		 */
 		tmpl: function () {
-      		var cache = {},
+      		var _cache = {},
+  				_escape = function (str) {
+  					str = (str || '').toString();
+			    	return str.replace(/&(?!\w+;)/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\"/g, '&quot;');
+				},
 				_getTmplStr = function (rawStr, mixinTmpl) {
 					if (mixinTmpl) {
 						for (var p in mixinTmpl) {
@@ -77,22 +81,28 @@ define('spaseed/lib/util', function(require, exports, module) {
 					}
 					return rawStr;
 				};
+      			
 			return function tmpl(str, data, mixinTmpl) {
 				var strIsKey = !/\W/.test(str);
         		!strIsKey && (str = _getTmplStr(str, mixinTmpl));
-				var fn = strIsKey ? cache[str] = cache[str] || tmpl(_getTmplStr(document.getElementById(str).innerHTML, mixinTmpl)) :
-					new Function("obj", "var _p_=[];with(obj){_p_.push('" + str
-						.replace(/[\r\t\n]/g, " ")
-						.split("\\'").join("\\\\'")
-						.split("'").join("\\'")
-						.split("<%").join("\t")
-						.replace(/\t-(.*?)%>/g, "',$1,'")
-						.replace(/\t=(.*?)%>/g, "<escapehtml>',$1,'</escapehtml>")
-						.split("\t").join("');")
-						.split("%>").join("_p_.push('")
-	        		+ "');}return _p_.join('').replace(new RegExp('<escapehtml>(.*?)</escapehtml>', 'g'), function($1,$2){"
-					+ "return $2.replace(/&(?!\w+;)/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\"/g, '&quot;')})");
-				return data ? fn(data) : fn;
+
+	        	var fn = strIsKey ? _cache[str] = _cache[str] || tmpl(_getTmplStr(document.getElementById(str).innerHTML, mixinTmpl)) :
+                    new Function("obj", "_escape", "var _p='';with(obj){_p+='" + str
+                        .replace(/[\r\t\n]/g, " ")
+                        .split("\\'").join("\\\\'")
+                        .split("'").join("\\'")
+                        .split("<%").join("\t")
+                        .replace(/\t-(.*?)%>/g, "'+$1+'")
+                        .replace(/\t=(.*?)%>/g, "'+_escape($1)+'")
+                        .split("\t").join("';")
+                        .split("%>").join("_p+='")
+                    + "';} return _p;");
+
+	        	var render = function (data) {
+	        		return fn(data, _escape)
+	        	};
+
+				return data ? render(data) : render;
 			};
 		}(),
 
