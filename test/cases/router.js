@@ -40,7 +40,7 @@ define('test/cases/router', function(require) {
         });
 
         it('Should match full path correctly', function () {
-            router.navigate('/aa/bb', false, true);
+            router.navigate('/aa/bb?r=1', false, true);
             current.should.equal('fullpath');
         });
         it('Should match param path correctly', function () {
@@ -63,9 +63,15 @@ define('test/cases/router', function(require) {
             args[0].should.equal('aa');
             args[1].should.equal('bb');
             args[2].should.equal('p1');
-            args[3].should.equal('p2?r=1');
+            args[3].should.equal('p2');
+            var query = typeof(args[4]);
+            query.should.equal('object');
         });
     });
+
+    setTimeout(function () {
+        router.navigate('/', false, true);
+    }, 100);
 
 });
 

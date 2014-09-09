@@ -1,5 +1,6 @@
 define('spaseed/main/datamanager', function(require, exports, module) {
 
+	var pageManager = require('pageManager');
 	var cache = {};
 
 	/**
@@ -11,7 +12,7 @@ define('spaseed/main/datamanager', function(require, exports, module) {
 
 		_errorHandler: function (ret, tipErr) {
 			//错误提示
-			tipErr !== false && console.log(ret.msg || '连接服务器异常，请稍后再试');
+			tipErr !== false && console.log(ret.msg || pageManager.config.defaultReqErr);
 		},
 
 		/**

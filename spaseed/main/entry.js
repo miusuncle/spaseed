@@ -12,16 +12,6 @@ define('spaseed/main/entry', function(require, exports) {
     	//初始化页面管理
 		pageManager.init(pageConfig);
 
-		//初始化路由
-		router.init({
-			'html5Mode': true,
-			'pageManager': pageManager,
-			'routes': {
-				'/': 'loadRoot',
-				'/*controller(/*action)(/*p1)(/*p2)(/*p3)(/*p4)': 'loadCommon'
-			}
-		});
-
 		//全局点击
 		evt.addCommonEvent('click', { 
 			'nav': function () {

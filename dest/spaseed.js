@@ -33,6 +33,14 @@ define('spaseed/config/page_config', function(require, exports, module) {
 		'container': '#container',
 
 		/**
+		 * 右侧内容容器选择器
+		 * @property appArea
+		 * @type String
+		 * @default '#appArea'
+		 */
+		'appArea': '#appArea',
+
+		/**
 		 * 切换页面需要更改class的容器选择器
 		 * @property classWrapper
 		 * @type String
@@ -82,6 +90,14 @@ define('spaseed/config/page_config', function(require, exports, module) {
 		},
 
 		/**
+		 * 扩展路由，优先于框架路由逻辑
+		 * @property extendRoutes
+		 * @type Object
+		 * @default {}
+		 */
+		'extendRoutes': {},
+
+		/**
 		 * 改变导航选中态
 		 * @property changeNavStatus
 		 * @type Function
@@ -121,7 +137,25 @@ define('spaseed/config/page_config', function(require, exports, module) {
 		 * @type Object
 		 * @default {}
 		 */
-		'css': {}
+		'css': {},
+
+		/**
+		 * 404提示
+		 * @property 404Html
+		 * @type String
+		 * @default '<h2 id="tt404" style="text-align:center;padding-top:100px;font-size:20px;line-height:1.5;color:#999">'+
+				   ' <p style="font-size:44px">404</p> 您访问的页面没有找到! </h2>'
+		 */
+		'html404': '<h2 id="tt404" style="text-align:center;padding-top:100px;font-size:20px;line-height:1.5;color:#999">'+
+				   ' <p style="font-size:44px">404</p> 您访问的页面没有找到! </h2>',
+
+		/**
+		 * 请求错误默认提示文字
+		 * @property defaultReqErr
+		 * @type String
+		 * @default '连接服务器异常，请稍后再试'
+		 */
+		'defaultReqErr': '连接服务器异常，请稍后再试'
 	};
 
 	module.exports = pageConfig;
@@ -10462,6 +10496,7 @@ define('spaseed/lib/util', function(require, exports, module) {
 
 define('spaseed/main/datamanager', function(require, exports, module) {
 
+	var pageManager = require('pageManager');
 	var cache = {};
 
 	/**
@@ -10473,7 +10508,7 @@ define('spaseed/main/datamanager', function(require, exports, module) {
 
 		_errorHandler: function (ret, tipErr) {
 			//错误提示
-			tipErr !== false && console.log(ret.msg || '连接服务器异常，请稍后再试');
+			tipErr !== false && console.log(ret.msg || pageManager.config.defaultReqErr);
 		},
 
 		/**
@@ -10551,16 +10586,6 @@ define('spaseed/main/entry', function(require, exports) {
     	//初始化页面管理
 		pageManager.init(pageConfig);
 
-		//初始化路由
-		router.init({
-			'html5Mode': true,
-			'pageManager': pageManager,
-			'routes': {
-				'/': 'loadRoot',
-				'/*controller(/*action)(/*p1)(/*p2)(/*p3)(/*p4)': 'loadCommon'
-			}
-		});
-
 		//全局点击
 		evt.addCommonEvent('click', { 
 			'nav': function () {
@@ -10606,6 +10631,17 @@ define('spaseed/main/pagemanager', function(require, exports, module) {
 			pageConfig = pageConfig || {};
 			$.extend(true, config, spaseedPageConfig, pageConfig);
 
+			//初始化路由
+			router.init({
+				'html5Mode': true,
+				'pageManager': this,
+				'routes': {
+					'/': 'loadRoot',
+					'/*controller(/*action)(/*p1)(/*p2)(/*p3)(/*p4)': 'loadCommon'
+				},
+				'extendRoutes': config.extendRoutes
+			});
+
 			/**
 			 * 页面包裹容器
 			 * @property pageWrapper
@@ -10629,62 +10665,36 @@ define('spaseed/main/pagemanager', function(require, exports, module) {
 			var _self = this,
 				arr = [].slice.call(arguments);
 
-			//解析路径
-			this.parseUrl(arr, function (controller, action, params) {
+			//解析路由匹配
+			this.parseMatch(arr, function (controller, action, params) {
 				//处理路由, 加载视图
 				_self.loadView(controller, action, params);
 			})
 		},
 
 		/**
-		 * 解析路径,处理url参数
-		 * @method parseUrl
+		 * 解析路由匹配
+		 * @method parseMatch
 		 * @param {Array}    arr 路由匹配到的参数
 		 * @param {Function} cb  回调函数
 		 */
-		parseUrl: function (arr, cb) {
+		parseMatch: function (arr, cb) {
 			var controller = null,
 				action = null,
-				params = [],
-				urlPara = null,
-				clearParaStr = function (str) {
-					return str.split('?')[0];
-				},
-				locationSearch = /\?.*/.exec(location.href);
-
-			//获取url参数
-			if (locationSearch) {
-				urlPara = util.paramsToObject(locationSearch[0]);
-			}
+				params = [];
 
 			//获取controller
-			if (/^\?/.test(arr[0])) {
-				//匹配首页 /?from=xx 场景
-				controller = root;
-			} else { 
-				//匹配其他页 如/xx?from=xx需清除url参数
-				controller = clearParaStr(arr[0]);
-			}
+			controller = arr[0];
 
 			//获取action与params
 			if (arr.length > 1) {
-				if (/^\?/.test(arr[1])) {
-					//匹配 /xx/?from=xx 场景
-					action = '';
+				if (typeof(arr[1]) === 'object') {
+					params.push(arr[1]);
 				} else {
-					action = clearParaStr(arr[1]);
+					action = arr[1];
 					params = arr.slice(2);
-					//如有路由参数, 数组最后一项需清除可能存在的url参数
-					if (params.length) {
-						var lstIdx = params.length-1,
-							lstItemStr = params[lstIdx] = clearParaStr(params[lstIdx]);
-						!lstItemStr && params.splice(lstIdx, 1);
-					}
 				}
 			}
-
-			//将url参数放入params
-			urlPara && params.push(urlPara);
 
 			cb(controller, action, params);
 
@@ -10741,6 +10751,13 @@ define('spaseed/main/pagemanager', function(require, exports, module) {
 			 * @type Object
 			 */
 			this.container = $(config.container);
+
+			/**
+			 * 右侧内容容器
+			 * @property appArea
+			 * @type Object
+			 */
+			this.appArea = $(config.appArea);
 
 			/**
 			 * 切换页面需要更改class的容器
@@ -10805,7 +10822,8 @@ define('spaseed/main/pagemanager', function(require, exports, module) {
 				if (controllerId && (!_self.fragment || _self.fragment.indexOf('/' + controller) < 0 || !action)) {
 					_self.renderView(cObj, params);
 				} 
-				_self.fragment = router.fragment;
+				_self.fragment = (router.fragment === '/') ? '/' + controller : router.fragment;
+				_self.fragment = _self.fragment.replace(/\/?\?.*/,'');
 
 				//执行action
 				if (action) {
@@ -10863,7 +10881,7 @@ define('spaseed/main/pagemanager', function(require, exports, module) {
 				_render = function (layoutName) {
 					if (_self.layout != layoutName) {
 						require.async(layoutConfig[layoutName]['module'], function (_layout) {
-							_layout.render(config.sidebar);
+							_layout.render();
 						})
 						_self.layout = layoutName;
 					} 
@@ -10912,9 +10930,8 @@ define('spaseed/main/pagemanager', function(require, exports, module) {
 		 * @method render404
 		 */
 		render404: function () {
-			var notFound = '<h2 id="tt404" style="text-align:center;padding-top:100px;font-size:20px;line-height:1.5;color:#999">'+
-						   ' <p style="font-size:44px">404</p> 您访问的页面没有找到! </h2>';
-			var container = this.container;
+			var notFound = this.config.html404;
+			var container = this.appArea.length ?  this.appArea : this.container;
 			container.html(notFound);
 		},
 
@@ -10944,28 +10961,34 @@ define('spaseed/main/pagemanager', function(require, exports, module) {
 				root = config.root,
 				navContainer = config.navContainer,
 				navActiveClass = config.navActiveClass;
-
-			var changeNav = function (navcon, links) {
-				navcon.find('.' + navActiveClass).removeClass(navActiveClass);
+				
+			var changeNav = function (navCollection, links) {
+				navCollection.find('.' + navActiveClass).removeClass(navActiveClass);
 				for (var i = 0, item; item = links[i]; i++) {
 			        var href = util.getHref(item);
 			        
 			        if ( (href === '/' && controller === root) || (href !== '/' && fragment.indexOf(href) == 0) ) {
 			          var itemParent = $(item).parent();
-			          if (navcon.find('.' + navActiveClass).length) {
+			          var onActiveNav = navCollection.find('.' + navActiveClass);
+			          if (onActiveNav.length) {
 			          	(fragment === href) && itemParent.addClass(navActiveClass);
 			          } else {
 			          	itemParent.addClass(navActiveClass);
 			          }
-				      
 			        }
 			    }
 			};
 
+			var navCollection;
 			for (var i=0, navcon; navcon = navContainer[i]; i++) {
 				navcon = $(navcon);
-				changeNav(navcon, navcon.find('a'));
+				if (navCollection) {
+					navCollection = navCollection.add(navcon);
+				} else {
+					navCollection = navcon;
+				}
 			}
+			changeNav(navCollection, navCollection.find('a'));
 		},
 
 		/**
@@ -11019,6 +11042,9 @@ define('spaseed/main/router', function(require, exports, module) {
         //路由映射对象
         'routes': {},
 
+        //扩展路由，优先于框架内部路由routes对象
+        'extendRoutes': {},
+
         //低端浏览器监听url变化的时间间隔
         'interval': 50,
 
@@ -11031,6 +11057,11 @@ define('spaseed/main/router', function(require, exports, module) {
 
       for (var p in option) {
         this.option[p] = option[p];
+      }
+
+      //扩展路由
+      if (this.option['extendRoutes']) {
+        this.extend(this.option['extendRoutes']);
       }
 
       this.option['html5Mode'] = (pushState && this.option['html5Mode']);
@@ -11296,26 +11327,78 @@ define('spaseed/main/router', function(require, exports, module) {
     },
 
     /**
+     * 扩展路由
+     * @method extend
+     * @param {Object} obj 路由map
+     */
+    extend: function (obj) {
+      obj = obj || {};
+      if (this.extendRoutes) {
+        $.extend(this.extendRoutes, obj);
+      } else {
+        this.extendRoutes = obj;
+      }
+    },
+
+    /**
+     * queryString转对象
+     */
+    queryToObj: function (queryStr) {
+      var urlPara = queryStr.split('?')[1];
+      urlPara = urlPara.split('&');
+      var objPara = {};
+      for (var i=0, item; item = urlPara[i]; i++) {
+        var itemArr = item.split('=');
+        objPara[itemArr[0]] = itemArr[1];
+      }
+      return objPara;
+    },
+
+    /**
+     * 执行路由匹配的方法
+     */
+    applyAction: function (action, params, urlParam, pointer) {
+      urlParam && params.push(urlParam);
+      action && action.apply(pointer, params);
+    },
+
+    /**
      * 加载页面
      * @method loadUrl
      * @param {String} url 地址
      */
     loadUrl: function (url) {
       var _self = this,
+          extendRoutes = _self.extendRoutes,
           routes = _self.option.routes,
           pm = _self.option.pageManager,
-          action = null,
-          params = null;
+          params = null,
+          urlParam = null,
+          searchReg = /\/?\?.*/,
+          searchMatch = searchReg.exec(url),
+          url = url.replace(searchReg,'');
 
+      searchMatch && (urlParam = this.queryToObj(searchMatch[0]));
+
+      //优先匹配框架外部定义路由
+      if (extendRoutes) {
+        for (var exRule in extendRoutes) {
+          if (params = _self.matchRoute(exRule, url)) {
+            this.applyAction(extendRoutes[exRule], params, urlParam, null);
+            return 
+          }
+        }
+      }
+
+      //匹配框架内部路由规则
       for (var rule in routes) {
-          //匹配到路由规则
           if (params = _self.matchRoute(rule, url)) {
-            action = routes[rule];
-            pm[action] && pm[action].apply(pm, params);
+            this.applyAction(pm[routes[rule]], params, urlParam, pm);
             break;
           }
       } 
     }
+
   };
 
   module.exports = router;

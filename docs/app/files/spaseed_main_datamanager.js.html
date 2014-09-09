@@ -97,6 +97,7 @@
     <pre class="code prettyprint linenums">
 define(&#x27;spaseed/main/datamanager&#x27;, function(require, exports, module) {
 
+	var pageManager = require(&#x27;pageManager&#x27;);
 	var cache = {};
 
 	/**
@@ -108,7 +109,7 @@ define(&#x27;spaseed/main/datamanager&#x27;, function(require, exports, module) 
 
 		_errorHandler: function (ret, tipErr) {
 			//错误提示
-			tipErr !== false &amp;&amp; console.log(ret.msg || &#x27;连接服务器异常，请稍后再试&#x27;);
+			tipErr !== false &amp;&amp; console.log(ret.msg || pageManager.config.defaultReqErr);
 		},
 
 		/**

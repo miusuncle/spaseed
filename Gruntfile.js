@@ -7,16 +7,14 @@ module.exports = function(grunt){
 				dest:'dest/spaseed.js'
 			},
 			app:{
-				src:['config/~.js','main/~.js','modules/~.js'],
+				src:['app/~.js'],
 				dest:'dest/app.js'
 			}
 		},
 		watch:{
 			files:[
 				'spaseed/~.js','spaseed/~.tpl','spaseed/~.ejs',
-                'modules/~.js','modules/~.tpl','modules/~.ejs',
-                'config/~.js',
-                'main/~.js'
+                'app/~.js','app/~.tpl','app/~.ejs'
             ],
 			tasks:['concat']
 		},

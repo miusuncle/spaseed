@@ -130,6 +130,14 @@ define(&#x27;spaseed/config/page_config&#x27;, function(require, exports, module
 		&#x27;container&#x27;: &#x27;#container&#x27;,
 
 		/**
+		 * 右侧内容容器选择器
+		 * @property appArea
+		 * @type String
+		 * @default &#x27;#appArea&#x27;
+		 */
+		&#x27;appArea&#x27;: &#x27;#appArea&#x27;,
+
+		/**
 		 * 切换页面需要更改class的容器选择器
 		 * @property classWrapper
 		 * @type String
@@ -179,6 +187,14 @@ define(&#x27;spaseed/config/page_config&#x27;, function(require, exports, module
 		},
 
 		/**
+		 * 扩展路由，优先于框架路由逻辑
+		 * @property extendRoutes
+		 * @type Object
+		 * @default {}
+		 */
+		&#x27;extendRoutes&#x27;: {},
+
+		/**
 		 * 改变导航选中态
 		 * @property changeNavStatus
 		 * @type Function
@@ -218,7 +234,25 @@ define(&#x27;spaseed/config/page_config&#x27;, function(require, exports, module
 		 * @type Object
 		 * @default {}
 		 */
-		&#x27;css&#x27;: {}
+		&#x27;css&#x27;: {},
+
+		/**
+		 * 404提示
+		 * @property 404Html
+		 * @type String
+		 * @default &#x27;&lt;h2 id=&quot;tt404&quot; style=&quot;text-align:center;padding-top:100px;font-size:20px;line-height:1.5;color:#999&quot;&gt;&#x27;+
+				   &#x27; &lt;p style=&quot;font-size:44px&quot;&gt;404&lt;/p&gt; 您访问的页面没有找到! &lt;/h2&gt;&#x27;
+		 */
+		&#x27;html404&#x27;: &#x27;&lt;h2 id=&quot;tt404&quot; style=&quot;text-align:center;padding-top:100px;font-size:20px;line-height:1.5;color:#999&quot;&gt;&#x27;+
+				   &#x27; &lt;p style=&quot;font-size:44px&quot;&gt;404&lt;/p&gt; 您访问的页面没有找到! &lt;/h2&gt;&#x27;,
+
+		/**
+		 * 请求错误默认提示文字
+		 * @property defaultReqErr
+		 * @type String
+		 * @default &#x27;连接服务器异常，请稍后再试&#x27;
+		 */
+		&#x27;defaultReqErr&#x27;: &#x27;连接服务器异常，请稍后再试&#x27;
 	};
 
 	module.exports = pageConfig;

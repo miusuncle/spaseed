@@ -44,16 +44,16 @@ npm test
 ```
 
 ## Directory Layout
-
-    config/                  --> app configuration directory
-      dao_config.js          --> cgi configuration
-      page_config.js         --> page management configuration
-      manager.js             --> fetch and manage data
+    app/                     --> app directory
+      config/                --> app configuration directory
+        dao_config.js        --> cgi configuration
+        page_config.js       --> page management configuration
+        manager.js           --> fetch and manage data
+      main/                  --> app main directory
+        startup.js           --> app entry module
+      modules/               --> all page module
     dest/                    --> packaged file directory
     docs/                    --> document generation directory
-    main/                    --> app main directory
-      startup.js             --> app entry module
-    modules/                 --> all page module
     spaseed/                 --> spaseed directory
       config/                --> spaseed configuration
         page_config.js       --> page basic configuration
@@ -64,7 +64,7 @@ npm test
         net.js               --> network requests package
         util.js              --> public method package
       main/                  --> main logical directory for framework
-        pagemanager.js       --> page switching management logic
+        pagemanager.js       --> page management logic
         datamanager.js       --> data basic management
         router.js            --> routing management
         entry.js             --> spaseed entry module

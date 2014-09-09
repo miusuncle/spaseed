@@ -29,6 +29,9 @@ define('spaseed/main/router', function(require, exports, module) {
         //路由映射对象
         'routes': {},
 
+        //扩展路由，优先于框架内部路由routes对象
+        'extendRoutes': {},
+
         //低端浏览器监听url变化的时间间隔
         'interval': 50,
 
@@ -41,6 +44,11 @@ define('spaseed/main/router', function(require, exports, module) {
 
       for (var p in option) {
         this.option[p] = option[p];
+      }
+
+      //扩展路由
+      if (this.option['extendRoutes']) {
+        this.extend(this.option['extendRoutes']);
       }
 
       this.option['html5Mode'] = (pushState && this.option['html5Mode']);
@@ -306,26 +314,78 @@ define('spaseed/main/router', function(require, exports, module) {
     },
 
     /**
+     * 扩展路由
+     * @method extend
+     * @param {Object} obj 路由map
+     */
+    extend: function (obj) {
+      obj = obj || {};
+      if (this.extendRoutes) {
+        $.extend(this.extendRoutes, obj);
+      } else {
+        this.extendRoutes = obj;
+      }
+    },
+
+    /**
+     * queryString转对象
+     */
+    queryToObj: function (queryStr) {
+      var urlPara = queryStr.split('?')[1];
+      urlPara = urlPara.split('&');
+      var objPara = {};
+      for (var i=0, item; item = urlPara[i]; i++) {
+        var itemArr = item.split('=');
+        objPara[itemArr[0]] = itemArr[1];
+      }
+      return objPara;
+    },
+
+    /**
+     * 执行路由匹配的方法
+     */
+    applyAction: function (action, params, urlParam, pointer) {
+      urlParam && params.push(urlParam);
+      action && action.apply(pointer, params);
+    },
+
+    /**
      * 加载页面
      * @method loadUrl
      * @param {String} url 地址
      */
     loadUrl: function (url) {
       var _self = this,
+          extendRoutes = _self.extendRoutes,
           routes = _self.option.routes,
           pm = _self.option.pageManager,
-          action = null,
-          params = null;
+          params = null,
+          urlParam = null,
+          searchReg = /\/?\?.*/,
+          searchMatch = searchReg.exec(url),
+          url = url.replace(searchReg,'');
 
+      searchMatch && (urlParam = this.queryToObj(searchMatch[0]));
+
+      //优先匹配框架外部定义路由
+      if (extendRoutes) {
+        for (var exRule in extendRoutes) {
+          if (params = _self.matchRoute(exRule, url)) {
+            this.applyAction(extendRoutes[exRule], params, urlParam, null);
+            return 
+          }
+        }
+      }
+
+      //匹配框架内部路由规则
       for (var rule in routes) {
-          //匹配到路由规则
           if (params = _self.matchRoute(rule, url)) {
-            action = routes[rule];
-            pm[action] && pm[action].apply(pm, params);
+            this.applyAction(pm[routes[rule]], params, urlParam, pm);
             break;
           }
       } 
     }
+
   };
 
   module.exports = router;
