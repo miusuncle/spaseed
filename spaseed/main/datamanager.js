@@ -1,6 +1,6 @@
 define('spaseed/main/datamanager', function(require, exports, module) {
 
-	var pageManager = require('pageManager');
+	var spaseedConfig = require('spaseedConfig');
 	var cache = {};
 
 	/**
@@ -11,8 +11,13 @@ define('spaseed/main/datamanager', function(require, exports, module) {
 	var dataManager = {
 
 		_errorHandler: function (ret, tipErr) {
+
+			var reqErrorHandler = spaseedConfig.reqErrorHandler;
+
+			reqErrorHandler && reqErrorHandler(ret);
+			
 			//错误提示
-			tipErr !== false && console.log(ret.msg || pageManager.config.defaultReqErr);
+			tipErr !== false && console.log(ret.msg || spaseedConfig.defaultReqErr);
 		},
 
 		/**

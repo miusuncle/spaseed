@@ -44,11 +44,11 @@
             
                 <li><a href="../classes/net.html">net</a></li>
             
-                <li><a href="../classes/pageConfig.html">pageConfig</a></li>
-            
                 <li><a href="../classes/pageManager.html">pageManager</a></li>
             
                 <li><a href="../classes/router.html">router</a></li>
+            
+                <li><a href="../classes/spaseedConfig.html">spaseedConfig</a></li>
             
                 <li><a href="../classes/util.html">util</a></li>
             
@@ -99,6 +99,7 @@
 define(&#x27;spaseed/lib/net&#x27;, function (require, exports, module) {
     var $ = require(&#x27;$&#x27;);
     var util = require(&#x27;util&#x27;);
+    var spaseedConfig = require(&#x27;spaseedConfig&#x27;);
     var console = window.console;
 
     /**
@@ -148,9 +149,15 @@ define(&#x27;spaseed/lib/net&#x27;, function (require, exports, module) {
                     opt.cb &amp;&amp; opt.cb(ret);
                 };
 
-                _url = this._addParam(_cgiConfig.url, {
+                var urlParams = {
                     t: new Date().getTime()
-                });
+                };
+
+                if (spaseedConfig.additionalUrlParam) {
+                    $.extend(urlParams, spaseedConfig.additionalUrlParam())
+                }
+
+                _url = this._addParam(_cgiConfig.url, urlParams);
 
                 if (_cgiConfig.method &amp;&amp; _cgiConfig.method.toLowerCase() === &quot;post&quot;) {
                     return this.post(_url, _data, _cb, _global);

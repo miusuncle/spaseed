@@ -1,12 +1,12 @@
-define('spaseed/config/page_config', function(require, exports, module) {
+define('spaseed/config/config', function(require, exports, module) {
 	var $ = require('$');
 
 	/** 
 	 * 页面管理参数配置
-	 * @class pageConfig
+	 * @class spaseedConfig
 	 * @static
 	 */
-	var pageConfig = {
+	var config = {
 
 		/**
 		 * 页面模块基础路径
@@ -155,8 +155,24 @@ define('spaseed/config/page_config', function(require, exports, module) {
 		 * @type String
 		 * @default '连接服务器异常，请稍后再试'
 		 */
-		'defaultReqErr': '连接服务器异常，请稍后再试'
+		'defaultReqErr': '连接服务器异常，请稍后再试',
+
+		/**
+		 * 请求错误回调
+		 * @property reqErrorHandler
+		 * @type Function
+		 * @default null
+		 */
+		'reqErrorHandler': null,
+
+		/**
+		 * 追加的url请求参数
+		 * @property additionalUrlParam
+		 * @type Function
+		 * @default null
+		 */
+		'additionalUrlParam': null
 	};
 
-	module.exports = pageConfig;
+	module.exports = config;
 });

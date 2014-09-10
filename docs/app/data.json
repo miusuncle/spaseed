@@ -5,11 +5,11 @@
         "version": "1.0.0"
     },
     "files": {
-        "spaseed\\config\\page_config.js": {
-            "name": "spaseed\\config\\page_config.js",
+        "spaseed\\config\\config.js": {
+            "name": "spaseed\\config\\config.js",
             "modules": {},
             "classes": {
-                "pageConfig": 1
+                "spaseedConfig": 1
             },
             "fors": {},
             "namespaces": {}
@@ -85,15 +85,15 @@
     },
     "modules": {},
     "classes": {
-        "pageConfig": {
-            "name": "pageConfig",
-            "shortname": "pageConfig",
+        "spaseedConfig": {
+            "name": "spaseedConfig",
+            "shortname": "spaseedConfig",
             "classitems": [],
             "plugins": [],
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "file": "spaseed\\config\\page_config.js",
+            "file": "spaseed\\config\\config.js",
             "line": 4,
             "description": "页面管理参数配置",
             "static": 1
@@ -120,7 +120,7 @@
             "plugin_for": [],
             "extension_for": [],
             "file": "spaseed\\lib\\net.js",
-            "line": 7,
+            "line": 8,
             "description": "网络请求",
             "static": 1
         },
@@ -179,174 +179,194 @@
     },
     "classitems": [
         {
-            "file": "spaseed\\config\\page_config.js",
+            "file": "spaseed\\config\\config.js",
             "line": 11,
             "description": "页面模块基础路径",
             "itemtype": "property",
             "name": "basePath",
             "type": "String",
             "default": "'modules/'",
-            "class": "pageConfig"
+            "class": "spaseedConfig"
         },
         {
-            "file": "spaseed\\config\\page_config.js",
+            "file": "spaseed\\config\\config.js",
             "line": 19,
             "description": "页面包裹选择器",
             "itemtype": "property",
             "name": "pageWrapper",
             "type": "String",
             "default": "'#pageWrapper'",
-            "class": "pageConfig"
+            "class": "spaseedConfig"
         },
         {
-            "file": "spaseed\\config\\page_config.js",
+            "file": "spaseed\\config\\config.js",
             "line": 27,
             "description": "页面主容器选择器",
             "itemtype": "property",
             "name": "container",
             "type": "String",
             "default": "'#container'",
-            "class": "pageConfig"
+            "class": "spaseedConfig"
         },
         {
-            "file": "spaseed\\config\\page_config.js",
+            "file": "spaseed\\config\\config.js",
             "line": 35,
             "description": "右侧内容容器选择器",
             "itemtype": "property",
             "name": "appArea",
             "type": "String",
             "default": "'#appArea'",
-            "class": "pageConfig"
+            "class": "spaseedConfig"
         },
         {
-            "file": "spaseed\\config\\page_config.js",
+            "file": "spaseed\\config\\config.js",
             "line": 43,
             "description": "切换页面需要更改class的容器选择器",
             "itemtype": "property",
             "name": "classWrapper",
             "type": "String",
             "default": "'#container'",
-            "class": "pageConfig"
+            "class": "spaseedConfig"
         },
         {
-            "file": "spaseed\\config\\page_config.js",
+            "file": "spaseed\\config\\config.js",
             "line": 51,
             "description": "切换页面需要保留的class",
             "itemtype": "property",
             "name": "defaultClass",
             "type": "String",
             "default": "''",
-            "class": "pageConfig"
+            "class": "spaseedConfig"
         },
         {
-            "file": "spaseed\\config\\page_config.js",
+            "file": "spaseed\\config\\config.js",
             "line": 59,
             "description": "默认标题",
             "itemtype": "property",
             "name": "defaultTitle",
             "type": "String",
             "default": "'spaseed'",
-            "class": "pageConfig"
+            "class": "spaseedConfig"
         },
         {
-            "file": "spaseed\\config\\page_config.js",
+            "file": "spaseed\\config\\config.js",
             "line": 67,
             "description": "导航容器选择器, 在各容器中遍历a标签, 执行选中态匹配",
             "itemtype": "property",
             "name": "navContainer",
             "type": "Array",
             "default": "['body']",
-            "class": "pageConfig"
+            "class": "spaseedConfig"
         },
         {
-            "file": "spaseed\\config\\page_config.js",
+            "file": "spaseed\\config\\config.js",
             "line": 75,
             "description": "导航选中class名",
             "itemtype": "property",
             "name": "navActiveClass",
             "type": "String",
             "default": "'active'",
-            "class": "pageConfig"
+            "class": "spaseedConfig"
         },
         {
-            "file": "spaseed\\config\\page_config.js",
+            "file": "spaseed\\config\\config.js",
             "line": 83,
             "description": "渲染前执行方法",
             "itemtype": "property",
             "name": "beforeRender",
             "type": "Function",
             "default": "function (controller, action, params) {}",
-            "class": "pageConfig"
+            "class": "spaseedConfig"
         },
         {
-            "file": "spaseed\\config\\page_config.js",
+            "file": "spaseed\\config\\config.js",
             "line": 92,
             "description": "扩展路由，优先于框架路由逻辑",
             "itemtype": "property",
             "name": "extendRoutes",
             "type": "Object",
             "default": "{}",
-            "class": "pageConfig"
+            "class": "spaseedConfig"
         },
         {
-            "file": "spaseed\\config\\page_config.js",
+            "file": "spaseed\\config\\config.js",
             "line": 100,
             "description": "改变导航选中态",
             "itemtype": "property",
             "name": "changeNavStatus",
             "type": "Function",
             "default": "通用方法",
-            "class": "pageConfig"
+            "class": "spaseedConfig"
         },
         {
-            "file": "spaseed\\config\\page_config.js",
+            "file": "spaseed\\config\\config.js",
             "line": 108,
             "description": "layout模版",
             "itemtype": "property",
             "name": "layout",
             "type": "Object",
             "default": "{\n\t\t\t\t\t\t'default': {\n\t\t\t\t\t\t\t'controller': [],\n\t\t\t\t\t\t\t'module': 'spaseed/layout/default'\n\t\t\t\t\t\t}\n\t\t\t\t\t}",
-            "class": "pageConfig"
+            "class": "spaseedConfig"
         },
         {
-            "file": "spaseed\\config\\page_config.js",
+            "file": "spaseed\\config\\config.js",
             "line": 126,
             "description": "首页模块名",
             "itemtype": "property",
             "name": "root",
             "type": "String",
             "default": "'home'",
-            "class": "pageConfig"
+            "class": "spaseedConfig"
         },
         {
-            "file": "spaseed\\config\\page_config.js",
+            "file": "spaseed\\config\\config.js",
             "line": 134,
             "description": "css配置",
             "itemtype": "property",
             "name": "css",
             "type": "Object",
             "default": "{}",
-            "class": "pageConfig"
+            "class": "spaseedConfig"
         },
         {
-            "file": "spaseed\\config\\page_config.js",
+            "file": "spaseed\\config\\config.js",
             "line": 142,
             "description": "404提示",
             "itemtype": "property",
             "name": "404Html",
             "type": "String",
             "default": "'<h2 id=\"tt404\" style=\"text-align:center;padding-top:100px;font-size:20px;line-height:1.5;color:#999\">'+\n\t\t\t\t   ' <p style=\"font-size:44px\">404</p> 您访问的页面没有找到! </h2>'",
-            "class": "pageConfig"
+            "class": "spaseedConfig"
         },
         {
-            "file": "spaseed\\config\\page_config.js",
+            "file": "spaseed\\config\\config.js",
             "line": 152,
             "description": "请求错误默认提示文字",
             "itemtype": "property",
             "name": "defaultReqErr",
             "type": "String",
             "default": "'连接服务器异常，请稍后再试'",
-            "class": "pageConfig"
+            "class": "spaseedConfig"
+        },
+        {
+            "file": "spaseed\\config\\config.js",
+            "line": 160,
+            "description": "请求错误回调",
+            "itemtype": "property",
+            "name": "reqErrorHandler",
+            "type": "Function",
+            "default": "null",
+            "class": "spaseedConfig"
+        },
+        {
+            "file": "spaseed\\config\\config.js",
+            "line": 168,
+            "description": "追加的url请求参数",
+            "itemtype": "property",
+            "name": "additionalUrlParam",
+            "type": "Function",
+            "default": "null",
+            "class": "spaseedConfig"
         },
         {
             "file": "spaseed\\layout\\default.js",
@@ -584,7 +604,7 @@
         },
         {
             "file": "spaseed\\lib\\net.js",
-            "line": 13,
+            "line": 14,
             "description": "发起请求",
             "itemtype": "method",
             "name": "send",
@@ -604,7 +624,7 @@
         },
         {
             "file": "spaseed\\lib\\net.js",
-            "line": 67,
+            "line": 74,
             "description": "GET请求",
             "itemtype": "method",
             "name": "get",
@@ -634,7 +654,7 @@
         },
         {
             "file": "spaseed\\lib\\net.js",
-            "line": 79,
+            "line": 86,
             "description": "POST请求",
             "itemtype": "method",
             "name": "post",
@@ -914,7 +934,7 @@
         },
         {
             "file": "spaseed\\main\\datamanager.js",
-            "line": 18,
+            "line": 23,
             "description": "公共回调",
             "itemtype": "method",
             "name": "commonCb",
@@ -944,7 +964,7 @@
         },
         {
             "file": "spaseed\\main\\datamanager.js",
-            "line": 37,
+            "line": 42,
             "description": "获取缓存数据",
             "itemtype": "method",
             "name": "get",
@@ -962,7 +982,7 @@
         },
         {
             "file": "spaseed\\main\\datamanager.js",
-            "line": 47,
+            "line": 52,
             "description": "设置缓存数据",
             "itemtype": "method",
             "name": "set",
@@ -981,7 +1001,7 @@
         },
         {
             "file": "spaseed\\main\\datamanager.js",
-            "line": 57,
+            "line": 62,
             "description": "获取所有缓存数据",
             "itemtype": "method",
             "name": "getCache",
@@ -992,7 +1012,7 @@
         },
         {
             "file": "spaseed\\main\\datamanager.js",
-            "line": 66,
+            "line": 71,
             "description": "清除所有缓存数据",
             "itemtype": "method",
             "name": "clearCache",
@@ -1000,22 +1020,15 @@
         },
         {
             "file": "spaseed\\main\\pagemanager.js",
-            "line": 17,
+            "line": 15,
             "description": "初始化",
-            "params": [
-                {
-                    "name": "pageConfig",
-                    "description": "页面配置对象",
-                    "type": "Object"
-                }
-            ],
             "itemtype": "method",
             "name": "init",
             "class": "pageManager"
         },
         {
             "file": "spaseed\\main\\pagemanager.js",
-            "line": 38,
+            "line": 20,
             "description": "页面包裹容器",
             "itemtype": "property",
             "name": "pageWrapper",
@@ -1024,19 +1037,19 @@
         },
         {
             "file": "spaseed\\main\\pagemanager.js",
-            "line": 47,
+            "line": 29,
             "description": "加载首页",
             "class": "pageManager"
         },
         {
             "file": "spaseed\\main\\pagemanager.js",
-            "line": 54,
+            "line": 36,
             "description": "统一加载视图方法",
             "class": "pageManager"
         },
         {
             "file": "spaseed\\main\\pagemanager.js",
-            "line": 68,
+            "line": 50,
             "description": "解析路由匹配",
             "itemtype": "method",
             "name": "parseMatch",
@@ -1056,7 +1069,7 @@
         },
         {
             "file": "spaseed\\main\\pagemanager.js",
-            "line": 96,
+            "line": 78,
             "description": "统一路由处理函数",
             "itemtype": "method",
             "name": "loadView",
@@ -1081,7 +1094,7 @@
         },
         {
             "file": "spaseed\\main\\pagemanager.js",
-            "line": 141,
+            "line": 122,
             "description": "页面主容器",
             "itemtype": "property",
             "name": "container",
@@ -1090,7 +1103,7 @@
         },
         {
             "file": "spaseed\\main\\pagemanager.js",
-            "line": 148,
+            "line": 129,
             "description": "右侧内容容器",
             "itemtype": "property",
             "name": "appArea",
@@ -1099,7 +1112,7 @@
         },
         {
             "file": "spaseed\\main\\pagemanager.js",
-            "line": 155,
+            "line": 136,
             "description": "切换页面需要更改class的容器",
             "itemtype": "property",
             "name": "classWrapper",
@@ -1108,25 +1121,25 @@
         },
         {
             "file": "spaseed\\main\\pagemanager.js",
-            "line": 245,
+            "line": 226,
             "description": "通过配置组装css请求\n(单页面模式会有先出dom后出样式的情况，不建议使用这种动态加载方式)",
             "class": "pageManager"
         },
         {
             "file": "spaseed\\main\\pagemanager.js",
-            "line": 266,
+            "line": 247,
             "description": "渲染公共模版",
             "class": "pageManager"
         },
         {
             "file": "spaseed\\main\\pagemanager.js",
-            "line": 295,
+            "line": 275,
             "description": "渲染视图",
             "class": "pageManager"
         },
         {
             "file": "spaseed\\main\\pagemanager.js",
-            "line": 321,
+            "line": 300,
             "description": "渲染404",
             "itemtype": "method",
             "name": "render404",
@@ -1134,25 +1147,25 @@
         },
         {
             "file": "spaseed\\main\\pagemanager.js",
-            "line": 331,
+            "line": 310,
             "description": "设置页面标题",
             "class": "pageManager"
         },
         {
             "file": "spaseed\\main\\pagemanager.js",
-            "line": 347,
+            "line": 326,
             "description": "改变导航选中态",
             "class": "pageManager"
         },
         {
             "file": "spaseed\\main\\pagemanager.js",
-            "line": 387,
+            "line": 365,
             "description": "页面切换时全局销毁",
             "class": "pageManager"
         },
         {
             "file": "spaseed\\main\\pagemanager.js",
-            "line": 394,
+            "line": 372,
             "description": "重置fragment标记(用于强制刷新controller)",
             "itemtype": "method",
             "name": "resetFragment",
@@ -1431,35 +1444,35 @@
         },
         {
             "message": "Missing item type\n加载首页",
-            "line": " spaseed\\main\\pagemanager.js:47"
+            "line": " spaseed\\main\\pagemanager.js:29"
         },
         {
             "message": "Missing item type\n统一加载视图方法",
-            "line": " spaseed\\main\\pagemanager.js:54"
+            "line": " spaseed\\main\\pagemanager.js:36"
         },
         {
             "message": "Missing item type\n通过配置组装css请求\n(单页面模式会有先出dom后出样式的情况，不建议使用这种动态加载方式)",
-            "line": " spaseed\\main\\pagemanager.js:245"
+            "line": " spaseed\\main\\pagemanager.js:226"
         },
         {
             "message": "Missing item type\n渲染公共模版",
-            "line": " spaseed\\main\\pagemanager.js:266"
+            "line": " spaseed\\main\\pagemanager.js:247"
         },
         {
             "message": "Missing item type\n渲染视图",
-            "line": " spaseed\\main\\pagemanager.js:295"
+            "line": " spaseed\\main\\pagemanager.js:275"
         },
         {
             "message": "Missing item type\n设置页面标题",
-            "line": " spaseed\\main\\pagemanager.js:331"
+            "line": " spaseed\\main\\pagemanager.js:310"
         },
         {
             "message": "Missing item type\n改变导航选中态",
-            "line": " spaseed\\main\\pagemanager.js:347"
+            "line": " spaseed\\main\\pagemanager.js:326"
         },
         {
             "message": "Missing item type\n页面切换时全局销毁",
-            "line": " spaseed\\main\\pagemanager.js:387"
+            "line": " spaseed\\main\\pagemanager.js:365"
         },
         {
             "message": "Missing item type\n事件监听",

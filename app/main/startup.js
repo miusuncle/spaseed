@@ -1,7 +1,7 @@
 
 define('main/startup', function(require, exports) {
 
-	var pageConfig = require('config/page_config');
+	var config = require('config/config');
 
 	var spaseedEntry = require('entry');
 
@@ -9,7 +9,7 @@ define('main/startup', function(require, exports) {
     var startup = function () {
 
     	//spaseed初始化
-		spaseedEntry.init(pageConfig);
+		spaseedEntry.init(config);
 		
     };
 

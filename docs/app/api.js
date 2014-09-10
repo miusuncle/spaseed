@@ -4,9 +4,9 @@ YUI.add("yuidoc-meta", function(Y) {
         "dataManager",
         "event",
         "net",
-        "pageConfig",
         "pageManager",
         "router",
+        "spaseedConfig",
         "util"
     ],
     "modules": [],

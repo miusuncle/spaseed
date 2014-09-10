@@ -1,12 +1,12 @@
-define('spaseed/config/page_config', function(require, exports, module) {
+define('spaseed/config/config', function(require, exports, module) {
 	var $ = require('$');
 
 	/** 
 	 * 页面管理参数配置
-	 * @class pageConfig
+	 * @class spaseedConfig
 	 * @static
 	 */
-	var pageConfig = {
+	var config = {
 
 		/**
 		 * 页面模块基础路径
@@ -155,10 +155,26 @@ define('spaseed/config/page_config', function(require, exports, module) {
 		 * @type String
 		 * @default '连接服务器异常，请稍后再试'
 		 */
-		'defaultReqErr': '连接服务器异常，请稍后再试'
+		'defaultReqErr': '连接服务器异常，请稍后再试',
+
+		/**
+		 * 请求错误回调
+		 * @property reqErrorHandler
+		 * @type Function
+		 * @default null
+		 */
+		'reqErrorHandler': null,
+
+		/**
+		 * 追加的url请求参数
+		 * @property additionalUrlParam
+		 * @type Function
+		 * @default null
+		 */
+		'additionalUrlParam': null
 	};
 
-	module.exports = pageConfig;
+	module.exports = config;
 });
 
 
@@ -10143,6 +10159,7 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
 define('spaseed/lib/net', function (require, exports, module) {
     var $ = require('$');
     var util = require('util');
+    var spaseedConfig = require('spaseedConfig');
     var console = window.console;
 
     /**
@@ -10192,9 +10209,15 @@ define('spaseed/lib/net', function (require, exports, module) {
                     opt.cb && opt.cb(ret);
                 };
 
-                _url = this._addParam(_cgiConfig.url, {
+                var urlParams = {
                     t: new Date().getTime()
-                });
+                };
+
+                if (spaseedConfig.additionalUrlParam) {
+                    $.extend(urlParams, spaseedConfig.additionalUrlParam())
+                }
+
+                _url = this._addParam(_cgiConfig.url, urlParams);
 
                 if (_cgiConfig.method && _cgiConfig.method.toLowerCase() === "post") {
                     return this.post(_url, _data, _cb, _global);
@@ -10496,7 +10519,7 @@ define('spaseed/lib/util', function(require, exports, module) {
 
 define('spaseed/main/datamanager', function(require, exports, module) {
 
-	var pageManager = require('pageManager');
+	var spaseedConfig = require('spaseedConfig');
 	var cache = {};
 
 	/**
@@ -10507,8 +10530,13 @@ define('spaseed/main/datamanager', function(require, exports, module) {
 	var dataManager = {
 
 		_errorHandler: function (ret, tipErr) {
+
+			var reqErrorHandler = spaseedConfig.reqErrorHandler;
+
+			reqErrorHandler && reqErrorHandler(ret);
+			
 			//错误提示
-			tipErr !== false && console.log(ret.msg || pageManager.config.defaultReqErr);
+			tipErr !== false && console.log(ret.msg || spaseedConfig.defaultReqErr);
 		},
 
 		/**
@@ -10577,14 +10605,30 @@ define('spaseed/main/entry', function(require, exports) {
 	var $ = require('$');
 	var evt = require('event');
 	var util = require('util');
+	var spaseedConfig = require('spaseedConfig');
 	var router = require('router');
 	var pageManager = require('pageManager');
 
 	//spaseed初始化
-    var init = function (pageConfig) {
+    var init = function (config) {
+
+    	//参数扩展合并
+    	config = config || {};
+    	$.extend(true, spaseedConfig, config);
 
     	//初始化页面管理
-		pageManager.init(pageConfig);
+		pageManager.init();
+
+		//初始化路由
+		router.init({
+			'html5Mode': true,
+			'pageManager': pageManager,
+			'routes': {
+				'/': 'loadRoot',
+				'/*controller(/*action)(/*p1)(/*p2)(/*p3)(/*p4)': 'loadCommon'
+			},
+			'extendRoutes': spaseedConfig.extendRoutes
+		});
 
 		//全局点击
 		evt.addCommonEvent('click', { 
@@ -10610,7 +10654,7 @@ define('spaseed/main/pagemanager', function(require, exports, module) {
 	var $ = require('$');
 	var router = require('router');
 	var util = require('util');
-	var spaseedPageConfig = require('spaseed/config/page_config');
+	var spaseedConfig = require('spaseedConfig');
 
 	/** 
 	 * 页面管理
@@ -10619,35 +10663,17 @@ define('spaseed/main/pagemanager', function(require, exports, module) {
 	 */
 	var pageManager = {
 
-		config: {},
-
 		/**
 		 * 初始化
-		 * @param {Object} pageConfig 页面配置对象
 		 * @method init
 		 */
-		init: function (pageConfig) {
-			var config = this.config;
-			pageConfig = pageConfig || {};
-			$.extend(true, config, spaseedPageConfig, pageConfig);
-
-			//初始化路由
-			router.init({
-				'html5Mode': true,
-				'pageManager': this,
-				'routes': {
-					'/': 'loadRoot',
-					'/*controller(/*action)(/*p1)(/*p2)(/*p3)(/*p4)': 'loadCommon'
-				},
-				'extendRoutes': config.extendRoutes
-			});
-
+		init: function () {
 			/**
 			 * 页面包裹容器
 			 * @property pageWrapper
 			 * @type Object
 			 */
-			this.pageWrapper = $(config.pageWrapper);
+			this.pageWrapper = $(spaseedConfig.pageWrapper);
 		},	
 
 
@@ -10655,7 +10681,7 @@ define('spaseed/main/pagemanager', function(require, exports, module) {
 		 * 加载首页
 		 */
 		loadRoot: function () {
-			this.loadView(this.config.root);
+			this.loadView(spaseedConfig.root);
 		},
 
 		/**
@@ -10708,12 +10734,11 @@ define('spaseed/main/pagemanager', function(require, exports, module) {
 		 * @param {Array} params 
 		 */
 		loadView: function (controller, action, params) {
-			var _self = this,
-				config = this.config;
+			var _self = this;
 
 			//渲染前执行业务逻辑
-			if (config.beforeRender) {
-				if (config.beforeRender(controller, action, params) === false) {
+			if (spaseedConfig.beforeRender) {
+				if (spaseedConfig.beforeRender(controller, action, params) === false) {
 					return
 				}
 			};
@@ -10750,24 +10775,24 @@ define('spaseed/main/pagemanager', function(require, exports, module) {
 			 * @property container
 			 * @type Object
 			 */
-			this.container = $(config.container);
+			this.container = $(spaseedConfig.container);
 
 			/**
 			 * 右侧内容容器
 			 * @property appArea
 			 * @type Object
 			 */
-			this.appArea = $(config.appArea);
+			this.appArea = $(spaseedConfig.appArea);
 
 			/**
 			 * 切换页面需要更改class的容器
 			 * @property classWrapper
 			 * @type Object
 			 */
-			this.classWrapper = $(config.classWrapper);
+			this.classWrapper = $(spaseedConfig.classWrapper);
 
 			//模块基础路径
-			var basePath = config.basePath;
+			var basePath = spaseedConfig.basePath;
 
 			//模块id按照如下规则组成
 			var controllerId = basePath + controller + '/' + controller,
@@ -10835,8 +10860,8 @@ define('spaseed/main/pagemanager', function(require, exports, module) {
 				}
 
 				//更改导航状态
-				if (config.changeNavStatus) {
-					config.changeNavStatus(controller, action);
+				if (spaseedConfig.changeNavStatus) {
+					spaseedConfig.changeNavStatus(controller, action);
 				} else {
 					_self.changeNavStatus(controller, action);
 				}
@@ -10854,7 +10879,7 @@ define('spaseed/main/pagemanager', function(require, exports, module) {
 		 * (单页面模式会有先出dom后出样式的情况，不建议使用这种动态加载方式)
 		 */
 		addCssReq: function (controller, action) {
-			var cssConfig = this.config.css,
+			var cssConfig = spaseedConfig.css,
 				controllerCssReq = cssConfig[controller],
 				actionCssReq = cssConfig[controller + '_' + action],
 				reqUrl = [],
@@ -10875,8 +10900,7 @@ define('spaseed/main/pagemanager', function(require, exports, module) {
 		 */
 		renderLayout: function (controller, action, params) {
 			var _self = this,
-				config = _self.config,
-				layoutConfig = config.layout,
+				layoutConfig = spaseedConfig.layout,
 				layout = 'default',
 				_render = function (layoutName) {
 					if (_self.layout != layoutName) {
@@ -10904,8 +10928,7 @@ define('spaseed/main/pagemanager', function(require, exports, module) {
 		 */
 		renderView: function (obj, params) {
 			if (obj) {
-				var config = this.config,
-				 	defaultClass = config.defaultClass,
+				var defaultClass = spaseedConfig.defaultClass,
 					classWrapper = this.classWrapper;
 
 				//页面模块通过属性pageClass来变更样式
@@ -10930,7 +10953,7 @@ define('spaseed/main/pagemanager', function(require, exports, module) {
 		 * @method render404
 		 */
 		render404: function () {
-			var notFound = this.config.html404;
+			var notFound = spaseedConfig.html404;
 			var container = this.appArea.length ?  this.appArea : this.container;
 			container.html(notFound);
 		},
@@ -10944,7 +10967,7 @@ define('spaseed/main/pagemanager', function(require, exports, module) {
 			} else if (cObj && cObj.title) {
 				document.title = cObj.title;
 			} else {
-				var defaultTitle = this.config.defaultTitle;
+				var defaultTitle = spaseedConfig.defaultTitle;
 				if (document.title != defaultTitle) {
 					document.title = defaultTitle;
 				}
@@ -10957,10 +10980,9 @@ define('spaseed/main/pagemanager', function(require, exports, module) {
 		changeNavStatus: function (controller, action) {
 			var _self = this,
 				fragment = this.fragment,
-				config = this.config,
-				root = config.root,
-				navContainer = config.navContainer,
-				navActiveClass = config.navActiveClass;
+				root = spaseedConfig.root,
+				navContainer = spaseedConfig.navContainer,
+				navActiveClass = spaseedConfig.navActiveClass;
 				
 			var changeNav = function (navCollection, links) {
 				navCollection.find('.' + navActiveClass).removeClass(navActiveClass);

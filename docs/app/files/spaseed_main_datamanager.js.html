@@ -44,11 +44,11 @@
             
                 <li><a href="../classes/net.html">net</a></li>
             
-                <li><a href="../classes/pageConfig.html">pageConfig</a></li>
-            
                 <li><a href="../classes/pageManager.html">pageManager</a></li>
             
                 <li><a href="../classes/router.html">router</a></li>
+            
+                <li><a href="../classes/spaseedConfig.html">spaseedConfig</a></li>
             
                 <li><a href="../classes/util.html">util</a></li>
             
@@ -97,7 +97,7 @@
     <pre class="code prettyprint linenums">
 define(&#x27;spaseed/main/datamanager&#x27;, function(require, exports, module) {
 
-	var pageManager = require(&#x27;pageManager&#x27;);
+	var spaseedConfig = require(&#x27;spaseedConfig&#x27;);
 	var cache = {};
 
 	/**
@@ -108,8 +108,13 @@ define(&#x27;spaseed/main/datamanager&#x27;, function(require, exports, module) 
 	var dataManager = {
 
 		_errorHandler: function (ret, tipErr) {
+
+			var reqErrorHandler = spaseedConfig.reqErrorHandler;
+
+			reqErrorHandler &amp;&amp; reqErrorHandler(ret);
+			
 			//错误提示
-			tipErr !== false &amp;&amp; console.log(ret.msg || pageManager.config.defaultReqErr);
+			tipErr !== false &amp;&amp; console.log(ret.msg || spaseedConfig.defaultReqErr);
 		},
 
 		/**

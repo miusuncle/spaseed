@@ -1,3 +1,16 @@
+define('config/config', function(require, exports, module) {
+	var $ = require('$');
+
+	//参数配置
+	var config = {
+
+		//首页模块名
+		'root': 'page1'
+	};
+
+	module.exports = config;
+});
+
 define('config/dao_config', function(require, exports, module) {
 
 	//cgi配置
@@ -100,23 +113,10 @@ define('config/manager', function(require, exports, module) {
 
 });
 
-define('config/page_config', function(require, exports, module) {
-	var $ = require('$');
-
-	//页面参数配置
-	var pageConfig = {
-
-		//首页模块名
-		'root': 'page1'
-	};
-
-	module.exports = pageConfig;
-});
-
 
 define('main/startup', function(require, exports) {
 
-	var pageConfig = require('config/page_config');
+	var config = require('config/config');
 
 	var spaseedEntry = require('entry');
 
@@ -124,7 +124,7 @@ define('main/startup', function(require, exports) {
     var startup = function () {
 
     	//spaseed初始化
-		spaseedEntry.init(pageConfig);
+		spaseedEntry.init(config);
 		
     };
 

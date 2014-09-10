@@ -46,8 +46,8 @@ npm test
 ## Directory Layout
     app/                     --> app directory
       config/                --> app configuration directory
+        config.js            --> app main configuration
         dao_config.js        --> cgi configuration
-        page_config.js       --> page management configuration
         manager.js           --> fetch and manage data
       main/                  --> app main directory
         startup.js           --> app entry module
@@ -56,7 +56,7 @@ npm test
     docs/                    --> document generation directory
     spaseed/                 --> spaseed directory
       config/                --> spaseed configuration
-        page_config.js       --> page basic configuration
+        config.js            --> spaseed basic configuration
       layout/                --> public rendering
       lib/                   --> lib file directory
         event.js             --> event package

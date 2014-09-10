@@ -2,6 +2,7 @@
 define('spaseed/lib/net', function (require, exports, module) {
     var $ = require('$');
     var util = require('util');
+    var spaseedConfig = require('spaseedConfig');
     var console = window.console;
 
     /**
@@ -51,9 +52,15 @@ define('spaseed/lib/net', function (require, exports, module) {
                     opt.cb && opt.cb(ret);
                 };
 
-                _url = this._addParam(_cgiConfig.url, {
+                var urlParams = {
                     t: new Date().getTime()
-                });
+                };
+
+                if (spaseedConfig.additionalUrlParam) {
+                    $.extend(urlParams, spaseedConfig.additionalUrlParam())
+                }
+
+                _url = this._addParam(_cgiConfig.url, urlParams);
 
                 if (_cgiConfig.method && _cgiConfig.method.toLowerCase() === "post") {
                     return this.post(_url, _data, _cb, _global);
