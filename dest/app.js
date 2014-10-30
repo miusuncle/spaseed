@@ -11,7 +11,25 @@ define('config/config', function(require, exports, module) {
 	module.exports = config;
 });
 
-define('config/dao_config', function(require, exports, module) {
+
+define('main/startup', function(require, exports) {
+
+	var config = require('config/config');
+
+	var spaseedEntry = require('entry');
+
+	//应用入口函数
+    var startup = function () {
+
+    	//spaseed初始化
+		spaseedEntry.init(config);
+		
+    };
+
+    exports.startup = startup;
+});
+
+define('models/config', function(require, exports, module) {
 
 	//cgi配置
 	var daoConfig = {
@@ -39,7 +57,7 @@ define('config/dao_config', function(require, exports, module) {
 	module.exports = config;
 });
 
-define('config/manager', function(require, exports, module) {
+define('models/manager', function(require, exports, module) {
 	var dataManager = require('dataManager');
 	var net = require('net');
 	var config = require('daoConfig');
@@ -111,24 +129,6 @@ define('config/manager', function(require, exports, module) {
 
 	module.exports = manager;
 
-});
-
-
-define('main/startup', function(require, exports) {
-
-	var config = require('config/config');
-
-	var spaseedEntry = require('entry');
-
-	//应用入口函数
-    var startup = function () {
-
-    	//spaseed初始化
-		spaseedEntry.init(config);
-		
-    };
-
-    exports.startup = startup;
 });
 
 

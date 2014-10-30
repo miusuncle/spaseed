@@ -47,10 +47,11 @@ npm test
     app/                     --> app directory
       config/                --> app configuration directory
         config.js            --> app main configuration
-        dao_config.js        --> cgi configuration
-        manager.js           --> fetch and manage data
       main/                  --> app main directory
         startup.js           --> app entry module
+      models/                --> app data management directory
+        config.js            --> cgi configuration
+        manager.js           --> fetch and manage data
       modules/               --> all page module
     dest/                    --> packaged file directory
     docs/                    --> document generation directory

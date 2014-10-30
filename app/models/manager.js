@@ -1,4 +1,4 @@
-define('config/manager', function(require, exports, module) {
+define('models/manager', function(require, exports, module) {
 	var dataManager = require('dataManager');
 	var net = require('net');
 	var config = require('daoConfig');
