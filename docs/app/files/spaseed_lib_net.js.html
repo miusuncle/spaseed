@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>spaseed\lib\net.js - spaseed</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1>spaseed</h1>
+            
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/dataManager.html">dataManager</a></li>
+            
+                <li><a href="../classes/event.html">event</a></li>
+            
+                <li><a href="../classes/net.html">net</a></li>
+            
+                <li><a href="../classes/pageManager.html">pageManager</a></li>
+            
+                <li><a href="../classes/router.html">router</a></li>
+            
+                <li><a href="../classes/spaseedConfig.html">spaseedConfig</a></li>
+            
+                <li><a href="../classes/util.html">util</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: spaseed\lib\net.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+
+define(&#x27;spaseed/lib/net&#x27;, function (require, exports, module) {
+    var $ = require(&#x27;$&#x27;);
+    var util = require(&#x27;util&#x27;);
+    var spaseedConfig = require(&#x27;spaseedConfig&#x27;);
+    var console = window.console;
+
+    /**
+     * 网络请求
+     * @class net
+     * @static
+     */
+    var net = {
+        /**
+         * 发起请求
+         * @method send
+         * @param  {Object} cgiConfig 配置
+         * @param  {Object} opt       选参
+         */
+        send: function (cgiConfig, opt) {
+            var _self = this,
+                _cgiConfig = cgiConfig,
+                _data = opt.data || {},
+                _url = &quot;&quot;,
+                _cb = null,
+                _global = opt.global;
+
+            if (!_cgiConfig) {
+                _cgiConfig = {
+                    url: opt.url,
+                    method: opt.method
+                };
+            }
+
+            if (_cgiConfig) {
+
+                // 成功回调
+                _cb = function (ret) {
+
+                    if (typeof(ret) === &#x27;string&#x27;) {
+                        ret = eval(&#x27;(&#x27; + ret + &#x27;)&#x27;);
+                    }
+
+                    // 使用友好的提示消息
+                    if (ret &amp;&amp; ret[&#x27;uiMsg&#x27;]) {
+                        // 如果有内部错误消息，则输出log
+                        console &amp;&amp; console.warn &amp;&amp; (ret[&#x27;code&#x27;] !== 0 &amp;&amp; console.warn(&#x27;错误 code=&#x27; + ret[&#x27;code&#x27;] + &#x27;,msg=&#x27; + ret[&#x27;msg&#x27;]));
+                        ret[&#x27;msg&#x27;] = ret[&#x27;uiMsg&#x27;] + &#x27;[#&#x27; + ret[&#x27;code&#x27;] + &#x27;]&#x27;;
+                        delete ret[&#x27;uiMsg&#x27;];
+                    }
+
+                    opt.cb &amp;&amp; opt.cb(ret);
+                };
+
+                var urlParams = {
+                    t: new Date().getTime()
+                };
+
+                if (spaseedConfig.additionalUrlParam) {
+                    $.extend(urlParams, spaseedConfig.additionalUrlParam())
+                }
+
+                _url = this._addParam(_cgiConfig.url, urlParams);
+
+                if (_cgiConfig.method &amp;&amp; _cgiConfig.method.toLowerCase() === &quot;post&quot;) {
+                    return this.post(_url, _data, _cb, _global);
+                } else {
+                    return this.get(_url, _data, _cb, _global);
+                }
+
+            }
+        },
+
+        /**
+         * GET请求
+         * @method get
+         * @param  {String}   url    URL
+         * @param  {Object}   data   参数
+         * @param  {Function} cb     回调函数
+         * @param  {Boolean}  global 是否触发全局 AJAX 事件
+         */
+        get: function (url, data, cb, global) {
+            return this._ajax(url, data, &#x27;GET&#x27;, cb, global);
+        },
+        
+        /**
+         * POST请求
+         * @method post
+         * @param  {String}   url    URL
+         * @param  {Object}   data   参数
+         * @param  {Function} cb     回调函数
+         * @param  {Boolean}  global 是否触发全局 AJAX 事件
+         */
+        post: function (url, data, cb, global) {
+            return this._ajax(url, data, &#x27;POST&#x27;, cb, global);
+        },
+
+        _ajax: function (url, data, method, cb, global) {
+            (global == undefined) &amp;&amp; (global = true);
+            return $.ajax({
+                type: method,
+                url: url,
+                data: data,
+                global: global,
+                success: function (data) {
+                    cb(data);
+                },
+                error: function (jqXHR) {
+                    if (window.isOnload) {//避免页面刷新时, 出小黄条错误
+                        cb({ ret: jqXHR.status });
+                    }
+                }
+            });
+        },
+
+        _addParam: function (url, p) {
+            var s = /\?/.test(url) ? &#x27;&amp;&#x27; : &#x27;?&#x27;;
+            url += s + util.objectToParams(p);
+            return url;
+        }
+    };
+    module.exports = net;
+});
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

@@ -2,22 +2,19 @@ module.exports = function(grunt){
 	grunt.initConfig({
 		pkg:grunt.file.readJSON('package.json'),
 		concat:{
-			lib:{
-				src:['lib/~.js'],
-				dest:'dest/lib.js'
+			spaseed:{
+				src:['spaseed/~.js'],
+				dest:'dest/spaseed.js'
 			},
-			main:{
-				src:['main/~.js','config/~.js','modules/~.js','widget/~.js'],
-				dest:'dest/main.js'
+			app:{
+				src:['app/~.js'],
+				dest:'dest/app.js'
 			}
 		},
 		watch:{
 			files:[
-                'modules/~.js','modules/~.tpl','modules/~.ejs',
-                'widget/~.js','widget/~.tpl','widget/~.ejs',
-                'main/~.js','main/~.tpl',
-                'lib/~.js',
-                'config/~.js'
+				'spaseed/~.js','spaseed/~.tpl','spaseed/~.ejs',
+                'app/~.js','app/~.tpl','app/~.ejs'
             ],
 			tasks:['concat']
 		},
@@ -27,16 +24,26 @@ module.exports = function(grunt){
 		      description: '<%= pkg.description %>',
 		      version: '<%= pkg.version %>',
 		      options: {
-		        paths: ['lib','main','config','widget'],
+		        paths: ['spaseed'],
 		        themedir: 'docs/themes/default',
 		        outdir: 'docs/app/'
 		      }
 		    }
-		 }
+		},
+		mocha: {
+			all: {
+			  src: ['test/index.html'],
+			  options: {
+			    run: true
+			  }
+			}
+		}
 	});
 	grunt.loadNpmTasks('grunt-qc-concat');
 	grunt.loadNpmTasks('grunt-qc-watch');
 	grunt.loadNpmTasks('grunt-contrib-yuidoc');
+	grunt.loadNpmTasks('grunt-mocha');
 
     grunt.registerTask('default',['concat','yuidoc','watch']);
+    grunt.registerTask('test',['mocha:all']);
 }

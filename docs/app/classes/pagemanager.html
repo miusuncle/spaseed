@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>pagemanager - spaseed</title>
+    <title>pageManager - spaseed</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -38,15 +38,17 @@
         <div id="api-tabview-panel">
             <ul id="api-classes" class="apis classes">
             
-                <li><a href="../classes/event.html">event</a></li>
+                <li><a href="../classes/dataManager.html">dataManager</a></li>
             
-                <li><a href="../classes/manager.html">manager</a></li>
+                <li><a href="../classes/event.html">event</a></li>
             
                 <li><a href="../classes/net.html">net</a></li>
             
-                <li><a href="../classes/pagemanager.html">pagemanager</a></li>
+                <li><a href="../classes/pageManager.html">pageManager</a></li>
             
                 <li><a href="../classes/router.html">router</a></li>
+            
+                <li><a href="../classes/spaseedConfig.html">spaseedConfig</a></li>
             
                 <li><a href="../classes/util.html">util</a></li>
             
@@ -89,7 +91,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>pagemanager Class</h1>
+                        <h1>pageManager Class</h1>
 <div class="box meta">
     
 
@@ -97,7 +99,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/main_pagemanager.js.html#l36"><code>main\pagemanager.js:36</code></a>
+            Defined in: <a href="../files/spaseed_main_pagemanager.js.html#l8"><code>spaseed\main\pagemanager.js:8</code></a>
         </div>
     
 
@@ -123,6 +125,8 @@
             <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
         
         
+            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
+        
         
         
     </ul>
@@ -138,42 +142,7 @@
                     <ul class="index-list methods">
                         
                             <li class="index-item method">
-                                <a href="#method__loadView">_loadView</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#method__parseUrlParams">_parseUrlParams</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#method_addCssReq">addCssReq</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#method_changeNavStatus">changeNavStatus</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#method_globalDestroy">globalDestroy</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#method_loadRoot">loadRoot</a>
+                                <a href="#method_init">init</a>
 
                                 
                                 
@@ -187,21 +156,14 @@
                             </li>
                         
                             <li class="index-item method">
+                                <a href="#method_parseMatch">parseMatch</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
                                 <a href="#method_render404">render404</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#method_renderLayout">renderLayout</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#method_renderView">renderView</a>
 
                                 
                                 
@@ -214,8 +176,39 @@
                                 
                             </li>
                         
-                            <li class="index-item method">
-                                <a href="#method_setTitle">setTitle</a>
+                    </ul>
+                </div>
+            
+
+            
+                <div class="index-section properties">
+                    <h3>Properties</h3>
+
+                    <ul class="index-list properties">
+                        
+                            <li class="index-item property">
+                                <a href="#property_appArea">appArea</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_classWrapper">classWrapper</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_container">container</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_pageWrapper">pageWrapper</a>
 
                                 
                                 
@@ -228,8 +221,6 @@
             
 
             
-
-            
         </div>
 
         
@@ -237,8 +228,63 @@
                 <h2 class="off-left">Methods</h2>
 
                 
-                    <div id="method__loadView" class="method item">
-    <h3 class="name"><code>_loadView</code></h3>
+                    <div id="method_init" class="method item">
+    <h3 class="name"><code>init</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/spaseed_main_pagemanager.js.html#l15"><code>spaseed\main\pagemanager.js:15</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>初始化</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_loadView" class="method item">
+    <h3 class="name"><code>loadView</code></h3>
 
     
         <div class="args">
@@ -291,7 +337,7 @@
             
         
         
-        <a href="../files/main_pagemanager.js.html#l122"><code>main\pagemanager.js:122</code></a>
+        <a href="../files/spaseed_main_pagemanager.js.html#l78"><code>spaseed\main\pagemanager.js:78</code></a>
         
         </p>
 
@@ -367,8 +413,8 @@
 </div>
 
                 
-                    <div id="method__parseUrlParams" class="method item">
-    <h3 class="name"><code>_parseUrlParams</code></h3>
+                    <div id="method_parseMatch" class="method item">
+    <h3 class="name"><code>parseMatch</code></h3>
 
     
         <div class="args">
@@ -415,7 +461,7 @@
             
         
         
-        <a href="../files/main_pagemanager.js.html#l65"><code>main\pagemanager.js:65</code></a>
+        <a href="../files/spaseed_main_pagemanager.js.html#l50"><code>spaseed\main\pagemanager.js:50</code></a>
         
         </p>
 
@@ -426,7 +472,7 @@
     </div>
 
     <div class="description">
-        <p>解析路径,处理url参数</p>
+        <p>解析路由匹配</p>
 
     </div>
 
@@ -478,386 +524,6 @@
 </div>
 
                 
-                    <div id="method_addCssReq" class="method item">
-    <h3 class="name"><code>addCssReq</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>controller</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>action</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type">Array</span>
-        </span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/main_pagemanager.js.html#l232"><code>main\pagemanager.js:232</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>通过配置组装css请求
-(单页面模式会有先出dom后出样式的情况，不建议使用这种动态加载方式)</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">controller</code>
-                        <span class="type">String</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                         
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">action</code>
-                        <span class="type">String</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                         
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        <span class="type">Array</span>:
-                    
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="method_changeNavStatus" class="method item">
-    <h3 class="name"><code>changeNavStatus</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>view</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/main_pagemanager.js.html#l336"><code>main\pagemanager.js:336</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>改变导航选中态</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">view</code>
-                        <span class="type">String</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>当前视图</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method_globalDestroy" class="method item">
-    <h3 class="name"><code>globalDestroy</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/main_pagemanager.js.html#l367"><code>main\pagemanager.js:367</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>页面切换时全局销毁</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method_loadRoot" class="method item">
-    <h3 class="name"><code>loadRoot</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/main_pagemanager.js.html#l42"><code>main\pagemanager.js:42</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>加载首页</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method_loadView" class="method item">
-    <h3 class="name"><code>loadView</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/main_pagemanager.js.html#l50"><code>main\pagemanager.js:50</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>统一加载视图方法</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
                     <div id="method_render404" class="method item">
     <h3 class="name"><code>render404</code></h3>
 
@@ -890,7 +556,7 @@
             
         
         
-        <a href="../files/main_pagemanager.js.html#l308"><code>main\pagemanager.js:308</code></a>
+        <a href="../files/spaseed_main_pagemanager.js.html#l300"><code>spaseed\main\pagemanager.js:300</code></a>
         
         </p>
 
@@ -905,247 +571,6 @@
 
     </div>
 
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method_renderLayout" class="method item">
-    <h3 class="name"><code>renderLayout</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>controller</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>action</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>params</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/main_pagemanager.js.html#l256"><code>main\pagemanager.js:256</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>渲染公共模版</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">controller</code>
-                        <span class="type">String</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                         
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">action</code>
-                        <span class="type">String</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                         
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">params</code>
-                        <span class="type">Array</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                         
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method_renderView" class="method item">
-    <h3 class="name"><code>renderView</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>obj</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>params</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/main_pagemanager.js.html#l282"><code>main\pagemanager.js:282</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>渲染视图</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">obj</code>
-                        <span class="type">String</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>模块对象</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">params</code>
-                        <span class="type">String</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>参数</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
     
 
     
@@ -1186,7 +611,7 @@
             
         
         
-        <a href="../files/main_pagemanager.js.html#l375"><code>main\pagemanager.js:375</code></a>
+        <a href="../files/spaseed_main_pagemanager.js.html#l372"><code>spaseed\main\pagemanager.js:372</code></a>
         
         </p>
 
@@ -1197,7 +622,7 @@
     </div>
 
     <div class="description">
-        <p>重置fragment标记</p>
+        <p>重置fragment标记(用于强制刷新controller)</p>
 
     </div>
 
@@ -1209,34 +634,17 @@
 </div>
 
                 
-                    <div id="method_setTitle" class="method item">
-    <h3 class="name"><code>setTitle</code></h3>
+            </div>
+        
 
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>cObj</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>aObj</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
+        
+            <div id="properties" class="api-class-tabpanel">
+                <h2 class="off-left">Properties</h2>
 
-    
-
-    
-
-    
+                
+                    <div id="property_appArea" class="property item">
+    <h3 class="name"><code>appArea</code></h3>
+    <span class="type">Object</span>
 
     
 
@@ -1257,10 +665,9 @@
             
         
         
-        <a href="../files/main_pagemanager.js.html#l318"><code>main\pagemanager.js:318</code></a>
+        <a href="../files/spaseed_main_pagemanager.js.html#l129"><code>spaseed\main\pagemanager.js:129</code></a>
         
         </p>
-
 
         
 
@@ -1268,50 +675,145 @@
     </div>
 
     <div class="description">
-        <p>设置页面标题</p>
+        <p>右侧内容容器</p>
 
     </div>
 
     
-        <div class="params">
-            <h4>Parameters:</h4>
 
-            <ul class="params-list">
+    
+
+    
+</div>
+
+                
+                    <div id="property_classWrapper" class="property item">
+    <h3 class="name"><code>classWrapper</code></h3>
+    <span class="type">Object</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
             
-                <li class="param">
-                    
-                        <code class="param-name">cObj</code>
-                        <span class="type">Object</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>controller模块对象</p>
-
-                    </div>
-
-                    
-                </li>
+                
+                <p>
+                
+                Defined in
+                
             
-                <li class="param">
-                    
-                        <code class="param-name">aObj</code>
-                        <span class="type">Object</span>
-                    
+        
+        
+        <a href="../files/spaseed_main_pagemanager.js.html#l136"><code>spaseed\main\pagemanager.js:136</code></a>
+        
+        </p>
 
-                    
+        
 
-                    <div class="param-description">
-                        <p>action模块对象</p>
+        
+    </div>
 
-                    </div>
+    <div class="description">
+        <p>切换页面需要更改class的容器</p>
 
-                    
-                </li>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_container" class="property item">
+    <h3 class="name"><code>container</code></h3>
+    <span class="type">Object</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
             
-            </ul>
-        </div>
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/spaseed_main_pagemanager.js.html#l122"><code>spaseed\main\pagemanager.js:122</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>页面主容器</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_pageWrapper" class="property item">
+    <h3 class="name"><code>pageWrapper</code></h3>
+    <span class="type">Object</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/spaseed_main_pagemanager.js.html#l20"><code>spaseed\main\pagemanager.js:20</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>页面包裹容器</p>
+
+    </div>
+
     
 
     
@@ -1321,8 +823,6 @@
 
                 
             </div>
-        
-
         
 
         

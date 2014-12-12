@@ -38,15 +38,17 @@
         <div id="api-tabview-panel">
             <ul id="api-classes" class="apis classes">
             
-                <li><a href="../classes/event.html">event</a></li>
+                <li><a href="../classes/dataManager.html">dataManager</a></li>
             
-                <li><a href="../classes/manager.html">manager</a></li>
+                <li><a href="../classes/event.html">event</a></li>
             
                 <li><a href="../classes/net.html">net</a></li>
             
-                <li><a href="../classes/pagemanager.html">pagemanager</a></li>
+                <li><a href="../classes/pageManager.html">pageManager</a></li>
             
                 <li><a href="../classes/router.html">router</a></li>
+            
+                <li><a href="../classes/spaseedConfig.html">spaseedConfig</a></li>
             
                 <li><a href="../classes/util.html">util</a></li>
             
@@ -97,7 +99,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/lib_util.js.html#l6"><code>lib\util.js:6</code></a>
+            Defined in: <a href="../files/spaseed_lib_util.js.html#l6"><code>spaseed\lib\util.js:6</code></a>
         </div>
     
 
@@ -283,7 +285,7 @@
             
         
         
-        <a href="../files/lib_util.js.html#l176"><code>lib\util.js:176</code></a>
+        <a href="../files/spaseed_lib_util.js.html#l189"><code>spaseed\lib\util.js:189</code></a>
         
         </p>
 
@@ -398,7 +400,7 @@
             
         
         
-        <a href="../files/lib_util.js.html#l44"><code>lib\util.js:44</code></a>
+        <a href="../files/spaseed_lib_util.js.html#l44"><code>spaseed\lib\util.js:44</code></a>
         
         </p>
 
@@ -523,7 +525,7 @@
             
         
         
-        <a href="../files/lib_util.js.html#l13"><code>lib\util.js:13</code></a>
+        <a href="../files/spaseed_lib_util.js.html#l13"><code>spaseed\lib\util.js:13</code></a>
         
         </p>
 
@@ -628,7 +630,7 @@
             
         
         
-        <a href="../files/lib_util.js.html#l164"><code>lib\util.js:164</code></a>
+        <a href="../files/spaseed_lib_util.js.html#l177"><code>spaseed\lib\util.js:177</code></a>
         
         </p>
 
@@ -737,7 +739,7 @@
             
         
         
-        <a href="../files/lib_util.js.html#l192"><code>lib\util.js:192</code></a>
+        <a href="../files/spaseed_lib_util.js.html#l205"><code>spaseed\lib\util.js:205</code></a>
         
         </p>
 
@@ -836,7 +838,7 @@
             
         
         
-        <a href="../files/lib_util.js.html#l145"><code>lib\util.js:145</code></a>
+        <a href="../files/spaseed_lib_util.js.html#l158"><code>spaseed\lib\util.js:158</code></a>
         
         </p>
 
@@ -909,7 +911,7 @@
             
         
         
-        <a href="../files/lib_util.js.html#l155"><code>lib\util.js:155</code></a>
+        <a href="../files/spaseed_lib_util.js.html#l168"><code>spaseed\lib\util.js:168</code></a>
         
         </p>
 
@@ -982,7 +984,7 @@
             
         
         
-        <a href="../files/lib_util.js.html#l136"><code>lib\util.js:136</code></a>
+        <a href="../files/spaseed_lib_util.js.html#l149"><code>spaseed\lib\util.js:149</code></a>
         
         </p>
 
@@ -1071,7 +1073,7 @@
             
         
         
-        <a href="../files/lib_util.js.html#l121"><code>lib\util.js:121</code></a>
+        <a href="../files/spaseed_lib_util.js.html#l134"><code>spaseed\lib\util.js:134</code></a>
         
         </p>
 
@@ -1194,7 +1196,7 @@
             
         
         
-        <a href="../files/lib_util.js.html#l96"><code>lib\util.js:96</code></a>
+        <a href="../files/spaseed_lib_util.js.html#l109"><code>spaseed\lib\util.js:109</code></a>
         
         </p>
 
@@ -1320,7 +1322,7 @@
             
         
         
-        <a href="../files/lib_util.js.html#l25"><code>lib\util.js:25</code></a>
+        <a href="../files/spaseed_lib_util.js.html#l25"><code>spaseed\lib\util.js:25</code></a>
         
         </p>
 
@@ -1450,6 +1452,12 @@
                     
                 </li>
             
+                <li class="arg">
+                    
+                        <code class="optional">[mixinTmpl]</code>
+                    
+                </li>
+            
             </ul><span class="paren">)</span>
         </div>
     
@@ -1483,7 +1491,7 @@
             
         
         
-        <a href="../files/lib_util.js.html#l58"><code>lib\util.js:58</code></a>
+        <a href="../files/spaseed_lib_util.js.html#l58"><code>spaseed\lib\util.js:58</code></a>
         
         </p>
 
@@ -1513,7 +1521,7 @@
                     
 
                     <div class="param-description">
-                        <p>html 模板字符串</p>
+                        <p>html模板字符串 | script模版元素Id</p>
 
                     </div>
 
@@ -1530,6 +1538,23 @@
 
                     <div class="param-description">
                         <p>用于生成模板的数据对象</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name optional">[mixinTmpl]</code>
+                        <span class="type">Object</span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>混合模版对象</p>
 
                     </div>
 
@@ -1556,6 +1581,16 @@
         </div>
     
 
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>    var careerTmpl = &#39;&lt;div&gt;&lt;%=career%&gt;&lt;/div&gt;&#39;;
+    util.tmpl(&#39;&lt;h1&gt;&lt;%=user%&gt;&lt;/h1&gt; &lt;%#careerTmpl%&gt;&#39;, {user:&#39;evanyuan&#39;, career: &#39;前端工程师&#39;}, {careerTmpl: careerTmpl});</code></pre>
+
+            </div>
+        </div>
     
 </div>
 
