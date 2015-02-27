@@ -1254,7 +1254,7 @@
                     "type": "String"
                 },
                 {
-                    "name": "slient",
+                    "name": "silent",
                     "description": "不改变地址栏",
                     "type": "Boolean"
                 },
@@ -1294,7 +1294,7 @@
                     "type": "String"
                 },
                 {
-                    "name": "slient",
+                    "name": "silent",
                     "description": "不改变地址栏",
                     "type": "Boolean"
                 },

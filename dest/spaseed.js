@@ -11248,10 +11248,10 @@ define('spaseed/main/router', function(require, exports, module) {
      * 导航
      * @method navigate
      * @param {String}  url 地址
-     * @param {Boolean} slient 不改变地址栏
+     * @param {Boolean} silent 不改变地址栏
      * @param {Boolean} replacement 替换浏览器的当前会话历史(h5模式时支持)
      */
-    navigate: function (url, slient, replacement) {
+    navigate: function (url, silent, replacement) {
       var _self = this;
       
       if (url !== '/') {
@@ -11260,7 +11260,7 @@ define('spaseed/main/router', function(require, exports, module) {
         url = '/' + url; 
       }
       
-      if (url !== _self.fragment && !slient) {//slient为true时，只路由不改变地址栏
+      if (url !== _self.fragment && !silent) {//silent为true时，只路由不改变地址栏
         if (_self.debug) {
           url = url.replace(_self.debug, '');
           url = _self.debug + url;
@@ -11312,11 +11312,11 @@ define('spaseed/main/router', function(require, exports, module) {
      * 重定向
      * @method redirect
      * @param {String}  url 地址
-     * @param {Boolean} slient 不改变地址栏
+     * @param {Boolean} silent 不改变地址栏
      * @param {Boolean} replacement 替换浏览器的当前会话历史(h5模式时支持)
      */
-    redirect: function (url, slient, replacement) {
-      this.navigate(url, slient, replacement);
+    redirect: function (url, silent, replacement) {
+      this.navigate(url, silent, replacement);
     },
 
     /**
