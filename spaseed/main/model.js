@@ -38,7 +38,6 @@ define('spaseed/main/model', function(require, exports, module) {
 		 * @param {Boolean}  options.global   是否触发ajaxStart, @default true
 		 * @param {String}   options.cacheKey 缓存变量key
 		 * @param {Boolean}  options.tipErr   是否提示错误, @default true
-		 * @author evanyuan
 		 */
 		request: function (options) {
 

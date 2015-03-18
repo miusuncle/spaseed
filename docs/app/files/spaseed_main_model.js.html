@@ -137,12 +137,11 @@ define(&#x27;spaseed/main/model&#x27;, function(require, exports, module) {
 		 * @param {Boolean}  options.global   是否触发ajaxStart, @default true
 		 * @param {String}   options.cacheKey 缓存变量key
 		 * @param {Boolean}  options.tipErr   是否提示错误, @default true
-		 * @author evanyuan
 		 */
-		request: function () {
+		request: function (options) {
 
 			var name = options.name,
-				data = options.data,
+				data = options.data || {},
 				success = options.success,
 				fail = options.fail,
 				global = options.global,
@@ -158,7 +157,7 @@ define(&#x27;spaseed/main/model&#x27;, function(require, exports, module) {
 				success &amp;&amp; success(this.testData[name])
 			} else {
 				net.send(this.getDao(name), {
-					data: data || {},
+					data: data,
 					global: global,
 					cb: _cb
 				});
