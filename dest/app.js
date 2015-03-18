@@ -29,113 +29,50 @@ define('main/startup', function(require, exports) {
     exports.startup = startup;
 });
 
-define('models/config', function(require, exports, module) {
+
+define('models/example', function(require, exports, module) {
+
+	var model = require('model');
 
 	//cgi配置
 	var daoConfig = {
-		'xxx': {
+		'queryPage1': {
 			url: '/xxx',
-			method: 'post'
+			method: 'get'
+		},
+		'queryPage2': {
+			url: '/xxx',
+			method: 'get'
+		},
+		'queryPage3': {
+			url: '/xxx',
+			method: 'get'
 		}
 	};
 
-	var host = '/cgi';
-	if (host) {
-		for (var i  in daoConfig) {
-			var cur = daoConfig[i];
-			if (cur && cur.url) {
-				cur.url = host + cur.url;
-			}
-		};
-	};
-
-	var config = {};
-	config.get = function (argv) {
-		return daoConfig[argv];
-	};
-
-	module.exports = config;
-});
-
-define('models/manager', function(require, exports, module) {
-	var dataManager = require('dataManager');
-	var net = require('net');
-	var config = require('daoConfig');
-
-	//数据管理
-	var manager = {
-
-		queryPage1: function (data, cb, fail) {
-			
-			var _self = this,
-				_cb = function (ret) {
-					dataManager.commonCb(ret, cb, fail);
-				};
-
-			//获取服务端数据
-			/*net.send(config.get('queryPage1'), {
-				data: data,
-				cb: _cb
-			});*/
-			
-			cb({
-				"title": "Page 1",
-				"description": "This is page 1"
-			})
-
+	//测试数据
+	var testData = {
+		'queryPage1': {
+			"title": "Page 1",
+			"description": "This is page 1"
 		},
-
-		queryPage2: function (data, cb, fail) {
-			
-			var _self = this,
-				_cb = function (ret) {
-					dataManager.commonCb(ret, cb, fail);
-				};
-
-			//获取服务端数据
-			/*net.send(config.get('queryPage2'), {
-				data: data,
-				cb: _cb
-			});*/
-			
-			cb({
-				"title": "Page 2",
-				"description": "This is page 2"
-			})
-
+		'queryPage2': {
+			"title": "Page 2",
+			"description": "This is page 2"
 		},
-
-		queryPage3: function (data, cb, fail) {
-			
-			var _self = this,
-				_cb = function (ret) {
-					dataManager.commonCb(ret, cb, fail);
-				};
-
-			//获取服务端数据
-			/*net.send(config.get('queryPage3'), {
-				data: data,
-				cb: _cb
-			});*/
-			
-			cb({
-				"title": "Page 3",
-				"description": "This is page 3"
-			})
-
+		'queryPage3': {
+			"title": "Page 3",
+			"description": "This is page 3"
 		}
+	}
 
-	};
-
-	module.exports = manager;
-
+	module.exports = new model(daoConfig, '', testData);
 });
 
 
 define('modules/page1/page1', function (require, exports, module) {
     var $ = require('$');
     var pageManager = require('pageManager');
-    var manager = require('manager');
     var util = require('util');
     var evt = require('event');
 
@@ -149,9 +86,11 @@ define('modules/page1/page1', function (require, exports, module) {
 
         pageClass: '',
 
+        model: require('models/example'),
+
         render: function () {
 
-            manager.queryPage1({}, function(data) {
+            this.model.request('queryPage1', {}, function(data) {
             	pageManager.container.html(util.tmpl(_tpl.main, {
         			data: data
         		}));
@@ -180,7 +119,6 @@ define('modules/page1/page1', function (require, exports, module) {
 define('modules/page2/page2', function (require, exports, module) {
     var $ = require('$');
     var pageManager = require('pageManager');
-    var manager = require('manager');
     var util = require('util');
     var evt = require('event');
 
@@ -194,9 +132,11 @@ define('modules/page2/page2', function (require, exports, module) {
 
         pageClass: '',
 
+        model: require('models/example'),
+
         render: function () {
 
-            manager.queryPage2({}, function(data) {
+            this.model.request('queryPage2', {}, function(data) {
                 pageManager.container.html(util.tmpl(_tpl.main, {
                     data: data
                 }));
@@ -222,7 +162,6 @@ define('modules/page2/page2', function (require, exports, module) {
 
 define('modules/page3/index/index', function (require, exports, module) {
     var $ = require('$');
-    var manager = require('manager');
     var util = require('util');
     var evt = require('event');
 
@@ -260,7 +199,6 @@ define('modules/page3/index/index', function (require, exports, module) {
 
 define('modules/page3/other/other', function (require, exports, module) {
     var $ = require('$');
-    var manager = require('manager');
     var util = require('util');
     var evt = require('event');
 
@@ -299,7 +237,6 @@ define('modules/page3/other/other', function (require, exports, module) {
 define('modules/page3/page3', function (require, exports, module) {
     var $ = require('$');
     var pageManager = require('pageManager');
-    var manager = require('manager');
     var util = require('util');
     var evt = require('event');
 
@@ -309,9 +246,11 @@ define('modules/page3/page3', function (require, exports, module) {
 
     var page3 = {
 
+        model: require('models/example'),
+
         render: function () {
 
-            manager.queryPage3({}, function(data) {
+            this.model.request('queryPage3', {}, function(data) {
                 pageManager.container.html(util.tmpl(_tpl.main, {
                     data: data
                 }));

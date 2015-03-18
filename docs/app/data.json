@@ -64,6 +64,15 @@
             "fors": {},
             "namespaces": {}
         },
+        "spaseed\\main\\model.js": {
+            "name": "spaseed\\main\\model.js",
+            "modules": {},
+            "classes": {
+                "model": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "spaseed\\main\\pagemanager.js": {
             "name": "spaseed\\main\\pagemanager.js",
             "modules": {},
@@ -149,6 +158,36 @@
             "line": 6,
             "description": "数据管理",
             "static": 1
+        },
+        "model": {
+            "name": "model",
+            "shortname": "model",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "spaseed\\main\\model.js",
+            "line": 6,
+            "description": "model基类",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "daoConfig",
+                    "description": "CGI配置",
+                    "type": "Object"
+                },
+                {
+                    "name": "urlPrefix",
+                    "description": "url前缀",
+                    "type": "String"
+                },
+                {
+                    "name": "testData",
+                    "description": "测试数据",
+                    "type": "Object"
+                }
+            ]
         },
         "pageManager": {
             "name": "pageManager",
@@ -934,7 +973,7 @@
         },
         {
             "file": "spaseed\\main\\datamanager.js",
-            "line": 23,
+            "line": 25,
             "description": "公共回调",
             "itemtype": "method",
             "name": "commonCb",
@@ -955,6 +994,11 @@
                     "type": "Function"
                 },
                 {
+                    "name": "cacheKey",
+                    "description": "缓存key",
+                    "type": "String"
+                },
+                {
                     "name": "tipErr",
                     "description": "提示公共错误 @default true",
                     "type": "Boolean"
@@ -964,7 +1008,7 @@
         },
         {
             "file": "spaseed\\main\\datamanager.js",
-            "line": 42,
+            "line": 48,
             "description": "获取缓存数据",
             "itemtype": "method",
             "name": "get",
@@ -982,7 +1026,7 @@
         },
         {
             "file": "spaseed\\main\\datamanager.js",
-            "line": 52,
+            "line": 58,
             "description": "设置缓存数据",
             "itemtype": "method",
             "name": "set",
@@ -1001,7 +1045,7 @@
         },
         {
             "file": "spaseed\\main\\datamanager.js",
-            "line": 62,
+            "line": 68,
             "description": "获取所有缓存数据",
             "itemtype": "method",
             "name": "getCache",
@@ -1012,11 +1056,57 @@
         },
         {
             "file": "spaseed\\main\\datamanager.js",
-            "line": 71,
+            "line": 77,
             "description": "清除所有缓存数据",
             "itemtype": "method",
             "name": "clearCache",
             "class": "dataManager"
+        },
+        {
+            "file": "spaseed\\main\\model.js",
+            "line": 31,
+            "description": "请求CGI",
+            "itemtype": "method",
+            "name": "request",
+            "params": [
+                {
+                    "name": "cgiName",
+                    "description": "CGI名称",
+                    "type": "String"
+                },
+                {
+                    "name": "data",
+                    "description": "参数",
+                    "type": "Object"
+                },
+                {
+                    "name": "cb",
+                    "description": "成功回调",
+                    "type": "Function"
+                },
+                {
+                    "name": "fail",
+                    "description": "失败回调",
+                    "type": "Function"
+                },
+                {
+                    "name": "global",
+                    "description": "是否触发ajaxStart, @default true",
+                    "type": "Boolean"
+                },
+                {
+                    "name": "cacheKey",
+                    "description": "缓存变量key",
+                    "type": "String"
+                },
+                {
+                    "name": "tipErr",
+                    "description": "是否提示错误, @default true",
+                    "type": "Boolean"
+                }
+            ],
+            "author": "evanyuan",
+            "class": "model"
         },
         {
             "file": "spaseed\\main\\pagemanager.js",

@@ -1,7 +1,6 @@
 
 define('modules/page3/index/index', function (require, exports, module) {
     var $ = require('$');
-    var manager = require('manager');
     var util = require('util');
     var evt = require('event');
 

@@ -2,7 +2,6 @@
 define('modules/page2/page2', function (require, exports, module) {
     var $ = require('$');
     var pageManager = require('pageManager');
-    var manager = require('manager');
     var util = require('util');
     var evt = require('event');
 
@@ -16,9 +15,11 @@ define('modules/page2/page2', function (require, exports, module) {
 
         pageClass: '',
 
+        model: require('models/example'),
+
         render: function () {
 
-            manager.queryPage2({}, function(data) {
+            this.model.request('queryPage2', {}, function(data) {
                 pageManager.container.html(util.tmpl(_tpl.main, {
                     data: data
                 }));

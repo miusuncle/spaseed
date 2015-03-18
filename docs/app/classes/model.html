@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>event - spaseed</title>
+    <title>model - spaseed</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -93,7 +93,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>event Class</h1>
+                        <h1>model Class</h1>
 <div class="box meta">
     
 
@@ -101,7 +101,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/spaseed_lib_event.js.html#l2"><code>spaseed\lib\event.js:2</code></a>
+            Defined in: <a href="../files/spaseed_main_model.js.html#l6"><code>spaseed\main\model.js:6</code></a>
         </div>
     
 
@@ -113,10 +113,145 @@
 
 
 <div class="box intro">
-    <p>事件管理</p>
+    <p>model基类</p>
 
 </div>
 
+
+    <div class="constructor">
+        <h2>Constructor</h2>
+        <div id="method_model" class="method item">
+    <h3 class="name"><code>model</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>daoConfig</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>urlPrefix</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>testData</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/spaseed_main_model.js.html#l6"><code>spaseed\main\model.js:6</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">daoConfig</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>CGI配置</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">urlPrefix</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>url前缀</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">testData</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>测试数据</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+    </div>
 
 
 <div id="classdocs" class="tabview">
@@ -142,14 +277,7 @@
                     <ul class="index-list methods">
                         
                             <li class="index-item method">
-                                <a href="#method_addCommonEvent">addCommonEvent</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#method_bindCommonEvent">bindCommonEvent</a>
+                                <a href="#method_request">request</a>
 
                                 
                                 
@@ -171,8 +299,8 @@
                 <h2 class="off-left">Methods</h2>
 
                 
-                    <div id="method_addCommonEvent" class="method item">
-    <h3 class="name"><code>addCommonEvent</code></h3>
+                    <div id="method_request" class="method item">
+    <h3 class="name"><code>request</code></h3>
 
     
         <div class="args">
@@ -180,13 +308,43 @@
             
                 <li class="arg">
                     
-                        <code>事件类型</code>
+                        <code>cgiName</code>
                     
                 </li>
             
                 <li class="arg">
                     
-                        <code>事件处理的函数映射</code>
+                        <code>data</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>cb</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>fail</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>global</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>cacheKey</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>tipErr</code>
                     
                 </li>
             
@@ -219,7 +377,7 @@
             
         
         
-        <a href="../files/spaseed_lib_event.js.html#l133"><code>spaseed\lib\event.js:133</code></a>
+        <a href="../files/spaseed_main_model.js.html#l31"><code>spaseed\main\model.js:31</code></a>
         
         </p>
 
@@ -230,7 +388,7 @@
     </div>
 
     <div class="description">
-        <p>为body添加事件代理</p>
+        <p>请求CGI</p>
 
     </div>
 
@@ -242,150 +400,15 @@
             
                 <li class="param">
                     
-                        <code class="param-name">事件类型</code>
-                        <span class="type">Type</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                         
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">事件处理的函数映射</code>
-                        <span class="type">DealFnMap</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                         
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method_bindCommonEvent" class="method item">
-    <h3 class="name"><code>bindCommonEvent</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>要绑定事件的元素</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>绑定的事件类型</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>事件处理的函数映射</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>取得事件对应的key的函数</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/spaseed_lib_event.js.html#l54"><code>spaseed\lib\event.js:54</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>通用的绑定事件处理</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">要绑定事件的元素</code>
-                        <span class="type">Element</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                         
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">绑定的事件类型</code>
+                        <code class="param-name">cgiName</code>
                         <span class="type">String</span>
                     
 
                     
 
                     <div class="param-description">
-                         
+                        <p>CGI名称</p>
+
                     </div>
 
                     
@@ -393,14 +416,15 @@
             
                 <li class="param">
                     
-                        <code class="param-name">事件处理的函数映射</code>
+                        <code class="param-name">data</code>
                         <span class="type">Object</span>
                     
 
                     
 
                     <div class="param-description">
-                         
+                        <p>参数</p>
+
                     </div>
 
                     
@@ -408,14 +432,79 @@
             
                 <li class="param">
                     
-                        <code class="param-name">取得事件对应的key的函数</code>
+                        <code class="param-name">cb</code>
                         <span class="type">Function</span>
                     
 
                     
 
                     <div class="param-description">
-                         
+                        <p>成功回调</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">fail</code>
+                        <span class="type">Function</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>失败回调</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">global</code>
+                        <span class="type">Boolean</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>是否触发ajaxStart, @default true</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">cacheKey</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>缓存变量key</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">tipErr</code>
+                        <span class="type">Boolean</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>是否提示错误, @default true</p>
+
                     </div>
 
                     

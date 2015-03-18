@@ -14,7 +14,9 @@ define('spaseed/main/datamanager', function(require, exports, module) {
 
 			var reqErrorHandler = spaseedConfig.reqErrorHandler;
 
-			reqErrorHandler && reqErrorHandler(ret);
+			if (reqErrorHandler && reqErrorHandler(ret) === false) {
+				return false
+			}
 			
 			//错误提示
 			tipErr !== false && console.log(ret.msg || spaseedConfig.defaultReqErr);
@@ -23,16 +25,20 @@ define('spaseed/main/datamanager', function(require, exports, module) {
 		/**
 		 * 公共回调
 		 * @method commonCb
-		 * @param {Object}   ret     CGI返回JSON对象
-		 * @param {Function} cb      成功回调(ret.code == 0)
-		 * @param {Function} fail    失败回调
-		 * @param {Boolean}  tipErr  提示公共错误 @default true
+		 * @param {Object}   ret       CGI返回JSON对象
+		 * @param {Function} cb        成功回调(ret.code == 0)
+		 * @param {Function} fail      失败回调
+		 * @param {String}   cacheKey  缓存key
+		 * @param {Boolean}  tipErr    提示公共错误 @default true
 		 */
-		commonCb: function (ret, cb, fail, tipErr) {
+		commonCb: function (ret, cb, fail, cacheKey, tipErr) {
 			var _self = this,
 				_code = ret.code;
 			if (_code == 0) {
 				cb && cb(ret.data);
+				if (cacheKey) {
+					this.set(cacheKey, ret.data);
+				}
 			} else {
 				_self._errorHandler(ret, tipErr);
 				fail && fail(ret);

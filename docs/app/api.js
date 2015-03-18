@@ -3,6 +3,7 @@ YUI.add("yuidoc-meta", function(Y) {
     "classes": [
         "dataManager",
         "event",
+        "model",
         "net",
         "pageManager",
         "router",
