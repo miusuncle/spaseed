@@ -49,9 +49,8 @@ npm test
         config.js            --> app main configuration
       main/                  --> app main directory
         startup.js           --> app entry module
-      models/                --> app data management directory
-        config.js            --> cgi configuration
-        manager.js           --> fetch and manage data
+      models/                --> app model directory
+        example.js           --> example of model instantiation
       modules/               --> all page module
     dest/                    --> packaged file directory
     docs/                    --> document generation directory
@@ -67,6 +66,7 @@ npm test
       main/                  --> main logical directory for framework
         pagemanager.js       --> page management logic
         datamanager.js       --> data basic management
+        model.js             --> model base class
         router.js            --> routing management
         entry.js             --> spaseed entry module
     test/                    --> test cases
