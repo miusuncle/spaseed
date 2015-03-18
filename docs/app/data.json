@@ -1070,37 +1070,37 @@
             "name": "request",
             "params": [
                 {
-                    "name": "cgiName",
+                    "name": "options.name",
                     "description": "CGI名称",
                     "type": "String"
                 },
                 {
-                    "name": "data",
+                    "name": "options.data",
                     "description": "参数",
                     "type": "Object"
                 },
                 {
-                    "name": "cb",
+                    "name": "options.success",
                     "description": "成功回调",
                     "type": "Function"
                 },
                 {
-                    "name": "fail",
+                    "name": "options.fail",
                     "description": "失败回调",
                     "type": "Function"
                 },
                 {
-                    "name": "global",
+                    "name": "options.global",
                     "description": "是否触发ajaxStart, @default true",
                     "type": "Boolean"
                 },
                 {
-                    "name": "cacheKey",
+                    "name": "options.cacheKey",
                     "description": "缓存变量key",
                     "type": "String"
                 },
                 {
-                    "name": "tipErr",
+                    "name": "options.tipErr",
                     "description": "是否提示错误, @default true",
                     "type": "Boolean"
                 }

@@ -14,11 +14,14 @@ define('modules/page3/page3', function (require, exports, module) {
         model: require('models/example'),
 
         render: function () {
-
-            this.model.request('queryPage3', {}, function(data) {
-                pageManager.container.html(util.tmpl(_tpl.main, {
-                    data: data
-                }));
+            
+            this.model.request({
+                name: 'queryPage3',
+                success: function (data) {
+                    pageManager.container.html(util.tmpl(_tpl.main, {
+                        data: data
+                    }));
+                }
             });
 
             this.bindEvent();

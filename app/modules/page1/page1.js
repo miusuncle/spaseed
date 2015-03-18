@@ -19,10 +19,13 @@ define('modules/page1/page1', function (require, exports, module) {
 
         render: function () {
 
-            this.model.request('queryPage1', {}, function(data) {
-            	pageManager.container.html(util.tmpl(_tpl.main, {
-        			data: data
-        		}));
+            this.model.request({
+                name: 'queryPage1',
+                success: function (data) {
+                    pageManager.container.html(util.tmpl(_tpl.main, {
+                        data: data
+                    }));
+                }
             });
 
             this.bindEvent();

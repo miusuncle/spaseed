@@ -18,11 +18,14 @@ define('modules/page2/page2', function (require, exports, module) {
         model: require('models/example'),
 
         render: function () {
-
-            this.model.request('queryPage2', {}, function(data) {
-                pageManager.container.html(util.tmpl(_tpl.main, {
-                    data: data
-                }));
+            
+            this.model.request({
+                name: 'queryPage2',
+                success: function (data) {
+                    pageManager.container.html(util.tmpl(_tpl.main, {
+                        data: data
+                    }));
+                }
             });
 
             this.bindEvent();

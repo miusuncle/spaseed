@@ -31,26 +31,35 @@ define('spaseed/main/model', function(require, exports, module) {
 		/**
 		 * 请求CGI
 		 * @method request
-		 * @param {String}   cgiName   CGI名称
-		 * @param {Object}   data      参数
-		 * @param {Function} cb        成功回调
-		 * @param {Function} fail      失败回调
-		 * @param {Boolean}  global    是否触发ajaxStart, @default true
-		 * @param {String}   cacheKey  缓存变量key
-		 * @param {Boolean}  tipErr    是否提示错误, @default true
+		 * @param {String}   options.name     CGI名称
+		 * @param {Object}   options.data     参数
+		 * @param {Function} options.success  成功回调
+		 * @param {Function} options.fail     失败回调
+		 * @param {Boolean}  options.global   是否触发ajaxStart, @default true
+		 * @param {String}   options.cacheKey 缓存变量key
+		 * @param {Boolean}  options.tipErr   是否提示错误, @default true
 		 * @author evanyuan
 		 */
-		request: function (cgiName, data, cb, fail, global, cacheKey, tipErr) {
+		request: function (options) {
+
+			var name = options.name,
+				data = options.data || {},
+				success = options.success,
+				fail = options.fail,
+				global = options.global,
+				cacheKey = options.cacheKey,
+				tipErr = options.tipErr;
+
 			var _self = this,
 				_cb = function (ret) {
-					dataManager.commonCb(ret, cb, fail, cacheKey, tipErr);
+					dataManager.commonCb(ret, success, fail, cacheKey, tipErr);
 				};
 
-			if (this.testData && this.testData[cgiName]) {
-				cb && cb(this.testData[cgiName])
+			if (this.testData && this.testData[name]) {
+				success && success(this.testData[name])
 			} else {
-				net.send(this.getDao(cgiName), {
-					data: data || {},
+				net.send(this.getDao(name), {
+					data: data,
 					global: global,
 					cb: _cb
 				});
